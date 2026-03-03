@@ -89,7 +89,7 @@ const faqItems: FAQItem[] = [
 
 export function FAQSection() {
   const { locale } = useLocale()
-  const [expandedId, setExpandedId] = useState<number | null>(2) // Second item expanded by default
+  const [expandedId, setExpandedId] = useState<number | null>()
   const [isDark, setIsDark] = useState(true)
 
   useEffect(() => {
@@ -115,7 +115,7 @@ export function FAQSection() {
   const title = locale === "uk" ? "Часті Питання" : "Frequently Asked Questions"
 
   return (
-    <section className="py-16 md:py-24 relative overflow-hidden" style={{ backgroundColor: bgColor }}>
+    <section className="py-16 md:py-24 relative overflow-hidden bg-background" >
       <div className="max-w-[1127px] mx-auto px-4">
         {/* Title */}
         <h2
@@ -137,13 +137,13 @@ export function FAQSection() {
                 key={item.id}
                 className="rounded-[14px] overflow-hidden transition-all duration-300"
                 style={{
-                  backgroundColor: isExpanded ? cardBg : "transparent",
                   border: `1px solid ${borderColor}`,
+                  // Applying your requested gradient to every item
                   background: isExpanded
                     ? isDark
                       ? "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(171, 171, 171, 0.06) 100%), #323130"
-                      : "linear-gradient(0deg, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.2)), linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(171, 171, 171, 0.1) 100%)"
-                    : "transparent",
+                      : "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(171, 171, 171, 0.06) 100%), #FFFFFF"
+                    : "linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(171, 171, 171, 0.06) 100%)",
                 }}
               >
                 {/* Question Row */}
@@ -151,7 +151,8 @@ export function FAQSection() {
                   onClick={() => setExpandedId(isExpanded ? null : item.id)}
                   className="w-full px-5 md:px-8 py-4 flex items-center justify-between gap-4 hover:opacity-80 transition-opacity"
                 >
-                  <h3 className="text-lg md:text-2xl font-medium text-left" style={{ color: mutedText }}>
+                  {/* Added the font-onest class here as well to match your previous request */}
+                  <h3 className="text-[24px] font-[Onest] font-medium text-left" style={{ color: mutedText }}>
                     {question}
                   </h3>
                   <div className="flex-shrink-0 w-6 h-6 flex items-center justify-center">
@@ -179,7 +180,7 @@ export function FAQSection() {
                 {isExpanded && (
                   <div className="px-5 md:px-8 pb-6 pt-0">
                     <p
-                      className="text-base md:text-lg"
+                      className="text-base md:text-lg font-[Onest]"
                       style={{ color: isDark ? "rgba(255, 255, 255, 0.5)" : "#666666" }}
                     >
                       {answer}

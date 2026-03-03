@@ -152,8 +152,8 @@ export function FeedbackSection() {
         </div>
 
         {/* ==================== DESKTOP ==================== */}
-        <div className="hidden md:flex justify-center relative min-h-[400px]">
-          <div className="relative w-full max-w-4xl">
+        <div className="hidden md:flex justify-center relative">
+          <div className="relative w-full max-w-4xl flex">
             {/* Avatar */}
             <div
               className="absolute w-32 h-32 rounded-full overflow-hidden flex-shrink-0 z-20"
@@ -161,7 +161,7 @@ export function FeedbackSection() {
                 backgroundColor: "#FF6200",
                 border: "4px solid #FF6200",
                 left: "0",
-                top: "50px",
+                top: "0",
               }}
             >
               <img
@@ -178,8 +178,8 @@ export function FeedbackSection() {
               style={{
                 width: "37px",
                 height: "41px",
-                left: "124px",
-                top: "76px",
+                left: "135px",
+                top: "45px",
               }}
             />
             {/* Feedback Card */}
@@ -195,6 +195,7 @@ export function FeedbackSection() {
               <div className="flex flex-col h-full">
                 {/* Top Row: Name/Position on Left, Stars on Right */}
                 <div className="flex justify-between items-start mb-6">
+                  <div>
                   <div>
                     <h3 className="text-xl font-semibold" style={{ color: textColor }}>
                       {current.name}
@@ -214,6 +215,7 @@ export function FeedbackSection() {
                         }}
                       />
                     ))}
+                  </div>
                   </div>
                 </div>
                 {/* Middle: Testimonial Text */}
@@ -237,12 +239,12 @@ export function FeedbackSection() {
                   <button
                     onClick={goToNext}
                     className="flex items-center justify-center transition-all duration-300 hover:scale-110"
-                    style={{ color: "#FF6200" }}
+                    style={{ color: textSecondary }}
                     onMouseEnter={(e) => {
-                      e.currentTarget.style.transform = "scale(1.2)"
+                      e.currentTarget.style.color = "#FF6200"
                     }}
                     onMouseLeave={(e) => {
-                      e.currentTarget.style.transform = "scale(1)"
+                      e.currentTarget.style.color = textSecondary
                     }}
                   >
                     <ChevronRight className="w-6 h-6" />
@@ -321,7 +323,7 @@ export function FeedbackSection() {
                   <button
                     onClick={goToNext}
                     className="flex items-center justify-center transition-colors"
-                    style={{ color: "#FF6200" }}
+                    style={{ color: textSecondary }}
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>

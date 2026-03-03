@@ -282,7 +282,7 @@ export function WhyUsSection2() {
                 }}
               >
                 <svg
-                  className="w-6 h-6 text-[#212121] mb-4"
+                  className="w-6 h-6 text-[#212121] mb-[14px]"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -316,7 +316,7 @@ export function WhyUsSection2() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p className="text-sm font-medium text-[#212121]">
+                <p className="text-[24px] font-[Onest] font-medium text-[#212121]">
                   {t.cards[0].label}
                   <span className="text-[#FF6200]">{t.cards[0].highlighted}</span>
                 </p>
@@ -331,7 +331,7 @@ export function WhyUsSection2() {
                 }}
               >
                 <svg
-                  className="w-6 h-6 text-[#212121] mb-4"
+                  className="w-6 h-6 text-[#212121] mb-[14px]"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -363,7 +363,7 @@ export function WhyUsSection2() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p className="text-sm font-medium text-[#212121]">
+                <p className="text-[24px] font-[Onest] font-medium text-[#212121]">
                   {t.cards[2].label}
                   <span className="text-[#FF6200]">{t.cards[2].highlighted}</span>
                 </p>
@@ -392,14 +392,14 @@ export function WhyUsSection2() {
                   border: "1px solid #E0E0E0",
                 }}
               >
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg className=" mb-[14px]" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M19 20H5C3.89543 20 3 19.1046 3 18V9C3 7.89543 3.89543 7 5 7H19C20.1046 7 21 7.89543 21 9V18C21 19.1046 20.1046 20 19 20Z" stroke="#212121" stroke-width="1.5" />
                   <path d="M7 7V3.6C7 3.26863 7.26863 3 7.6 3H16.4C16.7314 3 17 3.26863 17 3.6V7" stroke="#212121" stroke-width="1.5" />
                   <path d="M10 3V7" stroke="#212121" stroke-width="1.5" />
                   <path d="M12 3V7" stroke="#212121" stroke-width="1.5" />
                   <path d="M16.5 14C16.2239 14 16 13.7761 16 13.5C16 13.2239 16.2239 13 16.5 13C16.7761 13 17 13.2239 17 13.5C17 13.7761 16.7761 14 16.5 14Z" fill="#212121" stroke="#212121" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
                 </svg>
-                <p className="text-sm font-medium text-[#212121]">
+                <p className="text-[24px] font-[Onest] font-medium text-[#212121]">
                   {t.cards[1].label}
                   <span className="text-[#FF6200]">{t.cards[1].highlighted}</span>
                 </p>
@@ -414,7 +414,7 @@ export function WhyUsSection2() {
                 }}
               >
                 <svg
-                  className="w-6 h-6 text-[#212121] mb-4"
+                  className="w-6 h-6 text-[#212121] mb-[14px]"
                   viewBox="0 0 24 24"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
@@ -448,7 +448,7 @@ export function WhyUsSection2() {
                     strokeLinejoin="round"
                   />
                 </svg>
-                <p className="text-m font-medium text-[#212121]">
+                <p className="text-[24px] font-[Onest] font-medium text-[#212121]">
                   {t.cards[3].label}
                   <span className="text-[#FF6200]">{t.cards[3].highlighted}</span>
                 </p>
@@ -466,7 +466,7 @@ export function WhyUsSection2() {
               }}
             >
               <svg
-                className="w-6 h-6 text-[#212121] mb-4"
+                className="w-6 h-6 text-[#212121] mb-[14px]"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -528,7 +528,7 @@ export function WhyUsSection2() {
                   strokeLinejoin="round"
                 />
               </svg>
-              <p className="text-base font-medium text-[#212121] leading-relaxed">
+              <p className="text-[24px] font-[Onest] font-medium text-[#212121] leading-relaxed">
                 {t.transparency.label}
                 <span className="text-[#FF6200]">{t.transparency.highlighted1}</span>
                 {t.transparency.label2}

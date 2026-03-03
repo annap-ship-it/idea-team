@@ -140,12 +140,33 @@ export function ExpertiseSection() {
 
           {/* Outstaffing */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-20 border-b border-white/40">
-            <h3 className="text-3xl md:text-4xl font-medium text-white">{t.outstaffingTitle}</h3>
-
+            <h3 className="text-3xl md:text-4xl font-medium leading-[1.15]">
+              <span
+                className="
+                  inline-block
+                  pb-[3px]
+                  bg-gradient-to-r from-orange-600 to-white
+                  bg-[length:0%_100%]
+                  bg-left
+                  bg-no-repeat
+                  bg-clip-text
+                  text-white
+                  transition-all duration-500 ease-out
+                  hover:bg-[length:100%_100%]
+                  hover:text-transparent
+                "
+              >
+                {t.outstaffingTitle}
+              </span>
+            </h3>
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outstaff_1}</p>
@@ -154,8 +175,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outstaff_2}</p>
@@ -164,8 +189,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outstaff_3}</p>
@@ -174,8 +203,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outstaff_4}</p>
@@ -187,14 +220,34 @@ export function ExpertiseSection() {
 
           {/* Outsourcing */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 py-20 border-b border-white/40">
-            <h3 className="text-3xl md:text-4xl font-medium bg-gradient-to-r from-orange-600 to-white bg-clip-text text-transparent">
-              {t.outsourcingTitle}
+            <h3 className="text-3xl md:text-4xl font-medium leading-[1.15]">
+              <span
+                className="
+                  inline-block
+                  pb-[3px]
+                  bg-gradient-to-r from-orange-600 to-white
+                  bg-[length:0%_100%]
+                  bg-left
+                  bg-no-repeat
+                  bg-clip-text
+                  text-white
+                  transition-all duration-500 ease-out
+                  hover:bg-[length:100%_100%]
+                  hover:text-transparent
+                "
+              >
+                {t.outsourcingTitle}
+              </span>
             </h3>
 
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outsource_1}</p>
@@ -203,8 +256,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outsource_2}</p>
@@ -213,8 +270,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outsource_3}</p>
@@ -223,8 +284,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.outsource_4}</p>
@@ -236,12 +301,33 @@ export function ExpertiseSection() {
 
           {/* Consultation */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pt-20">
-            <h3 className="text-3xl md:text-4xl font-medium text-white">{t.consultationTitle}</h3>
-
+            <h3 className="text-3xl md:text-4xl font-medium leading-[1.15]">
+              <span
+                className="
+                  inline-block
+                  pb-[3px]
+                  bg-gradient-to-r from-orange-600 to-white
+                  bg-[length:0%_100%]
+                  bg-left
+                  bg-no-repeat
+                  bg-clip-text
+                  text-white
+                  transition-all duration-500 ease-out
+                  hover:bg-[length:100%_100%]
+                  hover:text-transparent
+                "
+              >
+                {t.consultationTitle}
+              </span>
+            </h3>
             <div className="space-y-6">
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.consult_1}</p>
@@ -250,8 +336,12 @@ export function ExpertiseSection() {
               </div>
 
               <div className="flex gap-4">
-                <div className="mt-1">
-                  <div className="w-2 h-2 bg-primary rounded-sm" />
+                <div className="mt-[9px] w-[16px] h-[16px]">
+                  <img
+                    src="/icons/tech/bullet-red.svg"
+                    alt="Icon"
+                    className="w-2 h-2 block"
+                  />
                 </div>
                 <div>
                   <p className="font-semibold text-white">{t.consult_2}</p>

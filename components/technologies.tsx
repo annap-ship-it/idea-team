@@ -48,21 +48,21 @@ export function TechnologiesSection() {
           </div>
 
           {/* Десктоп */}
-          <div className="hidden lg:flex flex-col items-end gap-8 xl:gap-14">
-            <div className="flex gap-6 xl:gap-12">
+          <div className="hidden lg:flex flex-col items-end gap-[22px]">
+            <div className="flex gap-[22px]">
               {rows[0].map((tech) => (
                 <TechCard key={tech.name} tech={tech} isHovered={hovered === tech.name} onHover={setHovered} />
               ))}
             </div>
 
             {/* Второй ряд сдвинут влево */}
-            <div className="flex gap-6 xl:gap-12 mr-12 xl:mr-20">
+            <div className="flex gap-[22px] mr-12 xl:mr-20">
               {rows[1].map((tech) => (
                 <TechCard key={tech.name} tech={tech} isHovered={hovered === tech.name} onHover={setHovered} />
               ))}
             </div>
 
-            <div className="flex gap-6 xl:gap-12">
+            <div className="flex gap-[22px]">
               {rows[2].map((tech) => (
                 <TechCard key={tech.name} tech={tech} isHovered={hovered === tech.name} onHover={setHovered} />
               ))}
@@ -108,7 +108,7 @@ function TechCard({
       `}
     >
       <div
-        className="w-15 h-15 bg-white rounded-lg flex items-start justify-start flex-shrink-0"
+        className="w-16 h-16 bg-white rounded-lg flex items-start justify-start flex-shrink-0"
         style={{ padding: "2px" }}
       >
         <Image
@@ -116,7 +116,7 @@ function TechCard({
           alt={tech.label}
           width={60}
           height={60}
-          className="object-contain"
+          className="object-contain w-full h-full"
         />
       </div>
       <span className="text-base font-medium text-foreground">{tech.label}</span>
