@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react"
 import { useLocale } from "@/lib/locale-context"
+import { cn } from "@/lib/utils"
 
 interface FAQItem {
   id: number
@@ -162,16 +163,13 @@ export function FAQSection() {
                       viewBox="0 0 14 14"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
-                      className="transition-transform duration-300"
-                      style={{ transform: isExpanded ? "rotate(180deg)" : "rotate(0deg)" }}
+                      className={cn("transition-transform duration-300", {
+                        'rotate-180': isExpanded,
+                      })}
                     >
-                      <path
-                        d="M1 5L7 11L13 5"
-                        stroke="#FF6200"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
+                      <g transform="translate(1.67, 2.17)">
+                        <path d="M6.19757 9C5.81267 9.66667 4.85042 9.66667 4.46552 9L0.135391 1.5C-0.249509 0.833332 0.231617 -1.05781e-06 1.00142 -9.90511e-07L9.66167 -2.33408e-07C10.4315 -1.6611e-07 10.9126 0.833333 10.5277 1.5L6.19757 9Z" fill={isExpanded ? "#C0C0C0" : "#FF6200"}/>
+                      </g>
                     </svg>
                   </div>
                 </button>

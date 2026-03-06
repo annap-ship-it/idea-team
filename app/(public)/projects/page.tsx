@@ -776,10 +776,11 @@ export default function ProjectsPage() {
                     <button
                       type="button"
                       onClick={handleFileAttach}
-                      className="flex items-center gap-2 px-4 py-2 rounded-[4px] border transition-colors hover:border-[#FF6200] hover:bg-[#5c2c0f] fomt-semibold active:bg-[#FAF9F8] active:text-black"
+                      className="flex items-center gap-2 px-4 py-2 rounded-[4px] border transition-colors hover:border-[#FF6200] active:bg-[#666666] active:text-white"
                       style={{
                         borderColor: isDark ? "#3A3A3A" : "#E0E0E0",
-                      }}
+                        color: isDark ? "#FFFFFF" : "#000000",
+                      }} 
                     >
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6200" strokeWidth="2">
                         <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>

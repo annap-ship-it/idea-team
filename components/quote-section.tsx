@@ -112,9 +112,8 @@ export function QuoteSection() {
                 alt="quote"
                 className="w-16 md:w-10"
               />
-              <div className="h-10" /> {/* 40px spacer */}
+              <div className="h-10 md:h-10" /> {/* 40px spacer */}
             </div>
-
 
             <blockquote className="mb-[30px] font-['Onest'] font-medium text-[20px] leading-none tracking-[0%] text-foreground whitespace-pre-line">
               {t.quote}

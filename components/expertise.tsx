@@ -80,7 +80,7 @@ export function ExpertiseSection() {
 
   return (
     <section id="our-expertise" className="py-16 px-4 md:py-24 bg-transparent">
-      <div className="max-w-7xl mx-auto px-8 py-32 relative overflow-hidden rounded-2xl bg-[#212121]">
+      <div className="max-w-7xl mx-auto px-8 py-10 md:py-32 relative overflow-hidden rounded-2xl bg-[#212121]">
         {/* Фоновые векторы */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Первый вектор — слева, обрезан сверху и слева */}
@@ -136,24 +136,26 @@ export function ExpertiseSection() {
 
         {/* Контент */}
         <div className="relative z-10">
-          <h2 className="text-5xl md:text-6xl font-bold text-white text-center mb-20">{t.title}</h2>
+          <h2 className="text-5xl md:text-6xl font-bold text-white text-center mb-5">{t.title}</h2>
 
           {/* Outstaffing */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pb-20 border-b border-white/40">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-20 pb-5 md:pb-20 border-b border-white/40">
             <h3 className="text-3xl md:text-4xl font-medium leading-[1.15]">
               <span
                 className="
                   inline-block
                   pb-[3px]
                   bg-gradient-to-r from-orange-600 to-white
-                  bg-[length:0%_100%]
                   bg-left
                   bg-no-repeat
                   bg-clip-text
-                  text-white
+                  text-transparent
+                  bg-[length:100%_100%]
+                  md:text-white
+                  md:bg-[length:0%_100%]
                   transition-all duration-500 ease-out
-                  hover:bg-[length:100%_100%]
-                  hover:text-transparent
+                  md:hover:bg-[length:100%_100%]
+                  md:hover:text-transparent
                 "
               >
                 {t.outstaffingTitle}
@@ -219,21 +221,23 @@ export function ExpertiseSection() {
           </div>
 
           {/* Outsourcing */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 py-20 border-b border-white/40">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-20 py-5 md:py-20 border-b border-white/40">
             <h3 className="text-3xl md:text-4xl font-medium leading-[1.15]">
-              <span
+            <span
                 className="
                   inline-block
                   pb-[3px]
                   bg-gradient-to-r from-orange-600 to-white
-                  bg-[length:0%_100%]
                   bg-left
                   bg-no-repeat
                   bg-clip-text
-                  text-white
+                  text-transparent
+                  bg-[length:100%_100%]
+                  md:text-white
+                  md:bg-[length:0%_100%]
                   transition-all duration-500 ease-out
-                  hover:bg-[length:100%_100%]
-                  hover:text-transparent
+                  md:hover:bg-[length:100%_100%]
+                  md:hover:text-transparent
                 "
               >
                 {t.outsourcingTitle}
@@ -300,21 +304,23 @@ export function ExpertiseSection() {
           </div>
 
           {/* Consultation */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 pt-20">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 md:gap-20 pt-5 md:pt-20">
             <h3 className="text-3xl md:text-4xl font-medium leading-[1.15]">
-              <span
+            <span
                 className="
                   inline-block
                   pb-[3px]
                   bg-gradient-to-r from-orange-600 to-white
-                  bg-[length:0%_100%]
                   bg-left
                   bg-no-repeat
                   bg-clip-text
-                  text-white
+                  text-transparent
+                  bg-[length:100%_100%]
+                  md:text-white
+                  md:bg-[length:0%_100%]
                   transition-all duration-500 ease-out
-                  hover:bg-[length:100%_100%]
-                  hover:text-transparent
+                  md:hover:bg-[length:100%_100%]
+                  md:hover:text-transparent
                 "
               >
                 {t.consultationTitle}

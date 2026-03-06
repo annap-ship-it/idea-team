@@ -257,6 +257,7 @@ export function FeedbackSection() {
         {/* Mobile Layout */}
         <div className="md:hidden flex justify-center">
           <div className="w-full max-w-xs">
+        
             <div
               className="mx-auto mb-4 w-20 h-20 rounded-full overflow-hidden flex-shrink-0"
               style={{
@@ -271,62 +272,70 @@ export function FeedbackSection() {
               />
             </div>
             {/* Feedback Card Mobile */}
-            <div
-              className="rounded-2xl p-6"
+            <div className="flex flex-col items-center">
+            <img
+              src={isDark ? "/images/polygon-arrow-dark.svg" : "/images/polygon-arrow-light.svg"}
+              alt=""
+              className="z-20 rotate-90 -mb-1.5"
               style={{
-                backgroundColor: cardBg,
-                border: `2px solid ${borderColor}`,
-                color: textColor,
-              }}
-            >
-              <div className="flex flex-col gap-4">
-                {/* Top: Name/Position and Stars */}
-                <div className="flex justify-between items-start gap-4">
-                  <div className="flex-1">
-                    <h3 className="text-lg font-semibold" style={{ color: textColor }}>
-                      {current.name}
-                    </h3>
-                    <p className="text-sm" style={{ color: textSecondary }}>
-                      {current.position}, {current.company}
-                    </p>
+                width: "37px",
+                height: "41px",
+              }}/>
+              <div
+                className="rounded-2xl p-6"
+                style={{
+                  backgroundColor: cardBg,
+                  border: `2px solid ${borderColor}`,
+                  color: textColor,
+                }}
+              >
+                <div className="flex flex-col gap-4">
+                  {/* Top: Name/Position and Stars */}
+                  <div className="flex justify-between items-start gap-4">
+                    <div className="flex-1">
+                      <h3 className="text-lg font-semibold" style={{ color: textColor }}>
+                        {current.name}
+                      </h3>
+                      <p className="text-sm" style={{ color: textSecondary }}>
+                        {current.position}, {current.company}
+                      </p>
+                    </div>
+                    {/* Stars on right */}
+                    <div className="flex gap-0.5 flex-shrink-0">
+                      {[...Array(5)].map((_, i) => (
+                        <Star
+                          key={i}
+                          className="w-4 h-4"
+                          style={{
+                            fill: i < current.rating ? "#FF6200" : "#D9D9D9",
+                            stroke: i < current.rating ? "#FF6200" : "#D9D9D9",
+                          }}
+                        />
+                      ))}
+                    </div>
                   </div>
-                  {/* Stars on right */}
-                  <div className="flex gap-0.5 flex-shrink-0">
-                    {[...Array(5)].map((_, i) => (
-                      <Star
-                        key={i}
-                        className="w-4 h-4"
-                        style={{
-                          fill: i < current.rating ? "#FF6200" : "#D9D9D9",
-                          stroke: i < current.rating ? "#FF6200" : "#D9D9D9",
-                        }}
-                      />
-                    ))}
+                  {/* Testimonial Text */}
+                  <p className="text-sm leading-relaxed" style={{ color: textColor }}>
+                    {current.text}
+                  </p>
+                  {/* Navigation Arrows - Bottom */}
+                  <div
+                    className="flex justify-between items-center mt-4 pt-4"
+                    style={{ borderTop: `1px solid ${borderColor}` }}
+                  >
+                    <button
+                      onClick={goToPrev}
+                      className="flex items-center justify-center transition-colors text-[#999999] dark:text-[#A8A4A0] active:text-orange-500"
+                    >
+                      <ChevronLeft className="w-5 h-5" />
+                    </button>
+                    <button
+                      onClick={goToNext}
+                      className="flex items-center justify-center transition-colors text-[#999999] dark:text-[#A8A4A0] active:text-orange-500"
+                    >
+                      <ChevronRight className="w-5 h-5" />
+                    </button>
                   </div>
-                </div>
-                {/* Testimonial Text */}
-                <p className="text-sm leading-relaxed" style={{ color: textColor }}>
-                  {current.text}
-                </p>
-                {/* Navigation Arrows - Bottom */}
-                <div
-                  className="flex justify-between items-center mt-4 pt-4"
-                  style={{ borderTop: `1px solid ${borderColor}` }}
-                >
-                  <button
-                    onClick={goToPrev}
-                    className="flex items-center justify-center transition-colors"
-                    style={{ color: textSecondary }}
-                  >
-                    <ChevronLeft className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={goToNext}
-                    className="flex items-center justify-center transition-colors"
-                    style={{ color: textSecondary }}
-                  >
-                    <ChevronRight className="w-5 h-5" />
-                  </button>
                 </div>
               </div>
             </div>

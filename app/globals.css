@@ -14,7 +14,11 @@
   .animate-slideIn,
   .animate-pulse,
   [class*="animate-"] {
-    animation-duration: 0.1s !important;
+    animation-duration: 2s !important;
+  }
+
+  .animate-nav {
+    animation-duration: 0.2s !important;
   }
 
   /* Reduce motion for users who prefer it */

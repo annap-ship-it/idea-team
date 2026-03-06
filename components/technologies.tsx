@@ -141,14 +141,14 @@ function MobileTechCard({
           : undefined
       }
       className={`
-        flex flex-col items-center justify-center gap-2 py-4 rounded-2xl transition-all duration-300 cursor-pointer
+        flex flex-row items-center justify-center gap-2 py-4 rounded-2xl transition-all duration-300 cursor-pointer
         bg-[var(--tech-card)]
         border border-[var(--tech-card-border)]
         dark:hover:[background:linear-gradient(180deg,#161515_0%,#FF6200_150%)]
         hover:[background:linear-gradient(180deg,#FAF9F8_0%,#FF6200_150%)]
       `}
     >
-      <div className="w-12 h-12 sm:w-14 sm:h-14 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
+      <div className="w-5 h-5 sm:w-8 sm:h-8 bg-white rounded-lg flex items-center justify-center flex-shrink-0">
         <Image
           src={tech.logo || "/placeholder.svg"}
           alt={tech.label}
@@ -157,7 +157,7 @@ function MobileTechCard({
           className="object-contain w-10 h-10 sm:w-12 sm:h-12"
         />
       </div>
-      <span className="text-xs sm:text-sm font-medium text-foreground px-2 text-center">{tech.label}</span>
+      <span className="text-sm font-semibold text-foreground px-2 text-center">{tech.label}</span>
     </div>
   )
 }

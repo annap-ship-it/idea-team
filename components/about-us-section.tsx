@@ -47,8 +47,8 @@ export function AboutUsSection() {
         <div className="grid lg:grid-cols-3 gap-12 items-start">
           {/* Left: Text Content */}
           <div className="space-y-6">
-            <p className="md:text-lg leading-relaxed text-white/60">{texts.description1}</p>
-            <p className="md:text-lg leading-relaxed text-white/60">{texts.description2}</p>
+            <p className="md:text-lg leading-relaxed">{texts.description1}</p>
+            <p className="md:text-lg leading-relaxed">{texts.description2}</p>
           </div>
 
           {/* Right: Interactive Map */}

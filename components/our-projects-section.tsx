@@ -65,16 +65,16 @@ function ProjectCard({
           border: "1px solid rgba(255, 255, 255, 0.1)",
         }}
       >
-        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col justify-between order-1 md:order-none">
-          <div>
+        <div className="w-full md:w-1/2 p-4 sm:p-6 md:p-8 lg:p-10 flex flex-col gap-5 sm:gap-0 justify-between order-1 md:order-none">
+          <div className="flex flex-col gap-5 sm:gap-0">
             <h3 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 sm:mb-3 md:mb-4 leading-tight">
               {title}
             </h3>
-            <p className="text-xs sm:text-sm md:text-base leading-relaxed opacity-90 line-clamp-3">
+            <p className="text-xl sm:text-sm md:text-base leading-relaxed opacity-90 line-clamp-3">
               {solution}
             </p>
           </div>
-          <span className="text-xs sm:text-sm opacity-75 flex-shrink-0 mt-2">
+          <span className="text-xl sm:text-sm opacity-75 flex-shrink-0 mt-2">
             {locale === "uk" ? "Читати повний кейс →" : "Read the full case →"}
           </span>
         </div>
@@ -173,7 +173,7 @@ export function OurProjectsSection() {
                 style={{ transform: `translateX(-${currentIndex * 100}%)` }}
               >
                 {projects.map((project, index) => (
-                  <div key={project.id} className="min-w-full flex-shrink-0 px-2">
+                  <div key={project.id} className="max-w-full md:min-w-full flex-shrink-0 px-9 sm:px-2">
                     <ProjectCard project={project} index={index} />
                   </div>
                 ))}
@@ -182,17 +182,21 @@ export function OurProjectsSection() {
             {/* Navigation Arrows */}
             <button
               onClick={prevSlide}
-              className="absolute left-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+              className="absolute left-0 top-1/2 -translate-y-1/2 p-2 text-[#787877] active:text-orange-500"
               aria-label="Previous"
             >
-              &lt;
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M7 13L1 7L7 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
             <button
               onClick={nextSlide}
-              className="absolute right-0 top-1/2 -translate-y-1/2 bg-black/50 text-white p-2 rounded-full"
+              className="absolute right-0 top-1/2 -translate-y-1/2 p-2 text-[#787877] active:text-orange-500"
               aria-label="Next"
             >
-              &gt;
+              <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M1 13L7 7L1 1" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
             </button>
             {/* Pagination Dots */}
             <div className="flex justify-center mt-4 space-x-2">

@@ -271,13 +271,35 @@ export function RequestConsultationSection() {
       className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 resize-none focus:outline-none focus:border-[#FF6200]"
     />
   </div>
-
   <div className="flex flex-wrap items-center gap-4 mt-3">
+  <label
+      htmlFor="attach-file"
+      className="flex items-center gap-2 cursor-pointer text-white hover:opacity-80 transition border border-[#212121] dark:border-[#3A3A3A] py-2 px-3 rounded-sm"
+      style={{
+        fontFamily: "Onest",
+        fontSize: "16px",
+      }}
+    >
+      <Paperclip size={18} color="#FF6200" />
+      {t.attachFile || "Attach file (optional)"}
+    </label>
+
+    <input
+      ref={fileInputRef}
+      id="attach-file"
+      type="file"
+      multiple
+      accept=".doc,.docx,.pdf,.ppt,.pptx"
+      onChange={handleFileSelect}
+      className="hidden"
+    />
+
+
     <button
       type="submit"
       disabled={isSubmitting}
       className={`
-        relative overflow-hidden
+        relative overflow-hidden w-full
         flex items-center justify-center gap-2.5
         px-6 py-3 text-sm md:text-base font-medium
         text-white
@@ -302,28 +324,6 @@ export function RequestConsultationSection() {
         t.send || "Send"
       )}
     </button>
-
-    <label
-      htmlFor="attach-file"
-      className="flex items-center gap-2 cursor-pointer text-white hover:opacity-80 transition"
-      style={{
-        fontFamily: "Onest",
-        fontSize: "16px",
-      }}
-    >
-      <Paperclip size={18} color="#FF6200" />
-      {t.attachFile || "Attach file (optional)"}
-    </label>
-
-    <input
-      ref={fileInputRef}
-      id="attach-file"
-      type="file"
-      multiple
-      accept=".doc,.docx,.pdf,.ppt,.pptx"
-      onChange={handleFileSelect}
-      className="hidden"
-    />
   </div>
 
   {files.length > 0 && (

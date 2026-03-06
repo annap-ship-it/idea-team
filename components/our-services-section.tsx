@@ -336,7 +336,7 @@ export function OurServicesSection() {
             <a
               key={service.id}
               href={service.link}
-              className="group h-[180px] md:h-[200px] rounded-2xl p-6 flex flex-col justify-between border border-border dark:border-[#4E4037] hover:border-primary/60 dark:hover:border-primary/60 transition-all"
+              className="group h-[180px] md:h-[200px] rounded-2xl p-6 flex flex-col justify-between border border-border border-gray-200 dark:border-[#4E4037] hover:border-primary/60 dark:hover:border-primary/60 transition-all"
               style={mobileBackground}
               onMouseEnter={() => setHoveredService(service.id)}
               onMouseLeave={() => setHoveredService(null)}
@@ -346,7 +346,7 @@ export function OurServicesSection() {
                 <h3 className="text-xl font-semibold text-foreground leading-tight">
                   {locale === "uk" ? service.titleUk : service.titleEn}
                 </h3>
-                <div className="flex items-center gap-1.5 text-sm text-foreground/60">
+                <div className="flex items-center gap-1.5 text-sm text-foreground/60 active:text-orange-500">
                   <span>{currentContent.readMore}</span>
                   <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                     <path
@@ -405,7 +405,7 @@ export function OurServicesSection() {
                   <h3 className="text-xl font-semibold text-foreground leading-tight">
                     {locale === "uk" ? service.titleUk : service.titleEn}
                   </h3>
-                  <div className="flex items-center gap-1.5 text-sm text-foreground/60">
+                  <div className="flex items-center gap-1.5 text-sm text-foreground/60 active:text-orange-500">
                     <span>{currentContent.readMore}</span>
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                       <path

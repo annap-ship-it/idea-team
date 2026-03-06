@@ -1289,7 +1289,7 @@ export function Navigation() {
 
         {mobileMenuOpen && (
           <div
-            className="fixed z-50 animate-in fade-in"
+            className="fixed z-50 animate-nav fade-in"
             style={{
               top: "96px",
               left: "16px",
@@ -1533,7 +1533,7 @@ export function Navigation() {
                       {/* Read All Reviews button */}
                       <Link
                         href="/#feedbacks"
-                        className="absolute transition-all duration-300 ease-out"
+                        className="absolute transition-all duration-300 ease-out text-center flex items-center justify-center"
                         style={{
                           bottom: "min(14px, 8%)",
                           left: "min(14px, 5%)",
@@ -1613,9 +1613,9 @@ export function Navigation() {
                   }}
                 >
                   {/* Responsive layout: vertical on <480px, horizontal on >=480px */}
-                  <div className="flex flex-col min-[480px]:flex-row min-[480px]:gap-5">
+                  <div className="flex flex-col min-[720px]:flex-row min-[720px]:gap-5">
                     {/* Services links */}
-                    <div className="flex flex-col gap-3 min-[480px]:grid min-[480px]:grid-cols-2 min-[480px]:flex-1">
+                    <div className="flex flex-col gap-3 min-[720px]:grid min-[720px]:grid-cols-2 min-[720px]:flex-1">
                       <Link
                         href="/services#custom-web-solutions"
                         className="transition-all duration-300 ease-out p-2"
@@ -1835,13 +1835,13 @@ export function Navigation() {
                     </div>
 
                     {/* Blog Article Card */}
-                    <div className="mt-5 min-[480px]:mt-0 min-[480px]:flex min-[480px]:items-start min-[480px]:justify-center min-[480px]:min-w-[200px]">
+                    <div className="mt-5 min-[720px]:mt-0 min-[720px]:flex min-[720px]:items-start min-[720px]:justify-center min-[720px]:min-w-[200px]">
                       <Link
                         href="/services"
                         className="relative overflow-hidden block transition-all duration-300 ease-out hover:scale-105"
                         style={{
                           width: "100%",
-                          maxWidth: "280px",
+                          maxWidth: "380px",
                           height: "180px",
                           borderRadius: "6px",
                           boxShadow: "0px 1px 1px 0px #00000010",
