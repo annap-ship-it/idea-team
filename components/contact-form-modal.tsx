@@ -176,7 +176,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-start justify-center my-10 p-3 md:p-4 overflow-y-auto"
+      className="fixed inset-0 z-50 flex items-start justify-center p-3 md:p-4 overflow-y-auto"
       style={{
         background: "rgba(0, 0, 0, 0.5)",
         paddingTop: "clamp(60px, 8vh, 100px)",
@@ -184,7 +184,7 @@ export function ContactFormModal({ isOpen, onClose }: ContactFormModalProps) {
       onClick={onClose}
     >
       <div
-        className="relative w-full rounded-[14px] shadow-lg"
+        className="relative w-full rounded-[14px] shadow-lg my-10"
         style={{
           maxWidth: "820px",
           backgroundColor: isDark ? "#212121" : "#FFFFFF",

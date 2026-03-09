@@ -16,7 +16,8 @@ export function LocaleToggle() {
       variant="ghost"
       size="sm"
       onClick={() => setLocale(locale === "en" ? "uk" : "en")}
-      className="font-normal text-base hover:bg-transparent"
+      style={{'backgroundColor': '#00000000'}}
+      className="relative flex justify-center border px-3.5 py-2.5 border-transparent transition-colors duration-100 rounded-full hover:border-gray-300 hover:bg-black"
     >
       <span
         style={{
