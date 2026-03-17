@@ -353,7 +353,6 @@ export default function ProjectsPage() {
     setIsSubmitting(true)
 
     try {
-      // Generate reCAPTCHA token using v3
       let grecaptcha = (window as any).grecaptcha
       let attempts = 0
 
@@ -369,8 +368,8 @@ export default function ProjectsPage() {
         return
       }
 
-      const recaptchaToken = await window.grecaptcha.execute(siteKey, {
-        action: "submit"
+      const recaptchaToken = await grecaptcha.execute(siteKey, {
+        action: "projects_consultation"
       })
 
       const formDataToSend = new FormData()
@@ -379,6 +378,7 @@ export default function ProjectsPage() {
       formDataToSend.append("message", formData.message)
       formDataToSend.append("subject", "Project Consultation Request")
       formDataToSend.append("recaptchaToken", recaptchaToken)
+
       if (attachedFile) {
         formDataToSend.append("file", attachedFile)
       }
@@ -389,10 +389,15 @@ export default function ProjectsPage() {
       })
 
       if (response.ok) {
-        setIsSubmitted(true)
+        setTimeout(() => {
+          setIsSubmitted(true)
+        }, 150)
+      } else {
+        alert(t.errorMessage)
       }
     } catch (error) {
       console.error("Error submitting form:", error)
+      alert(t.errorMessage)
     } finally {
       setIsSubmitting(false)
     }
