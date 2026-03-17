@@ -230,8 +230,8 @@ export default function ProjectsPage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [termsAccepted, setTermsAccepted] = useState(false)
-  const recaptchaRef = useRef<HTMLDivElement>(null)
   const [siteKey, setSiteKey] = useState<string>("")
+  const scriptLoaded = useRef(false)
 
   useEffect(() => {
     const fetchSiteKey = async () => {
@@ -265,14 +265,21 @@ export default function ProjectsPage() {
   }, [locale])
 
   useEffect(() => {
+    if (scriptLoaded.current || !siteKey) return
+
+    // Load reCAPTCHA v3 script
     const script = document.createElement("script")
     script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`
     script.async = true
     script.defer = true
+
     document.head.appendChild(script)
+    scriptLoaded.current = true
 
     return () => {
-      document.head.removeChild(script)
+      if (document.head.contains(script)) {
+        document.head.removeChild(script)
+      }
     }
   }, [siteKey])
 
@@ -347,8 +354,18 @@ export default function ProjectsPage() {
 
     try {
       // Generate reCAPTCHA token using v3
-      if (!window.grecaptcha) {
-        alert("reCAPTCHA is not loaded. Please refresh the page.")
+      let grecaptcha = (window as any).grecaptcha
+      let attempts = 0
+
+      while ((!grecaptcha || !grecaptcha.execute) && attempts < 30) {
+        await new Promise(resolve => setTimeout(resolve, 100))
+        grecaptcha = (window as any).grecaptcha
+        attempts++
+      }
+
+      if (!grecaptcha || !grecaptcha.execute) {
+        alert("reCAPTCHA failed to load. Please refresh and try again.")
+        setIsSubmitting(false)
         return
       }
 
@@ -878,13 +895,6 @@ export default function ProjectsPage() {
                       <span className="text-xs">{t.emailDisclaimer}</span>
                     </label>
                   </div>
-
-                  {/* reCAPTCHA widget */}
-                  <div
-                    ref={recaptchaRef}
-                    className="g-recaptcha"
-                    data-sitekey="6LcKsjksAAAAAGoEUPaQnULL3xDPUW5c_bLP5EjT"
-                  />
                 </form>
 
                 {/* Image */}
