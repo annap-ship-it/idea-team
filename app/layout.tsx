@@ -10,20 +10,21 @@ import { ScrollToTop } from "@/components/scroll-to-top"
 import { ClientOnlyPopups } from "@/components/client-only-popups"
 import "./globals.css"
 import Script from "next/script";
+import { GoogleTagManager } from '@next/third-parties/google';  // якщо вже встановив @next/third-parties
+
+// або вручну:
+
+import Script from 'next/script';
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="uk">
-      <head />
-      <body>
-        {children}
-
-        {/* Google tag (gtag.js) */}
+      <head>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-CNTQ2P0HEG"
           strategy="afterInteractive"
         />
-        <Script id="google-analytics" strategy="afterInteractive">
+        <Script id="gtag-init" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -31,7 +32,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             gtag('config', 'G-CNTQ2P0HEG');
           `}
         </Script>
-      </body>
+      </head>
+      <body>{children}</body>
     </html>
   );
 }
