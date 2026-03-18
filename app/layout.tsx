@@ -9,34 +9,6 @@ import { CookiesConsent } from "@/components/cookies-consent"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { ClientOnlyPopups } from "@/components/client-only-popups"
 import "./globals.css"
-import Script from "next/script";
-import { GoogleTagManager } from '@next/third-parties/google';  // якщо вже встановив @next/third-parties
-
-// або вручну:
-
-import Script from 'next/script';
-
-export default function RootLayout({ children }: { children: React.ReactNode }) {
-  return (
-    <html lang="uk">
-      <head>
-        <Script
-          src="https://www.googletagmanager.com/gtag/js?id=G-CNTQ2P0HEG"
-          strategy="afterInteractive"
-        />
-        <Script id="gtag-init" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){dataLayer.push(arguments);}
-            gtag('js', new Date());
-            gtag('config', 'G-CNTQ2P0HEG');
-          `}
-        </Script>
-      </head>
-      <body>{children}</body>
-    </html>
-  );
-}
 
 const onest = Onest({
   subsets: ["latin"],
@@ -77,7 +49,24 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+
+        {/* Google Analytics (gtag.js) – додано статично, щоб було видно в початковому HTML */}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=G-CNTQ2P0HEG"
+        ></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-CNTQ2P0HEG');
+            `,
+          }}
+        />
       </head>
+
       <body className={`${onest.variable} font-sans antialiased`}>
         <ThemeProvider>
           <LocaleProvider>
