@@ -227,7 +227,7 @@ export default function ProjectsPage() {
     email: "",
     message: "",
   })
-  const [attachedFile, setAttachedFile] = useState<File | null>(null)
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [termsAccepted, setTermsAccepted] = useState(false)
@@ -329,19 +329,27 @@ export default function ProjectsPage() {
     fetchProjects()
   }, [])
 
-  const handleFileAttach = () => {
-    const input = document.createElement("input")
-    input.type = "file"
-    input.accept = ".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
-    input.onchange = (e) => {
-      const file = (e.target as HTMLInputElement).files?.[0]
-      if (file && file.size <= 3 * 1024 * 1024) {
-        setAttachedFile(file)
-      } else {
-        alert(t.fileSizeError)
-      }
+  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const selectedFiles = Array.from(e.target.files || [])
+    const validExtensions = [".doc", ".docx", ".pdf", ".ppt", ".pptx", ".jpg", ".jpeg", ".png"]
+    const maxSize = 3 * 1024 * 1024
+    const maxFiles = 3
+
+    const validFiles = selectedFiles.filter((file) => {
+      const ext = "." + file.name.split(".").pop()?.toLowerCase()
+      return validExtensions.includes(ext) && file.size <= maxSize
+    })
+
+    if (attachedFiles.length + validFiles.length > maxFiles) {
+      alert("You can attach up to 3 files only")
+      return
     }
-    input.click()
+
+    setAttachedFiles((prev) => [...prev, ...validFiles].slice(0, maxFiles))
+  }
+
+  const handleRemoveFile = (index: number) => {
+    setAttachedFiles((prev) => prev.filter((_, i) => i !== index))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -380,9 +388,9 @@ export default function ProjectsPage() {
       formDataToSend.append("subject", "Project Consultation Request")
       formDataToSend.append("recaptchaToken", recaptchaToken)
 
-      if (attachedFile) {
-        formDataToSend.append("file", attachedFile)
-      }
+      attachedFiles.forEach((file) => {
+        formDataToSend.append("files", file)
+      })
 
       const response = await fetch("/api/contact", {
         method: "POST",
@@ -792,36 +800,52 @@ export default function ProjectsPage() {
                   </div>
 
                   {/* Attach File */}
-                  <div className="flex items-center gap-4">
-                    <button
-                      type="button"
-                      onClick={handleFileAttach}
-                      className="flex items-center gap-2 px-4 py-2 rounded-[4px] border transition-colors hover:border-[#FF6200] hover:bg-[#FF62001A] active:bg-[#FF62004D] active:text-white"
-                      style={{
-                        borderColor: isDark ? "#3A3A3A" : "#E0E0E0",
-                        color: isDark ? "#FFFFFF" : "#000000",
-                      }} 
+                  <div className="flex items-center gap-4 flex-wrap">
+                    <label className="flex items-center gap-2 cursor-pointer px-4 py-2 rounded-[4px] border transition-colors hover:border-[#FF6200] hover:bg-[#FF62001A] active:bg-[#FF62004D] active:text-white"
+                           style={{
+                             borderColor: isDark ? "#3A3A3A" : "#E0E0E0",
+                             color: isDark ? "#FFFFFF" : "#000000",
+                           }}
                     >
+                      <input
+                        type="file"
+                        multiple
+                        accept=".doc,.docx,.pdf,.ppt,.pptx,.jpg,.jpeg,.png"
+                        onChange={handleFileSelect}
+                        className="hidden"
+                      />
                       <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FF6200" strokeWidth="2">
-                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+                        <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48" />
                       </svg>
                       {t.attachLabel}
-                    </button>
-                    <span className="text-xs w-1/2" style={{ color: isDark ? "#666666" : "#999999" }}>
+                    </label>
+
+                    <span className="text-xs" style={{ color: isDark ? "#666666" : "#999999" }}>
                       {t.fileAttachInfo}
                     </span>
                   </div>
 
-                  {attachedFile && (
-                    <div className="flex items-center gap-2 text-sm " style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
-                      <span>{attachedFile.name}</span>
-                      <button
-                        type="button"
-                        onClick={() => setAttachedFile(null)}
-                        className="text-red-500 hover:text-red-700"
-                      >
-                        ×
-                      </button>
+                  {attachedFiles.length > 0 && (
+                    <div className="space-y-2">
+                      {attachedFiles.map((file, index) => (
+                        <div
+                          key={index}
+                          className="flex items-center justify-between gap-3 px-3 py-2 rounded-[4px]"
+                          style={{
+                            backgroundColor: isDark ? "#1E1E1E" : "#F5F5F5",
+                            color: isDark ? "#FFFFFF" : "#000000",
+                          }}
+                        >
+                          <span className="text-sm truncate">{file.name}</span>
+                          <button
+                            type="button"
+                            onClick={() => handleRemoveFile(index)}
+                            className="text-red-500 hover:text-red-700"
+                          >
+                            ×
+                          </button>
+                        </div>
+                      ))}
                     </div>
                   )}
 
