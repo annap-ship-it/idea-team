@@ -99,6 +99,7 @@ const testimonials: Testimonial[] = [
     text: `Working with the Idea Team showed us how quickly the team can dive into a project and maintain a high development pace. Communication was always transparent, and the solutions were well-thought-out and effective.`,
     avatarUrl: "/avatar3.svg",
   },
+  {
   id: 8,
     locale: "en",
     name: "Olha Kisil",
@@ -108,6 +109,7 @@ const testimonials: Testimonial[] = [
     text: `We received more than just task execution, Idea Team fully immersed themselves in our processes and flow. Thanks to their competence, the project was completed on time and delivered additional value to the end client.`,
     avatarUrl: "/avatar1.svg",
   },
+  {
   id: 9,
     locale: "en",
     name: "Oleksandr Bilyi",
@@ -117,6 +119,7 @@ const testimonials: Testimonial[] = [
     text: `The high qualification of Idea Team specialists is noticeable from the very first weeks. They offer optimal technical solutions, and their communication style makes collaboration exceptionally comfortable.`,
     avatarUrl: "/avatar2.svg",
   },
+  {
     id: 10,
     locale: "en",
     name: "Vladimir Bulashov",
