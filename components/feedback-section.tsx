@@ -124,7 +124,7 @@ const testimonials: Testimonial[] = [
     company: "Digis",
     rating: 5,
     text: `Working with the Idea Team is easy: their processes are well-organized, the team pays attention to details, and they are always available. Thanks to their engagement and quality support, we were able to accelerate our project development.`,
-    avatarUrl: "/avatar5.svg",
+    avatarUrl: "/avatar7.svg",
   },
 ];
 
