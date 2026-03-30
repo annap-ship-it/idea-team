@@ -35,7 +35,7 @@ export function HeroBanner() {
       buttonText: "Тест-драйв розробника",
       buttonDescription1: "Отримайте 10 годин безкоштовної технічної експертизи.",
       buttonDescription2: "Перевірте відповідність з першого дня.",
-      estimations: "Кошторисів",
+      estimations: "Оцінок",
       totalProjects: "Всього проектів",
       successfulClients: "Успішних клієнтів",
       professionals: "Професіоналів",
