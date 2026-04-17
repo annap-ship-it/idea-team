@@ -1,3 +1,5 @@
+// components/consultation-modal.tsx
+
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -13,7 +15,7 @@ interface ConsultationModalProps {
 }
 
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
-  const { t, locale } = useLocale()
+  const { t } = useLocale()
 
   const [isDark, setIsDark] = useState(false)
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     return () => observer.disconnect()
   }, [])
 
-  // Загрузка reCAPTCHA ключа
+  // Загрузка reCAPTCHA
   useEffect(() => {
     const fetchKey = async () => {
       try {
@@ -51,10 +53,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     fetchKey()
   }, [])
 
-  // Загрузка скрипта reCAPTCHA
   useEffect(() => {
     if (scriptLoaded.current) return
-
     const script = document.createElement("script")
     script.src = "https://www.google.com/recaptcha/api.js?render=explicit"
     script.async = true
@@ -76,7 +76,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.acceptTerms) {
-      setSubmitStatus({ type: "error", message: "Please accept the Terms and Conditions" })
+      setSubmitStatus({ type: "error", message: t.pleaseAcceptTerms || "Please accept the Terms and Conditions" })
       return
     }
 
@@ -97,11 +97,11 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       const data = await res.json()
 
       if (res.ok) {
-        setSubmitStatus({ type: "success", message: "Message sent successfully!" })
+        setSubmitStatus({ type: "success", message: t.messageSent || "Message sent successfully!" })
         setFormData({ name: "", email: "", message: "", acceptTerms: false })
         setFiles([])
         if (fileInputRef.current) fileInputRef.current.value = ""
-        setTimeout(onClose, 2000)
+        setTimeout(onClose, 1500)
       } else {
         setSubmitStatus({ type: "error", message: data.error || "Failed to send message" })
       }
@@ -121,7 +121,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
         {/* Кнопка закрытия */}
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-white text-4xl hover:text-gray-400 z-10"
+          className="absolute top-6 right-6 text-white text-4xl hover:text-gray-300 z-10"
         >
           ×
         </button>
@@ -129,53 +129,122 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 lg:p-12">
           {/* Левая часть — форма */}
           <div>
-            <h2 className="text-white text-3xl md:text-4xl font-bold mb-8">
-              Send us a note with your idea, and we'll get in touch
+            <h2 className="font-bold mb-6 text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
+              style={{
+                fontFamily: "Onest",
+                fontSize: "clamp(28px, 3vw, 40px)",
+                lineHeight: "1.15",
+              }}>
+              Send us a note with your idea, and we'll get in touch to provide guidance on implementation
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Поля формы — оставил твои стили */}
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                placeholder="Type your Name"
-                required
-                className="w-full bg-transparent border-b border-[#A8A8A8] py-3 text-white placeholder:text-[#A8A8A8] focus:outline-none"
-              />
+            <form onSubmit={handleSubmit} className="space-y-5">
+              <div>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  placeholder="Type your Name"
+                  required
+                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 focus:outline-none focus:border-[#FF6200]"
+                />
+              </div>
 
-              <input
-                type="email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                placeholder="Type your Email"
-                required
-                className="w-full bg-transparent border-b border-[#A8A8A8] py-3 text-white placeholder:text-[#A8A8A8] focus:outline-none"
-              />
+              <div>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  placeholder="Type your Email"
+                  required
+                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 focus:outline-none focus:border-[#FF6200]"
+                />
+              </div>
 
-              <textarea
-                value={formData.message}
-                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                placeholder="Type your Message"
-                required
-                rows={4}
-                className="w-full bg-transparent border-b border-[#A8A8A8] py-3 text-white placeholder:text-[#A8A8A8] focus:outline-none resize-none"
-              />
+              <div>
+                <textarea
+                  value={formData.message}
+                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                  placeholder="Type your Message"
+                  required
+                  rows={4}
+                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 resize-none focus:outline-none focus:border-[#FF6200]"
+                />
+              </div>
 
-              {/* Кнопка Attach file и Submit — можешь оставить свои стили */}
+              <div className="flex flex-wrap items-center gap-4 mt-3">
+                <label
+                  htmlFor="attach-file"
+                  className="flex items-center gap-2 cursor-pointer text-white hover:opacity-80 transition border border-[#212121] py-2 px-3 rounded-sm"
+                >
+                  <Paperclip size={18} color="#FF6200" />
+                  Attach file (optional)
+                </label>
+                <input
+                  ref={fileInputRef}
+                  id="attach-file"
+                  type="file"
+                  multiple
+                  accept=".doc,.docx,.pdf,.ppt,.pptx"
+                  onChange={handleFileSelect}
+                  className="hidden"
+                />
 
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full h-12 bg-[#FF6200] text-white rounded-full font-medium hover:bg-[#E55800] transition"
-              >
-                {isSubmitting ? "Sending..." : "Send"}
-              </button>
+                <button
+                  type="submit"
+                  disabled={isSubmitting}
+                  className="w-full h-12 bg-[#FF6200] text-white rounded-full font-medium hover:bg-[#E55800] transition disabled:opacity-50"
+                >
+                  {isSubmitting ? (
+                    <>
+                      <Loader2 className="w-5 h-5 animate-spin inline mr-2" />
+                      Sending...
+                    </>
+                  ) : (
+                    "Send"
+                  )}
+                </button>
+              </div>
+
+              {files.length > 0 && (
+                <div className="flex flex-wrap gap-3 mt-3">
+                  {files.map((file, idx) => (
+                    <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-[#2A2A2A] rounded-full text-white text-sm border border-[#3A3A3A]">
+                      <span className="truncate max-w-[180px]">{file.name}</span>
+                      <button type="button" onClick={() => removeFile(idx)}>
+                        <X size={14} />
+                      </button>
+                    </div>
+                  ))}
+                </div>
+              )}
+
+              <div className="flex items-start gap-3 mt-5">
+                <input
+                  type="checkbox"
+                  checked={formData.acceptTerms}
+                  onChange={(e) => setFormData({ ...formData, acceptTerms: e.target.checked })}
+                  className="mt-1 w-4 h-4 accent-[#FF6200]"
+                />
+                <label className="text-sm text-white/80 leading-relaxed">
+                  I Accept{" "}
+                  <Link href="/terms" className="underline text-white hover:text-[#FF6200]">
+                    Terms and Conditions
+                  </Link>
+                  . By submitting your email, you accept terms and conditions. We may send you occasionally marketing emails.
+                </label>
+              </div>
+
+              {submitStatus && (
+                <div className={`p-4 rounded-md mt-5 ${submitStatus.type === "success" ? "bg-green-900/30 text-green-300" : "bg-red-900/30 text-red-300"}`}>
+                  {submitStatus.message}
+                </div>
+              )}
             </form>
           </div>
 
           {/* Правая часть — картинка */}
-          <div className="relative hidden lg:block">
+          <div className="relative hidden lg:block h-[500px]">
             <Image
               src="/images/f236a65b9dcdd59fe25f5a9694d5243e04bca53a-20-281-29.jpg"
               alt="Developer working"
