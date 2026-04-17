@@ -12,6 +12,7 @@ export function HeroBanner() {
   const { locale } = useLocale()
   const [isPopoutOpen, setIsPopoutOpen] = useState(false)
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
+  const [contactFormOpen, setContactFormOpen] = useState(false)
 
   const content = {
     en: {
@@ -111,7 +112,8 @@ export function HeroBanner() {
           </p>
 
           <div className="flex flex-col items-center gap-4 mt-12 md:mt-14">
-            <button
+            {/* Developer Test Drive button - теперь открывает форму консультации */}
+<button
   className="h-10 rounded-full px-7 font-normal transition-all duration-300 ease-out disabled:cursor-not-allowed md:w-[200px] md:h-[40px]"
   style={{
     width: "200px",
@@ -126,7 +128,7 @@ export function HeroBanner() {
     background: "#FF6200",
     color: "#FFFFFF",
   }}
-  onClick={() => setContactFormOpen(true)}     // ← Изменено: теперь открывает форму консультации
+  onClick={() => setContactFormOpen(true)}     // ← Главное изменение
   onMouseEnter={(e) => {
     if (!e.currentTarget.disabled) {
       e.currentTarget.style.background = "linear-gradient(92.84deg, #FF6200 29.79%, #000000 100.07%)"
@@ -337,10 +339,9 @@ export function HeroBanner() {
         </div>
       </section>
 
-      <RateCalculatorPopout
-        isOpen={isPopoutOpen}
-        onClose={() => setIsPopoutOpen(false)}
-        onCalculateClick={handleCalculateClick}
+      <RequestConsultationSection 
+  isOpen={contactFormOpen} 
+  onClose={() => setContactFormOpen(false)} 
       />
 
       <CalculatorModal isOpen={isCalculatorOpen} onClose={() => setIsCalculatorOpen(false)} />
