@@ -5,7 +5,7 @@ import { useLocale } from "@/lib/locale-context"
 import { useState } from "react"
 
 import LiquidEther from "./liquid-ether"
-import RequestConsultationSection from "./request-consultation-section"
+import ConsultationModal from "./consultation-modal"   // ← Новый модальный компонент
 import CalculatorModal from "./calculator-modal"
 
 export function HeroBanner() {
@@ -24,10 +24,6 @@ export function HeroBanner() {
       buttonText: "Developer Test Drive",
       buttonDescription1: "Get 10 hours of free tech expertise.",
       buttonDescription2: "Test the fit from day one.",
-      estimations: "Estimations",
-      totalProjects: "Total Projects",
-      successfulClients: "Successful Clients",
-      professionals: "Professionals",
     },
     uk: {
       mainTitle: "Перетворюємо вашу ідею на",
@@ -37,10 +33,6 @@ export function HeroBanner() {
       buttonText: "Тест-драйв розробника",
       buttonDescription1: "Отримайте 10 годин безкоштовної технічної експертизи.",
       buttonDescription2: "Перевірте відповідність з першого дня.",
-      estimations: "Оцінок",
-      totalProjects: "Всього проектів",
-      successfulClients: "Успішних клієнтів",
-      professionals: "Професіоналів",
     },
   }
 
@@ -106,7 +98,6 @@ export function HeroBanner() {
           </p>
 
           <div className="flex flex-col items-center gap-4 mt-12 md:mt-14">
-            {/* Developer Test Drive button - теперь открывает форму */}
             <button
               className="h-10 rounded-full px-7 font-normal transition-all duration-300 ease-out disabled:cursor-not-allowed md:w-[200px] md:h-[40px]"
               style={{
@@ -122,7 +113,7 @@ export function HeroBanner() {
                 background: "#FF6200",
                 color: "#FFFFFF",
               }}
-              onClick={() => setContactFormOpen(true)}   // ← Изменено
+              onClick={() => setContactFormOpen(true)}   // ← Открывает форму
               onMouseEnter={(e) => {
                 if (!e.currentTarget.disabled) {
                   e.currentTarget.style.background = "linear-gradient(92.84deg, #FF6200 29.79%, #000000 100.07%)"
@@ -143,7 +134,6 @@ export function HeroBanner() {
                   e.currentTarget.style.background = "linear-gradient(92.84deg, #FF6200 29.79%, #000000 100.07%)"
                 }
               }}
-              disabled={false}
             >
               {t.buttonText}
             </button>
@@ -163,22 +153,19 @@ export function HeroBanner() {
               {t.buttonDescription2}
             </p>
           </div>
-
-          <div className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
-            style={{ maxWidth: "1116px", height: "auto", margin: "96px auto 0" }}>
-            {/* ... твой код stats ... */}
-          </div>
         </div>
       </section>
 
-      <RequestConsultationSection
+      {/* Модальное окно с формой консультации */}
+      <ConsultationModal
         isOpen={contactFormOpen}
         onClose={() => setContactFormOpen(false)}
       />
 
-      <CalculatorModal 
-        isOpen={isCalculatorOpen} 
-        onClose={() => setIsCalculatorOpen(false)} 
+      {/* Калькулятор (оставлен на случай) */}
+      <CalculatorModal
+        isOpen={isCalculatorOpen}
+        onClose={() => setIsCalculatorOpen(false)}
       />
     </>
   )
