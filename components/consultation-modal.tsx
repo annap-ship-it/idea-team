@@ -1,3 +1,5 @@
+// components/consultation-modal.tsx
+
 "use client"
 
 import { useState, useRef, useEffect } from "react"
@@ -13,7 +15,7 @@ interface ConsultationModalProps {
 }
 
 export default function ConsultationModal({ isOpen, onClose }: ConsultationModalProps) {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   const [isDark, setIsDark] = useState(false)
   const [formData, setFormData] = useState({
@@ -38,7 +40,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
     return () => observer.disconnect()
   }, [])
 
-  // Загрузка reCAPTCHA
+  // reCAPTCHA
   useEffect(() => {
     const fetchKey = async () => {
       try {
@@ -74,7 +76,7 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     if (!formData.acceptTerms) {
-      setSubmitStatus({ type: "error", message: t.pleaseAcceptTerms || "Please accept the Terms and Conditions" })
+      setSubmitStatus({ type: "error", message: t.pleaseAcceptTerms || "Будь ласка, прийміть умови" })
       return
     }
 
@@ -95,17 +97,21 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
       const data = await res.json()
 
       if (res.ok) {
-        setSubmitStatus({ type: "success", message: t.messageSent || "Message sent successfully!" })
+        setSubmitStatus({ type: "success", message: t.messageSent || "Повідомлення успішно надіслано!" })
         setFormData({ name: "", email: "", message: "", acceptTerms: false })
         setFiles([])
         if (fileInputRef.current) fileInputRef.current.value = ""
-        setTimeout(onClose, 1500)
+
+        setTimeout(() => {
+          setSubmitStatus(null)
+          onClose()
+        }, 3000)
       } else {
-        setSubmitStatus({ type: "error", message: data.error || "Failed to send message" })
+        setSubmitStatus({ type: "error", message: data.error || "Не вдалося надіслати повідомлення" })
       }
     } catch (err) {
       console.error("Submit failed:", err)
-      setSubmitStatus({ type: "error", message: "Failed to send message. Please try again." })
+      setSubmitStatus({ type: "error", message: "Не вдалося надіслати повідомлення. Спробуйте ще раз." })
     } finally {
       setIsSubmitting(false)
     }
@@ -115,99 +121,111 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 p-4">
-      <div className="relative w-full max-w-[1120px] bg-[#1E1E1E] rounded-3xl overflow-hidden">
-        {/* Кнопка закрытия */}
+      <div className="relative w-full max-w-[1120px] rounded-3xl overflow-hidden" 
+        style={{ background: isDark ? "#1E1E1E" : "#FFFFFF" }}>
+        
         <button
           onClick={onClose}
-          className="absolute top-6 right-6 text-white text-4xl hover:text-gray-300 z-10"
+          className="absolute top-6 right-6 text-4xl hover:text-gray-400 z-10"
+          style={{ color: isDark ? "#FFFFFF" : "#000000" }}
         >
           ×
         </button>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 p-8 lg:p-12">
-          {/* Левая часть — форма */}
+          {/* Форма */}
           <div>
-            <h2 className="font-bold mb-6 text-white whitespace-nowrap overflow-hidden text-ellipsis max-w-full"
-              style={{
-                fontFamily: "Onest",
-                fontSize: "clamp(28px, 3vw, 40px)",
+            <h2 className="font-bold mb-6" 
+              style={{ 
+                fontFamily: "Onest", 
+                fontSize: "clamp(28px, 3vw, 40px)", 
                 lineHeight: "1.15",
+                color: isDark ? "#FFFFFF" : "#212121" 
               }}>
-              Send us a note with your idea, and we'll get in touch to provide guidance on implementation
+              {locale === "uk" 
+                ? "Надішліть нам вашу ідею, і ми зв'яжемося з вами" 
+                : "Send us a note with your idea, and we'll get in touch"}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-5">
-              <div>
-                <input
-                  type="text"
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  placeholder="Type your Name"
-                  required
-                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 focus:outline-none focus:border-[#FF6200]"
-                />
-              </div>
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder={t.typeYourName || "Введіть своє ім'я"}
+                required
+                className="w-full px-4 py-3 rounded-md focus:outline-none focus:border-[#FF6200]"
+                style={{
+                  background: isDark ? "#2A2A2A" : "#F9F9F9",
+                  border: isDark ? "1px solid #3A3A3A" : "1px solid #D7DBE4",
+                  color: isDark ? "#FFFFFF" : "#212121"
+                }}
+              />
 
-              <div>
-                <input
-                  type="email"
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  placeholder="Type your Email"
-                  required
-                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 focus:outline-none focus:border-[#FF6200]"
-                />
-              </div>
+              <input
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder={t.typeYourEmail || "Введіть свою електронну адресу"}
+                required
+                className="w-full px-4 py-3 rounded-md focus:outline-none focus:border-[#FF6200]"
+                style={{
+                  background: isDark ? "#2A2A2A" : "#F9F9F9",
+                  border: isDark ? "1px solid #3A3A3A" : "1px solid #D7DBE4",
+                  color: isDark ? "#FFFFFF" : "#212121"
+                }}
+              />
 
-              <div>
-                <textarea
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  placeholder="Type your Message"
-                  required
-                  rows={4}
-                  className="w-full px-4 py-3 bg-[#2A2A2A] border border-[#3A3A3A] rounded-md text-white placeholder:text-white/50 resize-none focus:outline-none focus:border-[#FF6200]"
-                />
-              </div>
+              <textarea
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder={t.typeYourMessage || "Введіть своє повідомлення"}
+                required
+                rows={4}
+                className="w-full px-4 py-3 rounded-md resize-none focus:outline-none focus:border-[#FF6200]"
+                style={{
+                  background: isDark ? "#2A2A2A" : "#F9F9F9",
+                  border: isDark ? "1px solid #3A3A3A" : "1px solid #D7DBE4",
+                  color: isDark ? "#FFFFFF" : "#212121"
+                }}
+              />
 
-              <div className="flex flex-wrap items-center gap-4 mt-3">
-                <label
-                  htmlFor="attach-file"
-                  className="flex items-center gap-2 cursor-pointer text-white hover:opacity-80 transition border border-[#212121] py-2 px-3 rounded-sm"
-                >
+              <div className="flex items-center gap-3">
+                <label className="flex items-center gap-2 cursor-pointer" 
+                  style={{ color: isDark ? "#FFFFFF" : "#212121" }}>
                   <Paperclip size={18} color="#FF6200" />
-                  Attach file (optional)
+                  {t.attachFile || "Додати файл (необов'язково)"}
                 </label>
                 <input
                   ref={fileInputRef}
-                  id="attach-file"
                   type="file"
                   multiple
                   accept=".doc,.docx,.pdf,.ppt,.pptx"
                   onChange={handleFileSelect}
                   className="hidden"
                 />
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full h-12 bg-[#FF6200] text-white rounded-full font-medium hover:bg-[#E55800] transition disabled:opacity-50"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <Loader2 className="w-5 h-5 animate-spin inline mr-2" />
-                      Sending...
-                    </>
-                  ) : (
-                    "Send"
-                  )}
-                </button>
               </div>
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="w-full h-12 bg-[#FF6200] text-white rounded-full font-medium hover:bg-[#E55800] transition disabled:opacity-50"
+              >
+                {isSubmitting ? (
+                  <>
+                    <Loader2 className="w-5 h-5 animate-spin inline mr-2" />
+                    {t.sending || "Надсилання..."}
+                  </>
+                ) : (
+                  t.send || "Надіслати"
+                )}
+              </button>
 
               {files.length > 0 && (
                 <div className="flex flex-wrap gap-3 mt-3">
                   {files.map((file, idx) => (
-                    <div key={idx} className="flex items-center gap-2 px-4 py-2 bg-[#2A2A2A] rounded-full text-white text-sm border border-[#3A3A3A]">
+                    <div key={idx} className="flex items-center gap-2 px-4 py-2 rounded-full text-sm border"
+                      style={{ background: isDark ? "#2A2A2A" : "#F9F9F9", borderColor: isDark ? "#3A3A3A" : "#D7DBE4" }}>
                       <span className="truncate max-w-[180px]">{file.name}</span>
                       <button type="button" onClick={() => removeFile(idx)}>
                         <X size={14} />
@@ -224,12 +242,10 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
                   onChange={(e) => setFormData({ ...formData, acceptTerms: e.target.checked })}
                   className="mt-1 w-4 h-4 accent-[#FF6200]"
                 />
-                <label className="text-sm text-white/80 leading-relaxed">
-                  I Accept{" "}
-                  <Link href="/terms" className="underline text-white hover:text-[#FF6200]">
-                    Terms and Conditions
-                  </Link>
-                  . By submitting your email, you accept terms and conditions. We may send you occasionally marketing emails.
+                <label className="text-sm" style={{ color: isDark ? "#FFFFFF" : "#212121" }}>
+                  {locale === "uk" 
+                    ? "Я приймаю Умови та Положення. Надсилаючи свій запит, ви погоджуєтеся з умовами та положеннями. Ми можемо періодично надсилати вам маркетингові листи."
+                    : "I Accept Terms and Conditions. By submitting your email, you accept terms and conditions. We may send you occasionally marketing emails."}
                 </label>
               </div>
 
@@ -241,8 +257,8 @@ export default function ConsultationModal({ isOpen, onClose }: ConsultationModal
             </form>
           </div>
 
-          {/* Правая часть — картинка */}
-          <div className="relative hidden lg:block h-[500px]">
+          {/* Правая картинка */}
+          <div className="relative hidden lg:block h-[520px]">
             <Image
               src="/images/f236a65b9dcdd59fe25f5a9694d5243e04bca53a-20-281-29.jpg"
               alt="Developer working"
