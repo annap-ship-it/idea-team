@@ -156,7 +156,7 @@ export function HeroBanner() {
             </p>
           </div>
        
-          <div
+           <div
             className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
             style={{
               maxWidth: "1116px",
@@ -219,10 +219,113 @@ export function HeroBanner() {
               </div>
             </div>
           </div>
-        </div> </div>
+
+          <style jsx>{`
+            @media (max-width: 479px) {
+              .hero-banner {
+                height: auto !important;
+                min-height: 100vh !important;
+                max-height: none !important;
+                overflow: visible !important;
+                padding-bottom: 60px !important;
+              }
+              
+              .hero-content {
+                padding: 0 20px 0 !important;
+                height: auto !important;
+                min-height: auto !important;
+              }
+              
+              .hero-title {
+                margin-top: 200px !important;
+                font-size: 36px !important;
+                line-height: 110% !important;
+                width: 100% !important;
+                max-width: 100% !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                margin-bottom: 24px !important;
+              }
+            }
+            
+            @media (min-width: 480px) and (max-width: 767px) {
+              .hero-banner {
+                height: auto !important;
+                min-height: 100vh !important;
+                max-height: none !important;
+                overflow: visible !important;
+                padding-bottom: 60px !important;
+              }
+              
+              .hero-content {
+                padding: 0 28px 0 !important;
+                height: auto !important;
+                min-height: auto !important;
+              }
+              
+              .hero-title {
+                margin-top: 166px !important;
+                font-size: 40px !important;
+                line-height: 110% !important;
+                width: 100% !important;
+                max-width: 423px !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                margin-bottom: 24px !important;
+              }
+            }
+
+            @media (min-width: 768px) and (max-width: 1023px) {
+              .hero-banner {
+                min-height: 100vh !important;
+              }
+              
+              .hero-content {
+                padding: 0 40px !important;
+              }
+              
+              .hero-title {
+                margin-top: 180px !important;
+                font-size: 52px !important;
+              }
+            }
+            
+            @media (min-width: 1024px) and (max-width: 1279px) {
+              .hero-banner {
+                min-height: 100vh !important;
+              }
+              
+              .hero-title {
+                margin-top: 140px !important;
+                font-size: 56px !important;
+              }
+            }
+            
+            @media (min-width: 1280px) and (max-width: 1439px) {
+              .hero-banner {
+                max-height: 100vh !important;
+              }
+              
+              .hero-title {
+                margin-top: 120px !important;
+                font-size: 60px !important;
+              }
+            }
+            
+            @media (min-width: 1440px) {
+              .hero-banner {
+                max-height: 100vh !important;
+              }
+              
+              .hero-title {
+                margin-top: 160px !important;
+                font-size: 64px !important;
+              }
+            }
+          `}</style>
+        </div>
       </section>
 
-      {/* Модальное окно с формой */}
       <ConsultationModal
         isOpen={contactFormOpen}
         onClose={() => setContactFormOpen(false)}
