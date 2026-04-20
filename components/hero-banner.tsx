@@ -155,7 +155,8 @@ export function HeroBanner() {
               {t.buttonDescription2}
             </p>
           </div>
-        <div
+       
+          <div
             className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
             style={{
               maxWidth: "1116px",
@@ -218,7 +219,7 @@ export function HeroBanner() {
               </div>
             </div>
           </div>
-        </div>
+        </div> </div>
       </section>
 
       {/* Модальное окно с формой */}
