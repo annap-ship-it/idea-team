@@ -127,7 +127,7 @@ const defaultProjectsData: Record<string, any> = {
     ],
   },
 
-  gallery: ["/Waltair-Robotics-2.png", "/Waltair-Robotics-3.png", "/Waltair-Robotics 4.png"],
+  gallery: ["/Waltair-Robotics-2.jpg", "/Waltair-Robotics-3.jpg", "/Waltair-Robotics 4.jpg"],
 
   testimonial: {
     quote: "The app became significantly more stable and ready for release.",
