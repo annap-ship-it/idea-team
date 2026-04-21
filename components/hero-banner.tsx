@@ -101,7 +101,7 @@ export function HeroBanner() {
                 background: "#FF6200",
                 color: "#FFFFFF",
               }}
-              onClick={() => setContactFormOpen(true)}
+              onClick={() => setContactFormOpen(true)}   // ← Изменено
               onMouseEnter={(e) => {
                 if (!e.currentTarget.disabled) {
                   e.currentTarget.style.background = "linear-gradient(92.84deg, #FF6200 29.79%, #000000 100.07%)"
@@ -141,8 +141,7 @@ export function HeroBanner() {
               {t.buttonDescription2}
             </p>
           </div>
-
-          {/* Статистика — полностью как в твоём оригинальном коде */}
+          
           <div
             className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
             style={{ maxWidth: "1116px", height: "auto", margin: "96px auto 0" }}
@@ -205,7 +204,7 @@ export function HeroBanner() {
         </div>
       </section>
 
-      {/* Модальное окно с формой консультации */}
+      {/* Добавляем модальное окно */}
       <ConsultationModal
         isOpen={contactFormOpen}
         onClose={() => setContactFormOpen(false)}
