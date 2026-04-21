@@ -55,6 +55,91 @@ const translations = {
 
 // Default project data for fallback
 const defaultProjectsData: Record<string, any> = {
+  "waltair-robotics": {
+  title: {
+    en: "Waltair Robotics (Mobile App v4)",
+    uk: "Waltair Robotics (Mobile App v4)",
+  },
+  featured_image: "/images/Waltair-Robotics-1.png",
+  client: {
+    en: "Waltair Robotics",
+    uk: "Waltair Robotics",
+  },
+  industry: {
+    en: "Fitness & Sports Technology",
+    uk: "Фітнес та спортивні технології",
+  },
+  duration: {
+    en: "Ongoing",
+    uk: "В процесі",
+  },
+  team: {
+    en: "Mobile & Backend Team",
+    uk: "Mobile та Backend команда",
+  },
+
+  overview: {
+    en: `Mobile application for tennis coaches to remotely control a smart ball machine, record sessions, and analyze performance using real-time statistics and video.`,
+    uk: `Мобільний застосунок для тенісних тренерів для дистанційного керування машиною подачі м’ячів, запису тренувань та аналізу результатів у реальному часі.`,
+  },
+
+  challenge: {
+    en: `The mobile app suffered from instability, UI inconsistencies across devices, synchronization issues, and a monolithic codebase that was difficult to maintain.`,
+    uk: `Мобільний застосунок мав проблеми зі стабільністю, неконсистентний UI на різних пристроях, проблеми синхронізації та складну монолітну структуру коду.`,
+  },
+
+  solution: {
+    en: `We stabilized the application, fixed synchronization issues, rebuilt key screens, implemented full localization, improved navigation and UI consistency, and refactored the codebase into scalable components.`,
+    uk: `Ми стабілізували застосунок, виправили проблеми синхронізації, переробили ключові екрани, додали локалізацію, покращили навігацію та провели рефакторинг коду.`,
+  },
+
+  result: {
+    en: `Improved stability and performance, consistent UI across devices, reduced technical debt, and readiness for final QA and production release.`,
+    uk: `Покращена стабільність і продуктивність, консистентний UI, зменшений технічний борг та готовність до фінального QA і релізу.`,
+  },
+
+  stack: [
+    "React Native",
+    "Redux",
+    "Python",
+    "Socket.io",
+    "react-hook-form",
+    "Zod",
+    "i18n",
+  ],
+
+  features: {
+    en: [
+      "Real-time machine control via Wi-Fi",
+      "Live statistics and charts",
+      "Video playback (Play Clips)",
+      "Session tracking and analytics",
+      "Multi-language support",
+      "Improved navigation and UI flows",
+    ],
+    uk: [
+      "Керування машиною в реальному часі через Wi-Fi",
+      "Статистика та графіки в реальному часі",
+      "Відео (Play Clips)",
+      "Аналітика тренувань",
+      "Підтримка кількох мов",
+      "Покращена навігація",
+    ],
+  },
+
+  gallery: [
+    "/images/Waltair-Robotics-1.png",
+    "/images/Waltair-Robotics-2.png",
+    "/images/Waltair-Robotics-3.png",
+    "/images/Waltair-Robotics 4.png",
+  ],
+
+  testimonial: {
+    quote: "The app became significantly more stable and ready for release.",
+    author: "Product Team",
+    company: "Waltair Robotics",
+  },
+},
   "internal-monitoring-system-symbotic": {
     title: {
       en: "Internal Monitoring System for Symbotic",
