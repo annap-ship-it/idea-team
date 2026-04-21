@@ -7,46 +7,15 @@ import { useLocale } from "@/lib/locale-context"
 import { useState } from "react"
 
 import LiquidEther from "./liquid-ether"
-import ConsultationModal from "./consultation-modal"   // ← Новый модальный компонент
+import ConsultationModal from "./consultation-modal"
 import CalculatorModal from "./calculator-modal"
 
 export function HeroBanner() {
   const { theme } = useTheme()
-  const { locale } = useLocale()
+  const { locale, t } = useLocale()   // ← используем t из useLocale
 
   const [contactFormOpen, setContactFormOpen] = useState(false)
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
-
-  const content = {
-    en: {
-      mainTitle: "Turning your idea into",
-      mainTitleGradient: "a tech solution",
-      subtitle1: "You don't need better developers.",
-      subtitle2: "You need the right ones at the right time.",
-      buttonText: "Developer Test Drive",
-      buttonDescription1: "Get 10 hours of free tech expertise.",
-      buttonDescription2: "Test the fit from day one.",
-      estimations: "Estimations",
-      totalProjects: "Total Projects",
-      successfulClients: "Successful Clients",
-      professionals: "Professionals",
-    },
-    uk: {
-      mainTitle: "Перетворюємо вашу ідею на",
-      mainTitleGradient: "технічне рішення",
-      subtitle1: "Вам не потрібні кращі розробники.",
-      subtitle2: "Вам потрібні правильні розробники у правильний час.",
-      buttonText: "Тест-драйв розробника",
-      buttonDescription1: "Отримайте 10 годин безкоштовної технічної експертизи.",
-      buttonDescription2: "Перевірте відповідність з першого дня.",
-      estimations: "Оцінок",
-      totalProjects: "Всього проектів",
-      successfulClients: "Успішних клієнтів",
-      professionals: "Професіоналів",
-    },
-  }
-
-  const t = content[locale]
 
   return (
     <>
@@ -73,20 +42,19 @@ export function HeroBanner() {
               marginBottom: "20px",
             }}
           >
-            {t.mainTitle}
+            {t.mainTitle || "Turning your idea into"}
             <br />
             <span
               style={{
-                backgroundImage:
-                  theme === "light"
-                    ? "linear-gradient(90deg, #FF6200 51.44%, #212121 100%)"
-                    : "linear-gradient(90deg, #FF6200 51.44%, #FFFFFF 100%)",
+                backgroundImage: theme === "light"
+                  ? "linear-gradient(90deg, #FF6200 51.44%, #212121 100%)"
+                  : "linear-gradient(90deg, #FF6200 51.44%, #FFFFFF 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              {t.mainTitleGradient}
+              {t.mainTitleGradient || "a tech solution"}
             </span>
           </h1>
 
@@ -102,13 +70,12 @@ export function HeroBanner() {
               marginTop: "8px",
             }}
           >
-            {t.subtitle1}
+            {t.subtitle1 || "You don't need better developers."}
             <br />
-            {t.subtitle2}
+            {t.subtitle2 || "You need the right ones at the right time."}
           </p>
 
           <div className="flex flex-col items-center gap-4 mt-12 md:mt-14">
-            {/* Кнопка Developer Test Drive — теперь открывает форму */}
             <button
               className="h-10 rounded-full px-7 font-normal transition-all duration-300 ease-out disabled:cursor-not-allowed md:w-[200px] md:h-[40px]"
               style={{
@@ -146,7 +113,7 @@ export function HeroBanner() {
                 }
               }}
             >
-              {t.buttonText}
+              {t.buttonText || "Developer Test Drive"}
             </button>
 
             <p
@@ -159,13 +126,13 @@ export function HeroBanner() {
                 color: theme === "light" ? "#000000" : "#FFFFFF",
               }}
             >
-              {t.buttonDescription1}
+              {t.buttonDescription1 || "Get 10 hours of free tech expertise."}
               <br />
-              {t.buttonDescription2}
+              {t.buttonDescription2 || "Test the fit from day one."}
             </p>
           </div>
 
-          {/* Статистика — полностью сохранена из твоего оригинального кода */}
+          {/* Статистика — полностью как в оригинале */}
           <div
             className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
             style={{ maxWidth: "1116px", height: "auto", margin: "96px auto 0" }}
@@ -225,14 +192,9 @@ export function HeroBanner() {
         onClose={() => setContactFormOpen(false)}
       />
 
-      {/* Калькулятор (оставлен) */}
       <CalculatorModal
         isOpen={isCalculatorOpen}
         onClose={() => setIsCalculatorOpen(false)}
-      />
-    </>
-  )
-}
       />
     </>
   )
