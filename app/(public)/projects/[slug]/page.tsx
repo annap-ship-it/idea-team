@@ -79,13 +79,31 @@ const defaultProjectsData: Record<string, any> = {
   },
 
   overview: {
-    en: `Mobile application for tennis coaches to remotely control a smart ball machine, record sessions, and analyze performance using real-time statistics and video.`,
-    uk: `Мобільний застосунок для тенісних тренерів для дистанційного керування машиною подачі м’ячів, запису тренувань та аналізу результатів у реальному часі.`,
+    en: `Waltair Robotics is a mobile application built for tennis coaches to remotely control a smart ball-feeding machine, record training sessions, and analyze performance through real-time statistics and charts.
+ The app connects via Wi-Fi, synchronizing machine commands, shot data (hand used, speed, direction), and live video streams enabling coaches to deliver data-driven training experiences.
+The project entered its final stage of active development. We focused on improving app stability, UI/UX consistency, and overall performance ahead of public release.`,
+    uk: `Waltair Robotics — це мобільний застосунок, створений для тенісних тренерів, який дозволяє дистанційно керувати розумною машиною для подачі м’ячів, записувати тренування та аналізувати результати за допомогою статистики та графіків у реальному часі.
+ Застосунок підключається через Wi-Fi, синхронізуючи команди машини, дані про удари (рука, швидкість, напрямок) та живі відеотрансляції, забезпечуючи тренерам можливість проводити тренування на основі даних.
+Проєкт увійшов у фінальну фазу активної розробки. Ми зосередилися на покращенні стабільності, узгодженості UI/UX та загальної продуктивності перед публічним релізом.`,
   },
 
   challenge: {
-    en: `The mobile app suffered from instability, UI inconsistencies across devices, synchronization issues, and a monolithic codebase that was difficult to maintain.`,
-    uk: `Мобільний застосунок мав проблеми зі стабільністю, неконсистентний UI на різних пристроях, проблеми синхронізації та складну монолітну структуру коду.`,
+    en: [
+    "Regressions in session timers, navigation flow, and video playback",
+    "Inconsistent UI behavior across iPhone, iPad, and Android (portrait & landscape)",
+    "Synchronization issues with socket events and time tracking",
+    "Monolithic code structure with large, hard-to-maintain components",
+    "Unstable third-party libraries causing freezes and performance issues",
+    "Lack of localization and limited data visualization",
+  ],
+    uk: [
+    "Регресії у таймерах сесій, навігації та відтворенні відео",
+    "Неконсистентна поведінка UI на iPhone, iPad та Android (портрет / альбом)",
+    "Проблеми синхронізації socket-подій і відстеження часу",
+    "Монолітна структура коду та великі компоненти, які важко підтримувати",
+    "Нестабільні сторонні бібліотеки, що викликали зависання та зниження продуктивності",
+    "Відсутність локалізації та обмежена візуалізація даних",
+  ],
   },
 
   solution: {
