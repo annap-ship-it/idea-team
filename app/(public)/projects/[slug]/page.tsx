@@ -89,19 +89,19 @@ The project entered its final stage of active development. We focused on improvi
 
   challenge: {
     en: [
-    "Regressions in session timers, navigation flow, and video playback",\n
-    "Inconsistent UI behavior across iPhone, iPad, and Android (portrait & landscape)",\n
-    "Synchronization issues with socket events and time tracking",\n
-    "Monolithic code structure with large, hard-to-maintain components",\n
-    "Unstable third-party libraries causing freezes and performance issues",\n
+    "Regressions in session timers, navigation flow, and video playback\n",
+    "Inconsistent UI behavior across iPhone, iPad, and Android (portrait & landscape)\n",
+    "Synchronization issues with socket events and time tracking\n",
+    "Monolithic code structure with large, hard-to-maintain components\n",
+    "Unstable third-party libraries causing freezes and performance issues\n",
     "Lack of localization and limited data visualization",
   ],
     uk: [
-    "Регресії у таймерах сесій, навігації та відтворенні відео",\n
-    "Неконсистентна поведінка UI на iPhone, iPad та Android (портрет / альбом)",\n
-    "Проблеми синхронізації socket-подій і відстеження часу",\n
-    "Монолітна структура коду та великі компоненти, які важко підтримувати",\n
-    "Нестабільні сторонні бібліотеки, що викликали зависання та зниження продуктивності",\n
+    "Регресії у таймерах сесій, навігації та відтворенні відео\n",
+    "Неконсистентна поведінка UI на iPhone, iPad та Android (портрет / альбом)\n",
+    "Проблеми синхронізації socket-подій і відстеження часу\n",
+    "Монолітна структура коду та великі компоненти, які важко підтримувати\n",
+    "Нестабільні сторонні бібліотеки, що викликали зависання та зниження продуктивності\n",
     "Відсутність локалізації та обмежена візуалізація даних",
   ],
   },
