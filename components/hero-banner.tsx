@@ -8,14 +8,23 @@ import { useState } from "react"
 
 import LiquidEther from "./liquid-ether"
 import ConsultationModal from "./consultation-modal"
+import RateCalculatorPopout from "./rate-calculator-popout"
 import CalculatorModal from "./calculator-modal"
 
 export function HeroBanner() {
   const { theme } = useTheme()
-  const { locale, t } = useLocale()   // ← используем t из useLocale
+  const { locale, t } = useLocale()
 
   const [contactFormOpen, setContactFormOpen] = useState(false)
+  const [isPopoutOpen, setIsPopoutOpen] = useState(false)
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false)
+
+  const handleCalculateClick = () => {
+    setIsPopoutOpen(false)
+    setTimeout(() => {
+      setIsCalculatorOpen(true)
+    }, 100)
+  }
 
   return (
     <>
@@ -42,19 +51,20 @@ export function HeroBanner() {
               marginBottom: "20px",
             }}
           >
-            {t.mainTitle || "Turning your idea into"}
+            {t.mainTitle}
             <br />
             <span
               style={{
-                backgroundImage: theme === "light"
-                  ? "linear-gradient(90deg, #FF6200 51.44%, #212121 100%)"
-                  : "linear-gradient(90deg, #FF6200 51.44%, #FFFFFF 100%)",
+                backgroundImage:
+                  theme === "light"
+                    ? "linear-gradient(90deg, #FF6200 51.44%, #212121 100%)"
+                    : "linear-gradient(90deg, #FF6200 51.44%, #FFFFFF 100%)",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
                 backgroundClip: "text",
               }}
             >
-              {t.mainTitleGradient || "a tech solution"}
+              {t.mainTitleGradient}
             </span>
           </h1>
 
@@ -70,9 +80,9 @@ export function HeroBanner() {
               marginTop: "8px",
             }}
           >
-            {t.subtitle1 || "You don't need better developers."}
+            {t.subtitle1}
             <br />
-            {t.subtitle2 || "You need the right ones at the right time."}
+            {t.subtitle2}
           </p>
 
           <div className="flex flex-col items-center gap-4 mt-12 md:mt-14">
@@ -113,7 +123,7 @@ export function HeroBanner() {
                 }
               }}
             >
-              {t.buttonText || "Developer Test Drive"}
+              {t.buttonText}
             </button>
 
             <p
@@ -126,13 +136,13 @@ export function HeroBanner() {
                 color: theme === "light" ? "#000000" : "#FFFFFF",
               }}
             >
-              {t.buttonDescription1 || "Get 10 hours of free tech expertise."}
+              {t.buttonDescription1}
               <br />
-              {t.buttonDescription2 || "Test the fit from day one."}
+              {t.buttonDescription2}
             </p>
           </div>
 
-          {/* Статистика — полностью как в оригинале */}
+          {/* Статистика — полностью как в твоём оригинальном коде */}
           <div
             className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
             style={{ maxWidth: "1116px", height: "auto", margin: "96px auto 0" }}
@@ -147,10 +157,13 @@ export function HeroBanner() {
                 </span>
               </div>
 
-              <div className="w-px h-12 sm:h-8" style={{ backgroundColor: theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)" }} />
+              <div
+                className="w-px h-12 sm:h-8"
+                style={{ backgroundColor: theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)" }}
+              />
 
               <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
-                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
+                <span className="block font-bold stat-number " style={{ fontSize: "32px" }}>
                   30+
                 </span>
                 <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
@@ -159,7 +172,10 @@ export function HeroBanner() {
               </div>
             </div>
 
-            <div className="hidden md:block w-px h-8" style={{ backgroundColor: theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)" }} />
+            <div
+              className="hidden md:block w-px h-8"
+              style={{ backgroundColor: theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)" }}
+            />
 
             <div className="flex items-center gap-4 w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-12">
               <div className="flex stat-item text-center flex-1 sm:flex-none px-5">
@@ -171,7 +187,10 @@ export function HeroBanner() {
                 </span>
               </div>
 
-              <div className="w-px h-12 sm:h-8" style={{ backgroundColor: theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)" }} />
+              <div
+                className="w-px h-12 sm:h-8"
+                style={{ backgroundColor: theme === "light" ? "rgba(0, 0, 0, 0.2)" : "rgba(255, 255, 255, 0.2)" }}
+              />
 
               <div className="flex stat-item text-center flex-1 sm:flex-none">
                 <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
@@ -186,16 +205,19 @@ export function HeroBanner() {
         </div>
       </section>
 
-      {/* Модальное окно с формой */}
+      {/* Модальное окно с формой консультации */}
       <ConsultationModal
         isOpen={contactFormOpen}
         onClose={() => setContactFormOpen(false)}
       />
 
-      <CalculatorModal
-        isOpen={isCalculatorOpen}
-        onClose={() => setIsCalculatorOpen(false)}
+      <RateCalculatorPopout
+        isOpen={isPopoutOpen}
+        onClose={() => setIsPopoutOpen(false)}
+        onCalculateClick={handleCalculateClick}
       />
+
+      <CalculatorModal isOpen={isCalculatorOpen} onClose={() => setIsCalculatorOpen(false)} />
     </>
   )
 }
