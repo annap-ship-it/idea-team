@@ -60,7 +60,7 @@ const defaultProjectsData: Record<string, any> = {
     en: "Waltair Robotics (Mobile App v4)",
     uk: "Waltair Robotics (Mobile App v4)",
   },
-  featured_image: "/images/Waltair-Robotics-1.png",
+  featured_image: "/Waltair-Robotics-1.png",
   client: {
     en: "Waltair Robotics",
     uk: "Waltair Robotics",
@@ -128,10 +128,9 @@ const defaultProjectsData: Record<string, any> = {
   },
 
   gallery: [
-    "/images/Waltair-Robotics-1.png",
-    "/images/Waltair-Robotics-2.png",
-    "/images/Waltair-Robotics-3.png",
-    "/images/Waltair-Robotics 4.png",
+    "/Waltair-Robotics-2.png",
+    "/Waltair-Robotics-3.png",
+    "/Waltair-Robotics 4.png",
   ],
 
   testimonial: {
