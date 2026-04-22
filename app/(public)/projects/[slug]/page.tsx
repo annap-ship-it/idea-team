@@ -9,13 +9,14 @@ import { useParams } from "next/navigation"
 import { useLocale } from "@/lib/locale-context"
 
 interface ProjectData {
-  id: string
-  title: string
-  slug: string
-  excerpt: string
-  featured_image: string
-  content: any
-  created_at: string
+  id?: string
+  title: { en: string; uk?: string } | string
+  slug?: string
+  excerpt?: string
+  featured_image?: string
+  content?: any
+  created_at?: string
+  [key: string]: any
 }
 
 const translations = {
@@ -56,142 +57,144 @@ const translations = {
 // Default project data for fallback
 const defaultProjectsData: Record<string, any> = {
   "waltair-robotics": {
-  title: {
-    en: "Waltair Robotics (Mobile App v4)",
-    uk: "Waltair Robotics (Mobile App v4)",
-  },
-  featured_image: "/Waltair-Robotics-1.png",
-  client: {
-    en: "Waltair Robotics",
-    uk: "Waltair Robotics",
-  },
-  industry: {
-    en: "Fitness & Sports Technology",
-    uk: "Фітнес та спортивні технології",
-  },
-  duration: {
-    en: "3 months",
-    uk: "3 місяці",
-  },
-  team: {
-    en: "Mobile & Backend Team",
-    uk: "Mobile та Backend команда",
-  },
+    title: {
+      en: "Waltair Robotics (Mobile App v4)",
+      uk: "Waltair Robotics (Mobile App v4)",
+    },
+    featured_image: "/Waltair-Robotics-1.png",
+    client: {
+      en: "Waltair Robotics",
+      uk: "Waltair Robotics",
+    },
+    industry: {
+      en: "Fitness & Sports Technology",
+      uk: "Фітнес та спортивні технології",
+    },
+    duration: {
+      en: "3 months",
+      uk: "3 місяці",
+    },
+    team: {
+      en: "Mobile & Backend Team",
+      uk: "Mobile та Backend команда",
+    },
 
-  overview: {
-    en: `Waltair Robotics is a mobile application built for tennis coaches to remotely control a smart ball-feeding machine, record training sessions, and analyze performance through real-time statistics and charts.
+    overview: {
+      en: `Waltair Robotics is a mobile application built for tennis coaches to remotely control a smart ball-feeding machine, record training sessions, and analyze performance through real-time statistics and charts.
  The app connects via Wi-Fi, synchronizing machine commands, shot data (hand used, speed, direction), and live video streams enabling coaches to deliver data-driven training experiences.
 The project entered its final stage of active development. We focused on improving app stability, UI/UX consistency, and overall performance ahead of public release.`,
-    uk: `Waltair Robotics — це мобільний застосунок, створений для тенісних тренерів, який дозволяє дистанційно керувати розумною машиною для подачі м’ячів, записувати тренування та аналізувати результати за допомогою статистики та графіків у реальному часі.
+      uk: `Waltair Robotics — це мобільний застосунок, створений для тенісних тренерів, який дозволяє дистанційно керувати розумною машиною для подачі м’ячів, записувати тренування та аналізувати результати за допомогою статистики та графіків у реальному часі.
  Застосунок підключається через Wi-Fi, синхронізуючи команди машини, дані про удари (рука, швидкість, напрямок) та живі відеотрансляції, забезпечуючи тренерам можливість проводити тренування на основі даних.
 Проєкт увійшов у фінальну фазу активної розробки. Ми зосередилися на покращенні стабільності, узгодженості UI/UX та загальної продуктивності перед публічним релізом.`,
-  },
+    },
 
-  challenge: {
-    en: [
-    "- Regressions in session timers, navigation flow, and video playback\n",
-    "- Inconsistent UI behavior across iPhone, iPad, and Android (portrait & landscape)\n",
-    "- Synchronization issues with socket events and time tracking\n",
-    "- Monolithic code structure with large, hard-to-maintain components\n",
-    "- Unstable third-party libraries causing freezes and performance issues\n",
-    "- Lack of localization and limited data visualization",
-  ],
-    uk: [
-    "- Регресії у таймерах сесій, навігації та відтворенні відео\n",
-    "- Неконсистентна поведінка UI на iPhone, iPad та Android (портрет / альбом)\n",
-    "- Проблеми синхронізації socket-подій і відстеження часу\n",
-    "- Монолітна структура коду та великі компоненти, які важко підтримувати\n",
-    "- Нестабільні сторонні бібліотеки, що викликали зависання та зниження продуктивності\n",
-    "- Відсутність локалізації та обмежена візуалізація даних",
-  ],
-  },
+    challenge: {
+      en: [
+        "- Regressions in session timers, navigation flow, and video playback\n",
+        "- Inconsistent UI behavior across iPhone, iPad, and Android (portrait & landscape)\n",
+        "- Synchronization issues with socket events and time tracking\n",
+        "- Monolithic code structure with large, hard-to-maintain components\n",
+        "- Unstable third-party libraries causing freezes and performance issues\n",
+        "- Lack of localization and limited data visualization",
+      ],
+      uk: [
+        "- Регресії у таймерах сесій, навігації та відтворенні відео\n",
+        "- Неконсистентна поведінка UI на iPhone, iPad та Android (портрет / альбом)\n",
+        "- Проблеми синхронізації socket-подій і відстеження часу\n",
+        "- Монолітна структура коду та великі компоненти, які важко підтримувати\n",
+        "- Нестабільні сторонні бібліотеки, що викликали зависання та зниження продуктивності\n",
+        "- Відсутність локалізації та обмежена візуалізація даних",
+      ],
+    },
 
-  solution: {
-    en: [
-      "Stability & Error Handling Improvements\n",
-"●	Resolved synchronization issues with socket events and refined session time-tracking logic.\n",
-"●	Fixed UI layout inconsistencies across iOS and Android devices.\n",
-"●	Improved error handling and validation within key user flows such as Account Settings and Custom Programs.\n",
-"Feature Enhancements\n",
-"●	Integrated new APIs to enable seamless communication between the mobile app and the tennis ball machine.\n",
-"●	Rebuilt the Play Clips view for smoother video playback and improved responsiveness.\n",
-"●	Implemented internationalization (i18n) and localization support for multiple languages.\n",
-"●	Enhanced Session Details and Live Statistics screens with dynamic chart updates and real-time data visualization.\n",
-"●	Improved navigation logic and UI transitions in “Change Other Params” and “Create Option Wizard” flows.\n",
-"●	Updated buttons, modals, and form components to align with the latest design guidelines.\n",
-"Refactoring & Optimization\n",
-"●	Decomposed large files into smaller, reusable components for better scalability.\n",
-"●	Replaced unreliable third-party libraries with stable, custom-built solutions to prevent navigation freezes.\n",
-"●	Migrated form validation logic to react-hook-form + Zod, reducing boilerplate and improving code readability.\n",
-"Communication & Collaboration\n",
-"●	Close collaboration with the client’s backend and product management teams to clarify requirements and align functionality with user expectations.\n",
-"●	Early regression reporting and proactive proposal of alternative solutions during sprint reviews.\n",
-],
-    uk: [ 
-      "Покращення стабільності та обробки помилок\n",
-"●	Вирішено проблеми синхронізації socket-подій та логіки відстеження часу сесій.\n",
-"●	Усунено розбіжності в UI на різних пристроях iOS та Android.\n",
-"●	Покращено обробку помилок і валідацію в ключових сценаріях (Налаштування акаунта, Користувацькі програми).\n",
-"Розширення функціоналу\n",
-"●	Інтегровано нові API для плавної взаємодії між застосунком і машиною для подачі м’ячів.\n",
-"●	Повністю перероблено екран Play Clips для більш плавного відеовідтворення.\n",
-"●	Реалізовано інтернаціоналізацію (i18n) та підтримку кількох мов.\n",
-"●	Покращено екрани Session Details та Live Statistics з динамічними графіками та даними в реальному часі.\n",
-"●	Оновлено навігацію та UI-переходи у потоках Change Other Params та Create Option Wizard.\n",
-"●	Оновлено кнопки, модальні вікна та форми згідно з новими дизайн-гайдами.\n",
-"Рефакторинг та оптимізація\n",
-"●	Розбито великі файли на малі, багаторазово використовувані компоненти.\n",
-"●	Замінено нестабільні сторонні бібліотеки на кастомні рішення для уникнення зависань.\n",
-"●	Перенесено валідацію форм на react-hook-form + Zod, зменшивши шаблонний код та покращивши читабельність.\n",
-"Комунікація та співпраця\n",
-"●	Тісна взаємодія з backend та product-командами замовника для уточнення вимог і узгодження функціоналу.\n",
-"●	Раннє виявлення регресій та проактивні пропозиції альтернативних рішень під час спринт-рев’ю.\n",
-],
-  },
-  result: {
-    en: `The updated Waltair Robotics Mobile App v4 now delivers a far more stable, intuitive, and scalable experience for tennis coaches.\n
+    solution: {
+      en: [
+        "Stability & Error Handling Improvements",
+        "Resolved synchronization issues with socket events and refined session time-tracking logic.",
+        "Fixed UI layout inconsistencies across iOS and Android devices.",
+        "Improved error handling and validation within key user flows such as Account Settings and Custom Programs.",
+        "Feature Enhancements",
+        "Integrated new APIs to enable seamless communication between the mobile app and the tennis ball machine.",
+        "Rebuilt the Play Clips view for smoother video playback and improved responsiveness.",
+        "Implemented internationalization (i18n) and localization support for multiple languages.",
+        "Enhanced Session Details and Live Statistics screens with dynamic chart updates and real-time data visualization.",
+        "Improved navigation logic and UI transitions in “Change Other Params” and “Create Option Wizard” flows.",
+        "Updated buttons, modals, and form components to align with the latest design guidelines.",
+        "Refactoring & Optimization",
+        "Decomposed large files into smaller, reusable components for better scalability.",
+        "Replaced unreliable third-party libraries with stable, custom-built solutions to prevent navigation freezes.",
+        "Migrated form validation logic to react-hook-form + Zod, reducing boilerplate and improving code readability.",
+        "Communication & Collaboration",
+        "Close collaboration with the client’s backend and product management teams to clarify requirements and align functionality with user expectations.",
+        "Early regression reporting and proactive proposal of alternative solutions during sprint reviews.",
+      ],
+      uk: [
+        "Покращення стабільності та обробки помилок",
+        "Вирішено проблеми синхронізації socket-подій та логіки відстеження часу сесій.",
+        "Усунено розбіжності в UI на різних пристроях iOS та Android.",
+        "Покращено обробку помилок і валідацію в ключових сценаріях (Налаштування акаунта, Користувацькі програми).",
+        "Розширення функціоналу",
+        "Інтегровано нові API для плавної взаємодії між застосунком і машиною для подачі м’ячів.",
+        "Повністю перероблено екран Play Clips для більш плавного відеовідтворення.",
+        "Реалізовано інтернаціоналізацію (i18n) та підтримку кількох мов.",
+        "Покращено екрани Session Details та Live Statistics з динамічними графіками та даними в реальному часі.",
+        "Оновлено навігацію та UI-переходи у потоках Change Other Params та Create Option Wizard.",
+        "Оновлено кнопки, модальні вікна та форми згідно з новими дизайн-гайдами.",
+        "Рефакторинг та оптимізація",
+        "Розбито великі файли на малі, багаторазово використовувані компоненти.",
+        "Замінено нестабільні сторонні бібліотеки на кастомні рішення для уникнення зависань.",
+        "Перенесено валідацію форм на react-hook-form + Zod, зменшивши шаблонний код та покращивши читабельність.",
+        "Комунікація та співпраця",
+        "Тісна взаємодія з backend та product-командами замовника для уточнення вимог і узгодження функціоналу.",
+        "Раннє виявлення регресій та проактивні пропозиції альтернативних рішень під час спринт-рев’ю.",
+      ],
+    },
+    result: {
+      en: `The updated Waltair Robotics Mobile App v4 now delivers a far more stable, intuitive, and scalable experience for tennis coaches.
+
 With improved performance, a consistent user interface, and powerful analytics capabilities, the application is ready for extensive QA testing and final deployment.`,
-    uk: `Оновлений Waltair Robotics Mobile App v4 тепер забезпечує набагато стабільніший, інтуїтивний та масштабований досвід для тенісних тренерів.\n
+      uk: `Оновлений Waltair Robotics Mobile App v4 тепер забезпечує набагато стабільніший, інтуїтивний та масштабований досвід для тенісних тренерів.
+
 З покращеною продуктивністю, узгодженим інтерфейсом і потужною аналітикою застосунок готовий до фінального тестування та релізу.`,
-  },
+    },
 
-  stack: [
-    "React Native",
-    "Redux",
-    "Python",
-    "Socket.io",
-    "react-hook-form",
-    "Zod",
-    "i18n",
-  ],
-
-  features: {
-    en: [
-      "Real-time machine control via Wi-Fi",
-      "Live statistics and charts",
-      "Video playback (Play Clips)",
-      "Session tracking and analytics",
-      "Multi-language support",
-      "Improved navigation and UI flows",
+    stack: [
+      "React Native",
+      "Redux",
+      "Python",
+      "Socket.io",
+      "react-hook-form",
+      "Zod",
+      "i18n",
     ],
-    uk: [
-      "Керування машиною в реальному часі через Wi-Fi",
-      "Статистика та графіки в реальному часі",
-      "Відео (Play Clips)",
-      "Аналітика тренувань",
-      "Підтримка кількох мов",
-      "Покращена навігація",
-    ],
-  },
 
-  gallery: ["/Waltair-Robotics-2.jpg", "/Waltair-Robotics-3.jpg", "/Waltair-Robotics 4.jpg"],
+    features: {
+      en: [
+        "Real-time machine control via Wi-Fi",
+        "Live statistics and charts",
+        "Video playback (Play Clips)",
+        "Session tracking and analytics",
+        "Multi-language support",
+        "Improved navigation and UI flows",
+      ],
+      uk: [
+        "Керування машиною в реальному часі через Wi-Fi",
+        "Статистика та графіки в реальному часі",
+        "Відео (Play Clips)",
+        "Аналітика тренувань",
+        "Підтримка кількох мов",
+        "Покращена навігація",
+      ],
+    },
 
-  testimonial: {
-    quote: "We turned to the Idea Team to expand the team for our client's project. From the first contact, their structured approach and expertise were clear. The team quickly immersed themselves, offered innovative solutions, ensured transparent communication and on-time delivery. The final product exceeded the end client's expectations in functionality and usability.",
-    author: "Artem Malyi",
-    company: "IT Svit",
+    gallery: ["/Waltair-Robotics-2.jpg", "/Waltair-Robotics-3.jpg", "/Waltair-Robotics 4.jpg"],
+
+    testimonial: {
+      quote: "We turned to the Idea Team to expand the team for our client's project. From the first contact, their structured approach and expertise were clear. The team quickly immersed themselves, offered innovative solutions, ensured transparent communication and on-time delivery. The final product exceeded the end client's expectations in functionality and usability.",
+      author: "Artem Malyi",
+      company: "IT Svit",
+    },
   },
-},
   "internal-monitoring-system-symbotic": {
     title: {
       en: "Internal Monitoring System for Symbotic",
@@ -521,392 +524,305 @@ With improved performance, a consistent user interface, and powerful analytics c
       uk: "5 місяців",
     },
     team: {
-      en: "2 QA engineers",
-      uk: "2 QA-інженери",
+      en: "3 QA engineers, 1 test lead",
+      uk: "3 QA інженери, 1 тест-лідер",
     },
     overview: {
-      en: "An NBA-focused sports social platform needed comprehensive QA support during rapid development to ensure stability and quality.",
-      uk: "Спортивна соціальна платформа, орієнтована на NBA, потребувала комплексної підтримки QA під час швидкої розробки для забезпечення стабільності та якості.",
+      en: "Provided end-to-end QA and testing expertise for a sports-focused social platform, covering functional, performance, and security testing.",
+      uk: "Надано повний спектр QA та тестування для спортивної соціальної платформи, включаючи функціональне, продуктивнісне та безпекове тестування.",
     },
     challenge: {
-      en: "Ensure high product quality and stability during rapid development of an NBA-focused sports social platform with frequent releases and new feature additions.",
-      uk: "Забезпечити високу якість продукту та стабільність при швидкій розробці соцплатформи для NBA з частими релізами та додаванням нових функцій.",
+      en: "Ensure platform stability under high concurrency, validate social features and media uploads, and secure user data while maintaining fast response times.",
+      uk: "Забезпечити стабільність платформи при високій навантаженості, перевірити соціальні функції та завантаження медіа, а також захистити дані користувачів при збереженні швидкої відповіді системи.",
     },
     solution: {
-      en: "Provided manual QA support covering 170+ tickets, tested new and existing features, identified critical bugs, collaborated with developers, and recommended Android devices for testing.",
-      uk: "Ручне QA-покриття понад 170 задач, тестування нових та існуючих функцій, виявлення критичних багів, співпраця з розробниками, рекомендації Android-пристроїв для тестування.",
+      en: "Implemented automated test suites, load testing scenarios, and security scans; integrated CI pipelines for regression prevention and faster releases.",
+      uk: "Впроваджено автоматизовані тести, сценарії навантажувального тестування та сканування безпеки; інтегровано CI для запобігання регресіям та прискорення релізів.",
     },
     result: {
-      en: "Improved release stability, higher product quality, and smoother QA processes. Bug escape rate reduced by 80%. Release cycle time decreased from 2 weeks to 1 week.",
-      uk: "Підвищена стабільність релізів, краща якість продукту, оптимізація QA-процесів. Показник виходу багів зменшено на 80%. Час циклу релізу скорочено з 2 тижнів до 1 тижня.",
+      en: "Reduced critical bugs in production by 70% and improved release confidence with automated regression checks.",
+      uk: "Зменшено кількість критичних багів у продакшені на 70% та підвищено впевненість у релізах завдяки автоматичним перевіркам регресій.",
     },
-    stack: ["Manual Testing", "Team Collaboration Tools", "JIRA", "TestRail", "Android Testing"],
+    stack: ["Jest", "Cypress", "k6", "Sentry", "Jenkins"],
     features: {
       en: [
-        "Comprehensive test case development",
-        "Regression testing automation",
-        "Cross-device compatibility testing",
-        "Performance testing",
-        "User acceptance testing",
+        "Automated regression suites",
+        "Load and stress testing",
+        "Security scanning and vulnerability checks",
+        "CI integration for test gating",
+        "Detailed bug triage and reporting",
       ],
       uk: [
-        "Розробка комплексних тестових сценаріїв",
-        "Автоматизація регресійного тестування",
-        "Тестування сумісності на різних пристроях",
-        "Тестування продуктивності",
-        "Користувацьке акцептаційне тестування",
+        "Автоматизовані набори регресійних тестів",
+        "Тестування навантаження та стресу",
+        "Сканування безпеки та перевірка вразливостей",
+        "Інтеграція CI для контролю тестів",
+        "Детальна триаж та звітність по багах",
       ],
     },
-    gallery: ["/qa-testing-dashboard.jpg", "/mobile-app-testing.png", "/bug-tracking-system.jpg"],
+    gallery: ["/qa-dashboard.jpg", "/load-testing-graph.jpg", "/bug-triage-board.jpg"],
     testimonial: {
-      quote: "Excellent QA work on the sports platform!",
-      author: "Emily White",
+      quote: "Thorough and professional QA work that significantly improved our release stability.",
+      author: "QA Manager",
       company: "Sports Social Platform",
     },
   },
 }
 
-export default function ProjectDetailPage() {
+export default function ProjectPage() {
   const params = useParams()
-  const slug = params.slug as string
   const { locale } = useLocale()
-  const [project, setProject] = useState<any>(null)
-  const [loading, setLoading] = useState(true)
+  const t = translations[(locale as "en" | "uk")] || translations.en
+  const supabase = createBrowserClient()
+
+  const [project, setProject] = useState<ProjectData | null>(null)
   const [isDark, setIsDark] = useState(false)
 
-  const t = translations[locale]
-
-  const getLocalizedText = (text: any): string => {
-    if (!text) return ""
-    if (typeof text === "string") return text
-    if (typeof text === "object" && (text.en || text.uk)) {
-      return text[locale] || text.en || text.uk || ""
-    }
-    return ""
-  }
-
   useEffect(() => {
-    const checkTheme = () => {
-      setIsDark(document.documentElement.classList.contains("dark"))
-    }
-    checkTheme()
-
-    const observer = new MutationObserver(checkTheme)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
-
-    return () => observer.disconnect()
+    const theme = typeof window !== "undefined" ? localStorage.getItem("theme") : null
+    setIsDark(theme === "dark")
   }, [])
 
   useEffect(() => {
     async function fetchProject() {
-      try {
-        // Projects are currently stored as hardcoded data
-        // Check hardcoded data first
-        if (defaultProjectsData[slug]) {
-          setProject(defaultProjectsData[slug])
-          setLoading(false)
-          return
-        }
+      const slug = (params as any)?.slug as string
 
-        // If project not found in hardcoded data, redirect to projects page
-        window.location.href = "/projects"
-      } catch (error) {
-        if (defaultProjectsData[slug]) {
-          setProject(defaultProjectsData[slug])
+      if (!slug) {
+        const firstKey = Object.keys(defaultProjectsData)[0]
+        setProject(defaultProjectsData[firstKey])
+        return
+      }
+
+      try {
+        const { data } = await supabase
+          .from("projects")
+          .select("*")
+          .eq("slug", slug)
+          .single()
+
+        if (data) {
+          setProject(data)
+        } else {
+          setProject(defaultProjectsData[slug] || null)
         }
-        setLoading(false)
+      } catch (err) {
+        setProject(defaultProjectsData[slug] || null)
       }
     }
 
     fetchProject()
-  }, [slug])
+  }, [params])
 
-  function extractProjectDataFromPost(post: any) {
-    const data: any = {
-      title: post.title.en || post.title.uk || "Project Title",
-      featured_image: post.featured_image || "/project-management-team.png",
-      overview: post.excerpt.en || post.excerpt.uk || "",
-      challenge: "",
-      solution: "",
-      result: "",
-      stack: [],
-      features: [],
-      gallery: [],
-      testimonial: null,
+  if (!project) return null
+
+  const getLocalizedText = (value: any) => {
+    if (!value) return ""
+    if (typeof value === "string") return value
+    if (typeof value === "object") {
+      return value[locale] ?? value.en ?? ""
     }
-
-    if (post.content && Array.isArray(post.content)) {
-      post.content.forEach((block: any) => {
-        const text = block.content || ""
-        if (text.toLowerCase().startsWith("challenge:")) {
-          data.challenge = text.replace(/^challenge:\s*/i, "")
-        } else if (text.toLowerCase().startsWith("solution:")) {
-          data.solution = text.replace(/^solution:\s*/i, "")
-        } else if (text.toLowerCase().startsWith("result:")) {
-          data.result = text.replace(/^result:\s*/i, "")
-        } else if (text.toLowerCase().startsWith("stack:")) {
-          data.stack = text
-            .replace(/^stack:\s*/i, "")
-            .split(",")
-            .map((s: string) => s.trim())
-        } else if (text.toLowerCase().startsWith("testimonial:")) {
-          data.testimonial = text.replace(/^testimonial:\s*/i, "")
-        }
-      })
-    }
-
-    return data
-  }
-
-  const titleGradient = isDark ? "#FFFFFF" : "#000000"
-
-  if (loading) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-[#FF6200]"></div>
-      </div>
-    )
-  }
-
-  if (!project) {
-    return (
-      <div className="min-h-screen flex items-center justify-center">
-        <p>Project not found</p>
-      </div>
-    )
+    return String(value)
   }
 
   return (
-    <main className="min-h-screen" style={{ backgroundColor: "var(--background)" }}>
-      {/* Hero Section */}
-      <section className="relative">
-        <div className="relative w-full h-[400px] md:h-[500px]">
-          <Image
-            src={project.featured_image || "/placeholder.svg"}
-            alt={getLocalizedText(project.title)}
-            fill
-            className="object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent" />
-        </div>
+    <main className="container mx-auto px-4 py-10" role="main">
+      <Link href="/projects" className="flex items-center gap-2 text-sm mb-6">
+        <ArrowLeft size={16} />
+        {t.backToProjects}
+      </Link>
 
-        <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
-          <div className="max-w-[1280px] mx-auto">
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors"
-            >
-              <ArrowLeft size={20} />
-              {t.backToProjects}
-            </Link>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">{getLocalizedText(project.title)}</h1>
+      <h1 className="text-3xl font-bold mb-4">
+        {getLocalizedText(project.title)}
+      </h1>
+
+      {project.featured_image && (
+        <Image
+          src={project.featured_image}
+          alt={typeof project.title === "object" ? project.title.en : String(project.title)}
+          width={1200}
+          height={600}
+          className="rounded-lg mb-10"
+        />
+      )}
+
+      {/* INFO GRID */}
+      <div className="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+        {["client", "industry", "duration", "team"].map((key) => (
+          <div key={key}>
+            <p className="text-sm opacity-70">{(t as any)[key]}</p>
+            <p className="font-medium">{getLocalizedText(project[key])}</p>
           </div>
-        </div>
-      </section>
+        ))}
+      </div>
 
-      {/* Project Info */}
-      <section className="py-12 px-6">
-        <div className="max-w-[1280px] mx-auto">
-          {/* Meta Info */}
-          {(project.client || project.industry || project.duration || project.team) && (
-            <div
-              className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 rounded-[4px] mb-12"
-              style={{ backgroundColor: isDark ? "#1E1E1E" : "#F5F5F5" }}
-            >
-              {project.client && (
-                <div>
-                  <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.client}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.client)}</p>
-                </div>
-              )}
-              {project.industry && (
-                <div>
-                  <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.industry}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.industry)}</p>
-                </div>
-              )}
-              {project.duration && (
-                <div>
-                  <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.duration}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.duration)}</p>
-                </div>
-              )}
-              {project.team && (
-                <div>
-                  <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.team}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.team)}</p>
-                </div>
-              )}
-            </div>
-          )}
+      {/* OVERVIEW */}
+      {project.overview && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.overview}</h2>
+          <p className="opacity-80 whitespace-pre-line">
+            {getLocalizedText(project.overview)}
+          </p>
+        </section>
+      )}
 
-          {/* Overview */}
-          {project.overview && (
-            <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-4"
-                style={{
-                  color: titleGradient,
-                }}
-              >
-                {t.overview}
-              </h2>
-              <p className="text-lg leading-relaxed" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
-                {getLocalizedText(project.overview)}
-              </p>
-            </div>
-          )}
+      {/* CHALLENGE */}
+      {project.challenge && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.challenge}</h2>
 
-          {/* Challenge, Solution, Result */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {project.challenge && (
-              <div
-                className="p-6 rounded-[4px] border-t-4 border-[#FF6200]"
-                style={{
-                  backgroundColor: isDark ? "#1E1E1E" : "#FFFFFF",
-                  boxShadow: isDark ? "none" : "2px 2px 20px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                <h3 className="text-[#FF6200] font-bold text-lg mb-3">{t.challenge}</h3>
-                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(project.challenge)}</p>
-              </div>
-            )}
-            {project.solution && (
-              <div
-                className="p-6 rounded-[4px] border-t-4 border-[#FF6200]"
-                style={{
-                  backgroundColor: isDark ? "#1E1E1E" : "#FFFFFF",
-                  boxShadow: isDark ? "none" : "2px 2px 20px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                <h3 className="text-[#FF6200] font-bold text-lg mb-3">{t.solution}</h3>
-                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(project.solution)}</p>
-              </div>
-            )}
-            {project.result && (
-              <div
-                className="p-6 rounded-[4px] border-t-4 border-[#FF6200]"
-                style={{
-                  backgroundColor: isDark ? "#1E1E1E" : "#FFFFFF",
-                  boxShadow: isDark ? "none" : "2px 2px 20px rgba(0, 0, 0, 0.1)",
-                }}
-              >
-                <h3 className="text-[#FF6200] font-bold text-lg mb-3">{t.result}</h3>
-                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(project.result)}</p>
-              </div>
-            )}
-          </div>
-
-          {/* Tech Stack */}
-          {project.stack && project.stack.length > 0 && (
-            <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{
-                  color: titleGradient,
-                }}
-              >
-                {t.technologyStack}
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {project.stack.map((tech: string, i: number) => (
-                  <span
-                    key={i}
-                    className="px-4 py-2 rounded-full text-sm font-medium"
-                    style={{
-                      backgroundColor: isDark ? "#2A2A2A" : "#F5F5F5",
-                      color: isDark ? "#FFFFFF" : "#000000",
-                      border: `1px solid ${isDark ? "#3A3A3A" : "#E0E0E0"}`,
-                    }}
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
-          {/* Features */}
-          {project.features && project.features.length > 0 && (
-            <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{
-                  color: titleGradient,
-                }}
-              >
-                {t.keyFeatures}
-              </h2>
-              <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {project.features.map((feature: string, i: number) => (
-                  <li key={i} className="flex items-start gap-3">
-                    <div className="w-6 h-6 rounded-full bg-[#FF6200] flex items-center justify-center flex-shrink-0 mt-0.5">
-                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="3">
-                        <polyline points="20 6 9 17 4 12"></polyline>
-                      </svg>
-                    </div>
-                    <span style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(feature)}</span>
-                  </li>
+          {Array.isArray(project.challenge) ? (
+            // If challenge is an array of localized arrays/strings, try locale first
+            Array.isArray((project.challenge as any)[locale]) ? (
+              <ul className="list-disc pl-5 space-y-2 opacity-80">
+                {(project.challenge as any)[locale].map((item: string, i: number) => (
+                  <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
                 ))}
               </ul>
-            </div>
-          )}
-
-          {/* Gallery */}
-          {project.gallery && project.gallery.length > 0 && (
-            <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{
-                  color: titleGradient,
-                }}
-              >
-                {t.projectGallery}
-              </h2>
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {project.gallery.map((image: string, i: number) => (
-                  <div key={i} className="relative aspect-[3/2] rounded-[4px] overflow-hidden">
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt={`${getLocalizedText(project.title)} screenshot ${i + 1}`}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-300"
-                    />
-                  </div>
+            ) : (
+              <ul className="list-disc pl-5 space-y-2 opacity-80">
+                {(project.challenge as any).map((item: any, i: number) => (
+                  <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
                 ))}
-              </div>
-            </div>
-          )}
-
-          {/* Testimonial */}
-          {project.testimonial && (
-            <div className="p-8 rounded-[4px] mb-12" style={{ backgroundColor: isDark ? "#1E1E1E" : "#F5F5F5" }}>
-              <svg className="w-10 h-10 text-[#FF6200] mb-4" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z" />
-              </svg>
-              <p className="text-lg italic mb-4" style={{ color: isDark ? "#FFFFFF" : "#000000" }}>
-                "{project.testimonial.quote}"
+              </ul>
+            )
+          ) : typeof project.challenge === "object" ? (
+            Array.isArray((project.challenge as any)[locale]) ? (
+              <ul className="list-disc pl-5 space-y-2 opacity-80">
+                {(project.challenge as any)[locale].map((item: string, i: number) => (
+                  <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="opacity-80 whitespace-pre-line">
+                {getLocalizedText(project.challenge)}
               </p>
-              <p className="text-[#FF6200] font-semibold">{project.testimonial.author}</p>
-              <p className="text-sm" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
-                {project.testimonial.company}
-              </p>
-            </div>
+            )
+          ) : (
+            <p className="opacity-80 whitespace-pre-line">
+              {getLocalizedText(project.challenge)}
+            </p>
           )}
+        </section>
+      )}
 
-          {/* CTA */}
-          <div className="text-center">
-            <h3 className="text-2xl font-bold mb-4" style={{ color: isDark ? "#FFFFFF" : "#000000" }}>
-              {t.similarProject}
-            </h3>
-            <Link
-              href="https://calendar.google.com/calendar/appointments/schedules/AcZssZ2DSvfJWDr_AXOWUTxid3bQrwNr4so5STlGytDH-8W1vkXUDJ-nA1VYSW8oeSY2-eKxNHsYpUfY"
-              className="inline-block px-8 py-3 rounded-full bg-[#FF6200] text-white font-semibold hover:bg-[#E55A00] transition-colors"
-            >
-              {t.letsTalk}
-            </Link>
+      {/* SOLUTION */}
+      {project.solution && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.solution}</h2>
+
+          {Array.isArray(project.solution) ? (
+            Array.isArray((project.solution as any)[locale]) ? (
+              <ul className="list-disc pl-5 space-y-2 opacity-80">
+                {(project.solution as any)[locale].map((item: string, i: number) => (
+                  <li key={i}>{String(item).trim()}</li>
+                ))}
+              </ul>
+            ) : (
+              <ul className="list-disc pl-5 space-y-2 opacity-80">
+                {(project.solution as any).map((item: any, i: number) => (
+                  <li key={i}>{String(item).trim()}</li>
+                ))}
+              </ul>
+            )
+          ) : typeof project.solution === "object" ? (
+            Array.isArray((project.solution as any)[locale]) ? (
+              <ul className="list-disc pl-5 space-y-2 opacity-80">
+                {(project.solution as any)[locale].map((item: string, i: number) => (
+                  <li key={i}>{String(item).trim()}</li>
+                ))}
+              </ul>
+            ) : (
+              <p className="opacity-80 whitespace-pre-line">
+                {getLocalizedText(project.solution)}
+              </p>
+            )
+          ) : (
+            <p className="opacity-80 whitespace-pre-line">
+              {getLocalizedText(project.solution)}
+            </p>
+          )}
+        </section>
+      )}
+
+      {/* RESULT */}
+      {project.result && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.result}</h2>
+          <p className="opacity-80 whitespace-pre-line">
+            {getLocalizedText(project.result)}
+          </p>
+        </section>
+      )}
+
+      {/* STACK */}
+      {project.stack && Array.isArray(project.stack) && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.technologyStack}</h2>
+          <div className="flex flex-wrap gap-2">
+            {project.stack.map((tech: string, i: number) => (
+              <span
+                key={i}
+                className="px-3 py-1 rounded bg-gray-200 dark:bg-gray-800 text-sm"
+              >
+                {tech}
+              </span>
+            ))}
           </div>
-        </div>
+        </section>
+      )}
+
+      {/* FEATURES */}
+      {project.features && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.keyFeatures}</h2>
+          {Array.isArray(project.features) ? (
+            <ul className="list-disc pl-5 space-y-2 opacity-80">
+              {project.features.map((f: any, i: number) => (
+                <li key={i}>{getLocalizedText(f)}</li>
+              ))}
+            </ul>
+          ) : (project.features as any)[locale] ? (
+            <ul className="list-disc pl-5 space-y-2 opacity-80">
+              {(project.features as any)[locale].map((f: string, i: number) => (
+                <li key={i}>{f}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="opacity-80 whitespace-pre-line">
+              {getLocalizedText(project.features)}
+            </p>
+          )}
+        </section>
+      )}
+
+      {/* GALLERY */}
+      {project.gallery && Array.isArray(project.gallery) && (
+        <section className="mb-10">
+          <h2 className="text-xl font-bold mb-3">{t.projectGallery}</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            {project.gallery.map((img: string, i: number) => (
+              <Image
+                key={i}
+                src={img}
+                alt="Gallery image"
+                width={400}
+                height={300}
+                className="rounded-lg"
+              />
+            ))}
+          </div>
+        </section>
+      )}
+
+      {/* CTA */}
+      <section className="text-center py-10">
+        <h3 className="text-2xl font-bold mb-4">{t.similarProject}</h3>
+        <Link
+          href="/contact"
+          className="inline-block px-6 py-3 bg-[#FF6200] text-white rounded-lg text-lg"
+        >
+          {t.letsTalk}
+        </Link>
       </section>
     </main>
   )
