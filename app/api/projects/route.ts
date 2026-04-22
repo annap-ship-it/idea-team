@@ -72,6 +72,18 @@ export async function GET() {
       {
         id: "4",
         title: {
+          en: "Waltair Robotics (Mobile App v4)",
+          uk: "Waltair Robotics (Mobile App v4)",
+        },
+        slug: "waltair-robotics",
+        image: "/Waltair-Robotics-1.png",
+        shortDescription: {
+          en: "Mobile version was stabilized and improved. Fixed regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. Resolved socket synchronization issues, improved overall code maintainability by reducing monolithic structure, and addressed instability caused by third-party libraries. Added proper localization support and enhanced data visualization capabilities.",
+          uk: "Виправлена мобільна версія, яка мала низку проблем, що впливали на зручність використання та підтримку, зокрема регресії в таймерах сесій, навігації та відтворенні відео, а також нестабільну поведінку інтерфейсу на різних пристроях і в різних орієнтаціях. Додатково виникали проблеми із синхронізацією socket-подій, монолітною та складною для підтримки структурою коду й нестабільністю сторонніх бібліотек. Крім того, бракувало підтримки локалізації та можливостей для візуалізації даних.",
+        },
+      },
+      id: "5",
+        title: {
           en: "Testing Expertise for a Sports Social Platform",
           uk: "Тестування експертизи для спортивної соціальної платформи",
         },
