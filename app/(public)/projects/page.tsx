@@ -321,6 +321,7 @@ export default function ProjectsPage() {
   }, [siteKey])
 
   useEffect(() => {
+useEffect(() => {
   async function fetchProjects() {
     try {
       const supabase = createBrowserClient()
