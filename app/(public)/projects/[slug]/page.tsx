@@ -10,7 +10,7 @@ import { useLocale } from "@/lib/locale-context"
 
 interface ProjectData {
   id?: string
-  title: { en: string; uk?: string } | string
+  title?: { en?: string; uk?: string } | string
   slug?: string
   excerpt?: string
   featured_image?: string
@@ -625,7 +625,7 @@ export default function ProjectPage() {
   }
 
   return (
-    <main className="container mx-auto px-4 py-10" role="main">
+    <div className="container mx-auto px-4 py-10">
       <Link href="/projects" className="flex items-center gap-2 text-sm mb-6">
         <ArrowLeft size={16} />
         {t.backToProjects}
@@ -670,33 +670,22 @@ export default function ProjectPage() {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-3">{t.challenge}</h2>
 
-          {Array.isArray(project.challenge) ? (
-            // If challenge is an array of localized arrays/strings, try locale first
-            Array.isArray((project.challenge as any)[locale]) ? (
-              <ul className="list-disc pl-5 space-y-2 opacity-80">
-                {(project.challenge as any)[locale].map((item: string, i: number) => (
-                  <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
-                ))}
-              </ul>
-            ) : (
-              <ul className="list-disc pl-5 space-y-2 opacity-80">
-                {(project.challenge as any).map((item: any, i: number) => (
-                  <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
-                ))}
-              </ul>
-            )
-          ) : typeof project.challenge === "object" ? (
-            Array.isArray((project.challenge as any)[locale]) ? (
-              <ul className="list-disc pl-5 space-y-2 opacity-80">
-                {(project.challenge as any)[locale].map((item: string, i: number) => (
-                  <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="opacity-80 whitespace-pre-line">
-                {getLocalizedText(project.challenge)}
-              </p>
-            )
+          {/*
+            Minimal, safe change: render a list only when the data for the current locale is an array.
+            Otherwise keep original paragraph rendering. This preserves original design and layout.
+          */}
+          {project.challenge && typeof project.challenge === "object" && Array.isArray(project.challenge[locale]) ? (
+            <ul className="list-disc pl-5 space-y-2 opacity-80">
+              {project.challenge[locale].map((item: string, i: number) => (
+                <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
+              ))}
+            </ul>
+          ) : Array.isArray(project.challenge) ? (
+            <ul className="list-disc pl-5 space-y-2 opacity-80">
+              {project.challenge.map((item: any, i: number) => (
+                <li key={i}>{String(item).replace(/^- /, "").trim()}</li>
+              ))}
+            </ul>
           ) : (
             <p className="opacity-80 whitespace-pre-line">
               {getLocalizedText(project.challenge)}
@@ -710,32 +699,18 @@ export default function ProjectPage() {
         <section className="mb-10">
           <h2 className="text-xl font-bold mb-3">{t.solution}</h2>
 
-          {Array.isArray(project.solution) ? (
-            Array.isArray((project.solution as any)[locale]) ? (
-              <ul className="list-disc pl-5 space-y-2 opacity-80">
-                {(project.solution as any)[locale].map((item: string, i: number) => (
-                  <li key={i}>{String(item).trim()}</li>
-                ))}
-              </ul>
-            ) : (
-              <ul className="list-disc pl-5 space-y-2 opacity-80">
-                {(project.solution as any).map((item: any, i: number) => (
-                  <li key={i}>{String(item).trim()}</li>
-                ))}
-              </ul>
-            )
-          ) : typeof project.solution === "object" ? (
-            Array.isArray((project.solution as any)[locale]) ? (
-              <ul className="list-disc pl-5 space-y-2 opacity-80">
-                {(project.solution as any)[locale].map((item: string, i: number) => (
-                  <li key={i}>{String(item).trim()}</li>
-                ))}
-              </ul>
-            ) : (
-              <p className="opacity-80 whitespace-pre-line">
-                {getLocalizedText(project.solution)}
-              </p>
-            )
+          {project.solution && typeof project.solution === "object" && Array.isArray(project.solution[locale]) ? (
+            <ul className="list-disc pl-5 space-y-2 opacity-80">
+              {project.solution[locale].map((item: string, i: number) => (
+                <li key={i}>{String(item).trim()}</li>
+              ))}
+            </ul>
+          ) : Array.isArray(project.solution) ? (
+            <ul className="list-disc pl-5 space-y-2 opacity-80">
+              {project.solution.map((item: any, i: number) => (
+                <li key={i}>{String(item).trim()}</li>
+              ))}
+            </ul>
           ) : (
             <p className="opacity-80 whitespace-pre-line">
               {getLocalizedText(project.solution)}
@@ -781,9 +756,9 @@ export default function ProjectPage() {
                 <li key={i}>{getLocalizedText(f)}</li>
               ))}
             </ul>
-          ) : (project.features as any)[locale] ? (
+          ) : project.features && typeof project.features === "object" && Array.isArray(project.features[locale]) ? (
             <ul className="list-disc pl-5 space-y-2 opacity-80">
-              {(project.features as any)[locale].map((f: string, i: number) => (
+              {project.features[locale].map((f: string, i: number) => (
                 <li key={i}>{f}</li>
               ))}
             </ul>
@@ -824,6 +799,7 @@ export default function ProjectPage() {
           {t.letsTalk}
         </Link>
       </section>
-    </main>
+    </div>
   )
 }
+
