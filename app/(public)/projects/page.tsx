@@ -190,7 +190,6 @@ const defaultProjects = [
     },
     stack: ["Manual Testing", "Team Collaboration Tools"],
   },
-
 ]
 
 const techIcons: Record<string, string> = {
