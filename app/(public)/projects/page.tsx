@@ -168,6 +168,29 @@ const defaultProjects = [
     "i18n",
   ],
   },
+  {
+    id: "5",
+    title: {
+      en: "Testing Expertise for a Sports Social Platform",
+      uk: "Тестування експертизи для спортивної соціальної платформи",
+    },
+    slug: "testing-expertise-sports-social-platform",
+    featured_image: "/images/56951b6f749b0c1c24e1b24aab787192b5cc65e2.jpg",
+    challenge: {
+      en: "Ensure high product quality and stability during rapid development of an NBA-focused sports social platform.",
+      uk: "Забезпечити високу якість продукту та стабільність при швидкій розробці соцплатформи для NBA.",
+    },
+    solution: {
+      en: "Provided manual QA support covering 170+ tickets, tested new and existing features, identified critical bugs, collaborated with developers, and recommended Android devices.",
+      uk: "Ручне QA-покриття понад 170 задач, тестування нових та існуючих функцій, виявлення критичних багів, співпраця з розробниками, рекомендації Android-пристроїв.",
+    },
+    result: {
+      en: "Improved release stability, higher product quality, and smoother QA processes.",
+      uk: "Підвищена стабільність релізів, краща якість продукту, оптимізація QA-процесів.",
+    },
+    stack: ["Manual Testing", "Team Collaboration Tools"],
+  },
+
 ]
 
 const techIcons: Record<string, string> = {
