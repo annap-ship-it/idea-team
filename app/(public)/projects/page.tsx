@@ -146,7 +146,7 @@ const defaultProjects = [
     slug: "waltair-robotics",
     featured_image: "/Waltair-Robotics-1.png",
     challenge: {
-      en: "Fixed the mobile version. It suffered from multiple issues impacting usability and maintainability, including regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. The app also faced synchronization problems with socket events, a monolithic and hard-to-maintain codebase, and instability caused by third-party libraries. Additionally, it lacked proper localization support and had limited capabilities for data visualization.
+      en: "Mobile version was stabilized and improved. Fixed regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. Resolved socket synchronization issues, improved overall code maintainability by reducing monolithic structure, and addressed instability caused by third-party libraries. Added proper localization support and enhanced data visualization capabilities.
 ",
       uk: "Виправлена мобільна версія, яка мала низку проблем, що впливали на зручність використання та підтримку, зокрема регресії в таймерах сесій, навігації та відтворенні відео, а також нестабільну поведінку інтерфейсу на різних пристроях і в різних орієнтаціях. Додатково виникали проблеми із синхронізацією socket-подій, монолітною та складною для підтримки структурою коду й нестабільністю сторонніх бібліотек. Крім того, бракувало підтримки локалізації та можливостей для візуалізації даних.",
     },
