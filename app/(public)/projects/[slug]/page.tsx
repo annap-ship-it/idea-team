@@ -42,7 +42,7 @@ const translations = {
     duration: "Тривалість",
     team: "Команда",
     overview: "Огляд",
-    challenge: "Завдання",
+    challenge: "Проблема",
     solution: "Рішення",
     result: "Результат",
     technologyStack: "Стек технологій",
@@ -70,8 +70,8 @@ const defaultProjectsData: Record<string, any> = {
     uk: "Фітнес та спортивні технології",
   },
   duration: {
-    en: "Ongoing",
-    uk: "В процесі",
+    en: "3 months",
+    uk: "3 місяці",
   },
   team: {
     en: "Mobile & Backend Team",
@@ -107,13 +107,52 @@ The project entered its final stage of active development. We focused on improvi
   },
 
   solution: {
-    en: `We stabilized the application, fixed synchronization issues, rebuilt key screens, implemented full localization, improved navigation and UI consistency, and refactored the codebase into scalable components.`,
-    uk: `Ми стабілізували застосунок, виправили проблеми синхронізації, переробили ключові екрани, додали локалізацію, покращили навігацію та провели рефакторинг коду.`,
+    en: [
+      "Stability & Error Handling Improvements\n",
+"●	Resolved synchronization issues with socket events and refined session time-tracking logic.\n",
+"●	Fixed UI layout inconsistencies across iOS and Android devices.\n",
+"●	Improved error handling and validation within key user flows such as Account Settings and Custom Programs.\n",
+"Feature Enhancements\n",
+"●	Integrated new APIs to enable seamless communication between the mobile app and the tennis ball machine.\n",
+"●	Rebuilt the Play Clips view for smoother video playback and improved responsiveness.\n",
+"●	Implemented internationalization (i18n) and localization support for multiple languages.\n",
+"●	Enhanced Session Details and Live Statistics screens with dynamic chart updates and real-time data visualization.\n",
+"●	Improved navigation logic and UI transitions in “Change Other Params” and “Create Option Wizard” flows.\n",
+"●	Updated buttons, modals, and form components to align with the latest design guidelines.\n",
+"Refactoring & Optimization\n",
+"●	Decomposed large files into smaller, reusable components for better scalability.\n",
+"●	Replaced unreliable third-party libraries with stable, custom-built solutions to prevent navigation freezes.\n",
+"●	Migrated form validation logic to react-hook-form + Zod, reducing boilerplate and improving code readability.\n",
+"Communication & Collaboration\n",
+"●	Close collaboration with the client’s backend and product management teams to clarify requirements and align functionality with user expectations.\n",
+"●	Early regression reporting and proactive proposal of alternative solutions during sprint reviews.\n",
+],
+    uk: [ 
+      "Покращення стабільності та обробки помилок\n",
+"●	Вирішено проблеми синхронізації socket-подій та логіки відстеження часу сесій.\n",
+"●	Усунено розбіжності в UI на різних пристроях iOS та Android.\n",
+"●	Покращено обробку помилок і валідацію в ключових сценаріях (Налаштування акаунта, Користувацькі програми).\n",
+"Розширення функціоналу\n",
+"●	Інтегровано нові API для плавної взаємодії між застосунком і машиною для подачі м’ячів.\n",
+"●	Повністю перероблено екран Play Clips для більш плавного відеовідтворення.\n",
+"●	Реалізовано інтернаціоналізацію (i18n) та підтримку кількох мов.\n",
+"●	Покращено екрани Session Details та Live Statistics з динамічними графіками та даними в реальному часі.\n",
+"●	Оновлено навігацію та UI-переходи у потоках Change Other Params та Create Option Wizard.\n",
+"●	Оновлено кнопки, модальні вікна та форми згідно з новими дизайн-гайдами.\n",
+"Рефакторинг та оптимізація\n",
+"●	Розбито великі файли на малі, багаторазово використовувані компоненти.\n",
+"●	Замінено нестабільні сторонні бібліотеки на кастомні рішення для уникнення зависань.\n",
+"●	Перенесено валідацію форм на react-hook-form + Zod, зменшивши шаблонний код та покращивши читабельність.\n",
+"Комунікація та співпраця\n",
+"●	Тісна взаємодія з backend та product-командами замовника для уточнення вимог і узгодження функціоналу.\n",
+"●	Раннє виявлення регресій та проактивні пропозиції альтернативних рішень під час спринт-рев’ю.\n",
+],
   },
-
   result: {
-    en: `Improved stability and performance, consistent UI across devices, reduced technical debt, and readiness for final QA and production release.`,
-    uk: `Покращена стабільність і продуктивність, консистентний UI, зменшений технічний борг та готовність до фінального QA і релізу.`,
+    en: `The updated Waltair Robotics Mobile App v4 now delivers a far more stable, intuitive, and scalable experience for tennis coaches.\n
+With improved performance, a consistent user interface, and powerful analytics capabilities, the application is ready for extensive QA testing and final deployment.`,
+    uk: `Оновлений Waltair Robotics Mobile App v4 тепер забезпечує набагато стабільніший, інтуїтивний та масштабований досвід для тенісних тренерів.\n
+З покращеною продуктивністю, узгодженим інтерфейсом і потужною аналітикою застосунок готовий до фінального тестування та релізу.`,
   },
 
   stack: [
@@ -148,9 +187,9 @@ The project entered its final stage of active development. We focused on improvi
   gallery: ["/Waltair-Robotics-2.jpg", "/Waltair-Robotics-3.jpg", "/Waltair-Robotics 4.jpg"],
 
   testimonial: {
-    quote: "The app became significantly more stable and ready for release.",
-    author: "Product Team",
-    company: "Waltair Robotics",
+    quote: "We turned to the Idea Team to expand the team for our client's project. From the first contact, their structured approach and expertise were clear. The team quickly immersed themselves, offered innovative solutions, ensured transparent communication and on-time delivery. The final product exceeded the end client's expectations in functionality and usability.",
+    author: "Artem Malyi",
+    company: "IT Svit",
   },
 },
   "internal-monitoring-system-symbotic": {
