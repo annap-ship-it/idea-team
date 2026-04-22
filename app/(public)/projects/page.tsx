@@ -159,6 +159,37 @@ const defaultProjects = [
     },
     stack: ["Manual Testing", "Team Collaboration Tools"],
   },
+    {
+      id: "5",
+    title: {
+      en: "Waltair Robotics (Mobile App v4)",
+      uk: "Waltair Robotics (Mobile App v4)",
+    },
+    slug: "waltair-robotics",
+    featured_image: "/Waltair-Robotics-1.png",
+    challenge: {
+      en: "Fixed the mobile version. It suffered from multiple issues impacting usability and maintainability, including regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. The app also faced synchronization problems with socket events, a monolithic and hard-to-maintain codebase, and instability caused by third-party libraries. Additionally, it lacked proper localization support and had limited capabilities for data visualization.
+",
+      uk: "Виправлена мобільна версія, яка мала низку проблем, що впливали на зручність використання та підтримку, зокрема регресії в таймерах сесій, навігації та відтворенні відео, а також нестабільну поведінку інтерфейсу на різних пристроях і в різних орієнтаціях. Додатково виникали проблеми із синхронізацією socket-подій, монолітною та складною для підтримки структурою коду й нестабільністю сторонніх бібліотек. Крім того, бракувало підтримки локалізації та можливостей для візуалізації даних.",
+    },
+    solution: {
+      en: "Significantly improved application stability and performance. Significantly improved application stability and performance. Significantly improved application stability and performance. Significantly improved application stability and performance",
+      uk: "Значно підвищено стабільність і продуктивність застосунку. Досягнуто консистентного та адаптивного UI на iPhone, iPad та Android. Впроваджено повну систему локалізації для багатомовної підтримки. Проведено масштабний рефакторинг і зменшено технічний борг.",
+    },
+    result: {
+      en: "The updated Waltair Robotics Mobile App v4 now delivers a far more stable, intuitive, and scalable experience for tennis coaches.",
+      uk: "Оновлений Waltair Robotics Mobile App v4 тепер забезпечує набагато стабільніший, інтуїтивний та масштабований досвід для тенісних тренерів.",
+    },
+    stack: [
+    "React Native",
+    "Redux",
+    "Python",
+    "Socket.io",
+    "react-hook-form",
+    "Zod",
+    "i18n",
+  ],
+  },
 ]
 
 const techIcons: Record<string, string> = {
