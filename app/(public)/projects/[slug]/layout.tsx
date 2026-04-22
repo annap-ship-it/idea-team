@@ -13,6 +13,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: "High-performance eCommerce Platform",
       excerpt: "Feature-rich e-commerce platform capable of handling millions of transactions",
     },
+    "waltair-robotics": {
+      title: "Waltair Robotics (Mobile App v4) Case Study",
+      excerpt: "Waltair Robotics is a mobile application built for tennis coaches to remotely control a smart ball-feeding machine, record training sessions, and analyze performance through real-time statistics and charts.",
+    },
   }
 
   const project = projectsData[params.slug]
