@@ -1,10 +1,10 @@
+
 "use client"
 
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import { createBrowserClient } from "@/lib/supabase/client"
 import { useParams } from "next/navigation"
 import { useLocale } from "@/lib/locale-context"
 
@@ -574,15 +574,41 @@ export default function ProjectDetailPage() {
   const [loading, setLoading] = useState(true)
   const [isDark, setIsDark] = useState(false)
 
-  const t = translations[locale]
+  const t = translations[locale as "en" | "uk"]
 
-  const getLocalizedText = (text: any): string => {
+  const getLocalizedText = (text: any): any => {
     if (!text) return ""
     if (typeof text === "string") return text
+    if (Array.isArray(text)) return text
     if (typeof text === "object" && (text.en || text.uk)) {
-      return text[locale] || text.en || text.uk || ""
+      return text[locale as "en" | "uk"] || text.en || text.uk || ""
     }
     return ""
+  }
+
+  // ✅ Новый хелпер для списка
+  const getListItems = (value: any): string[] => {
+    // 1) Если сам value массив (частый случай в твоих данных)
+    if (Array.isArray(value)) {
+      return value
+        .map((item) => String(item).replace(/^-+\s*/, "").trim())
+        .filter(Boolean)
+    }
+
+    // 2) Локализация может вернуть массив или строку
+    const localized = getLocalizedText(value)
+
+    if (Array.isArray(localized)) {
+      return localized
+        .map((item) => String(item).replace(/^-+\s*/, "").trim())
+        .filter(Boolean)
+    }
+
+    // 3) Если строка — делим по строкам
+    return String(localized)
+      .split("\n")
+      .map((line) => line.replace(/^-+\s*/, "").trim())
+      .filter(Boolean)
   }
 
   useEffect(() => {
@@ -600,17 +626,14 @@ export default function ProjectDetailPage() {
   useEffect(() => {
     async function fetchProject() {
       try {
-        // Projects are currently stored as hardcoded data
-        // Check hardcoded data first
         if (defaultProjectsData[slug]) {
           setProject(defaultProjectsData[slug])
           setLoading(false)
           return
         }
 
-        // If project not found in hardcoded data, redirect to projects page
         window.location.href = "/projects"
-      } catch (error) {
+      } catch {
         if (defaultProjectsData[slug]) {
           setProject(defaultProjectsData[slug])
         }
@@ -620,43 +643,6 @@ export default function ProjectDetailPage() {
 
     fetchProject()
   }, [slug])
-
-  function extractProjectDataFromPost(post: any) {
-    const data: any = {
-      title: post.title.en || post.title.uk || "Project Title",
-      featured_image: post.featured_image || "/project-management-team.png",
-      overview: post.excerpt.en || post.excerpt.uk || "",
-      challenge: "",
-      solution: "",
-      result: "",
-      stack: [],
-      features: [],
-      gallery: [],
-      testimonial: null,
-    }
-
-    if (post.content && Array.isArray(post.content)) {
-      post.content.forEach((block: any) => {
-        const text = block.content || ""
-        if (text.toLowerCase().startsWith("challenge:")) {
-          data.challenge = text.replace(/^challenge:\s*/i, "")
-        } else if (text.toLowerCase().startsWith("solution:")) {
-          data.solution = text.replace(/^solution:\s*/i, "")
-        } else if (text.toLowerCase().startsWith("result:")) {
-          data.result = text.replace(/^result:\s*/i, "")
-        } else if (text.toLowerCase().startsWith("stack:")) {
-          data.stack = text
-            .replace(/^stack:\s*/i, "")
-            .split(",")
-            .map((s: string) => s.trim())
-        } else if (text.toLowerCase().startsWith("testimonial:")) {
-          data.testimonial = text.replace(/^testimonial:\s*/i, "")
-        }
-      })
-    }
-
-    return data
-  }
 
   const titleGradient = isDark ? "#FFFFFF" : "#000000"
 
@@ -678,12 +664,11 @@ export default function ProjectDetailPage() {
 
   return (
     <main className="min-h-screen" style={{ backgroundColor: "var(--background)" }}>
-      {/* Hero Section */}
       <section className="relative">
         <div className="relative w-full h-[400px] md:h-[500px]">
           <Image
             src={project.featured_image || "/placeholder.svg"}
-            alt={getLocalizedText(project.title)}
+            alt={String(getLocalizedText(project.title))}
             fill
             className="object-cover"
           />
@@ -692,22 +677,19 @@ export default function ProjectDetailPage() {
 
         <div className="absolute bottom-0 left-0 right-0 p-6 md:p-12">
           <div className="max-w-[1280px] mx-auto">
-            <Link
-              href="/projects"
-              className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors"
-            >
+            <Link href="/projects" className="inline-flex items-center gap-2 text-white/80 hover:text-white mb-4 transition-colors">
               <ArrowLeft size={20} />
               {t.backToProjects}
             </Link>
-            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">{getLocalizedText(project.title)}</h1>
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white">
+              {String(getLocalizedText(project.title))}
+            </h1>
           </div>
         </div>
       </section>
 
-      {/* Project Info */}
       <section className="py-12 px-6">
         <div className="max-w-[1280px] mx-auto">
-          {/* Meta Info */}
           {(project.client || project.industry || project.duration || project.team) && (
             <div
               className="grid grid-cols-2 md:grid-cols-4 gap-6 p-6 rounded-[4px] mb-12"
@@ -716,48 +698,42 @@ export default function ProjectDetailPage() {
               {project.client && (
                 <div>
                   <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.client}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.client)}</p>
+                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{String(getLocalizedText(project.client))}</p>
                 </div>
               )}
               {project.industry && (
                 <div>
                   <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.industry}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.industry)}</p>
+                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{String(getLocalizedText(project.industry))}</p>
                 </div>
               )}
               {project.duration && (
                 <div>
                   <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.duration}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.duration)}</p>
+                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{String(getLocalizedText(project.duration))}</p>
                 </div>
               )}
               {project.team && (
                 <div>
                   <p className="text-[#FF6200] font-semibold text-sm mb-1">{t.team}</p>
-                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{getLocalizedText(project.team)}</p>
+                  <p style={{ color: isDark ? "#FFFFFF" : "#000000" }}>{String(getLocalizedText(project.team))}</p>
                 </div>
               )}
             </div>
           )}
 
-          {/* Overview */}
           {project.overview && (
             <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-4"
-                style={{
-                  color: titleGradient,
-                }}
-              >
+              <h2 className="text-2xl font-bold mb-4" style={{ color: titleGradient }}>
                 {t.overview}
               </h2>
               <p className="text-lg leading-relaxed" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
-                {getLocalizedText(project.overview)}
+                {String(getLocalizedText(project.overview))}
               </p>
             </div>
           )}
 
-          {/* Challenge, Solution, Result */}
+          {/* ✅ Challenge / Solution / Result */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
             {project.challenge && (
               <div
@@ -768,9 +744,14 @@ export default function ProjectDetailPage() {
                 }}
               >
                 <h3 className="text-[#FF6200] font-bold text-lg mb-3">{t.challenge}</h3>
-                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(project.challenge)}</p>
+                <ul className="list-disc pl-5 space-y-2" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
+                  {getListItems(project.challenge).map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
               </div>
             )}
+
             {project.solution && (
               <div
                 className="p-6 rounded-[4px] border-t-4 border-[#FF6200]"
@@ -780,9 +761,14 @@ export default function ProjectDetailPage() {
                 }}
               >
                 <h3 className="text-[#FF6200] font-bold text-lg mb-3">{t.solution}</h3>
-                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(project.solution)}</p>
+                <ul className="list-disc pl-5 space-y-2" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
+                  {getListItems(project.solution).map((item, index) => (
+                    <li key={index}>{item}</li>
+                  ))}
+                </ul>
               </div>
             )}
+
             {project.result && (
               <div
                 className="p-6 rounded-[4px] border-t-4 border-[#FF6200]"
@@ -792,20 +778,14 @@ export default function ProjectDetailPage() {
                 }}
               >
                 <h3 className="text-[#FF6200] font-bold text-lg mb-3">{t.result}</h3>
-                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(project.result)}</p>
+                <p style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{String(getLocalizedText(project.result))}</p>
               </div>
             )}
           </div>
 
-          {/* Tech Stack */}
           {project.stack && project.stack.length > 0 && (
             <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{
-                  color: titleGradient,
-                }}
-              >
+              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
                 {t.technologyStack}
               </h2>
               <div className="flex flex-wrap gap-3">
@@ -826,15 +806,9 @@ export default function ProjectDetailPage() {
             </div>
           )}
 
-          {/* Features */}
           {project.features && project.features.length > 0 && (
             <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{
-                  color: titleGradient,
-                }}
-              >
+              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
                 {t.keyFeatures}
               </h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -845,22 +819,16 @@ export default function ProjectDetailPage() {
                         <polyline points="20 6 9 17 4 12"></polyline>
                       </svg>
                     </div>
-                    <span style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{getLocalizedText(feature)}</span>
+                    <span style={{ color: isDark ? "#A0A0A0" : "#666666" }}>{feature}</span>
                   </li>
                 ))}
               </ul>
             </div>
           )}
 
-          {/* Gallery */}
           {project.gallery && project.gallery.length > 0 && (
             <div className="mb-12">
-              <h2
-                className="text-2xl font-bold mb-6"
-                style={{
-                  color: titleGradient,
-                }}
-              >
+              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
                 {t.projectGallery}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -868,7 +836,7 @@ export default function ProjectDetailPage() {
                   <div key={i} className="relative aspect-[3/2] rounded-[4px] overflow-hidden">
                     <Image
                       src={image || "/placeholder.svg"}
-                      alt={`${getLocalizedText(project.title)} screenshot ${i + 1}`}
+                      alt={`${String(getLocalizedText(project.title))} screenshot ${i + 1}`}
                       fill
                       className="object-cover hover:scale-105 transition-transform duration-300"
                     />
@@ -878,7 +846,6 @@ export default function ProjectDetailPage() {
             </div>
           )}
 
-          {/* Testimonial */}
           {project.testimonial && (
             <div className="p-8 rounded-[4px] mb-12" style={{ backgroundColor: isDark ? "#1E1E1E" : "#F5F5F5" }}>
               <svg className="w-10 h-10 text-[#FF6200] mb-4" fill="currentColor" viewBox="0 0 24 24">
@@ -894,7 +861,6 @@ export default function ProjectDetailPage() {
             </div>
           )}
 
-          {/* CTA */}
           <div className="text-center">
             <h3 className="text-2xl font-bold mb-4" style={{ color: isDark ? "#FFFFFF" : "#000000" }}>
               {t.similarProject}
