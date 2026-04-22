@@ -585,7 +585,6 @@ export default function ProjectDetailPage() {
     return ""
   }
 
-  // ✅ Новый хелпер для списка
   const getListItems = (value: any): string[] => {
     // 1) Если сам value массив (частый случай в твоих данных)
     if (Array.isArray(value)) {
@@ -611,37 +610,63 @@ export default function ProjectDetailPage() {
   }
 
   useEffect(() => {
-    const checkTheme = () => {
-      setIsDark(document.documentElement.classList.contains("dark"))
-    }
-    checkTheme()
+  async function fetchProjects() {
+    try {
+      const supabase = createBrowserClient()
 
-    const observer = new MutationObserver(checkTheme)
-    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+      // Get projects category ID
+      const { data: category } = await supabase
+        .from("categories")
+        .select("id")
+        .eq("slug", "projects")
+        .single()
 
-    return () => observer.disconnect()
-  }, [])
+      if (category) {
+        const { data: posts } = await supabase
+          .from("posts")
+          .select("*")
+          .eq("category_id", category.id)
+          .eq("status", "published")
+          .order("created_at", { ascending: false })
 
-  useEffect(() => {
-    async function fetchProject() {
-      try {
-        if (defaultProjectsData[slug]) {
-          setProject(defaultProjectsData[slug])
-          setLoading(false)
-          return
+        if (posts && posts.length > 0) {
+          const mappedProjects = posts.map((post) => {
+            const projectData = extractProjectData(post.content)
+            return {
+              id: post.id,
+              title: post.title,
+              slug: post.slug,
+              featured_image: post.featured_image || "/project-management-team.png",
+              ...projectData,
+            }
+          })
+
+          // Объединяем проекты из БД + defaultProjects (без дублей по slug)
+          const mergedProjects = [
+            ...mappedProjects,
+            ...defaultProjects.filter(
+              (defProject) =>
+                !mappedProjects.some((dbProject) => dbProject.slug === defProject.slug),
+            ),
+          ]
+
+          setProjects(mergedProjects)
+        } else {
+          setProjects(defaultProjects)
         }
-
-        window.location.href = "/projects"
-      } catch {
-        if (defaultProjectsData[slug]) {
-          setProject(defaultProjectsData[slug])
-        }
-        setLoading(false)
+      } else {
+        setProjects(defaultProjects)
       }
+    } catch (error) {
+      console.error("Error fetching projects:", error)
+      setProjects(defaultProjects)
+    } finally {
+      setLoading(false)
     }
+  }
 
-    fetchProject()
-  }, [slug])
+  fetchProjects()
+}, [])
 
   const titleGradient = isDark ? "#FFFFFF" : "#000000"
 
