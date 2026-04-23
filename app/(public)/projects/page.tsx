@@ -335,6 +335,7 @@ useEffect(() => {
           .select("*")
           .eq("category_id", category.id)
           .eq("status", "published")
+          .eq("locale", locale)  
           .order("created_at", { ascending: false })
 
         if (posts && posts.length > 0) {
