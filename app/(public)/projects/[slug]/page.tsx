@@ -627,6 +627,7 @@ export default function ProjectDetailPage() {
           .select("*")
           .eq("category_id", category.id)
           .eq("status", "published")
+          .eq("locale", locale === "uk" ? "uk" : "en")
           .order("created_at", { ascending: false })
 
         if (posts && posts.length > 0) {
@@ -666,7 +667,7 @@ export default function ProjectDetailPage() {
   }
 
   fetchProjects()
-}, [])
+}, [locale])
 
   const titleGradient = isDark ? "#FFFFFF" : "#000000"
 
