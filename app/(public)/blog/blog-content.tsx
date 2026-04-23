@@ -114,6 +114,13 @@ export default function BlogContent() {
       
       // Fetch posts in the current locale
       const targetLocale = locale === "uk" ? "uk" : "en"
+      const { data: projectsCategory } = await supabase
+  .from("categories")
+  .select("id")
+  .eq("slug", "projects")
+  .single()
+
+const projectsCategoryId = projectsCategory?.id
       
       const { data: postsData, error: localeError } = await supabase
         .from("posts")
@@ -122,6 +129,7 @@ export default function BlogContent() {
         )
         .eq("status", "published")
         .eq("locale", targetLocale)
+        .neq("category_id", projectsCategoryId)
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(50)
 
@@ -136,6 +144,7 @@ export default function BlogContent() {
               `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
             )
             .eq("status", "published")
+            .neq("category_id", projectsCategoryId)
             .eq("locale", "en")
             .order("published_at", { ascending: false, nullsFirst: false })
             .limit(50)
