@@ -109,7 +109,8 @@ export function OurProjectsSection() {
   useEffect(() => {
     const fetchProjects = async () => {
       try {
-        const response = await fetch("/api/projects")
+        const targetLocale = locale === "uk" ? "uk" : "en"
+        const response = await fetch(`/api/projects?locale=${targetLocale}`)
         if (response.ok) {
           const data = await response.json()
           setProjects(data)
