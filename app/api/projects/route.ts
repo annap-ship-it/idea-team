@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server"
 import { createServerClient } from "@/lib/supabase/server"
 
-export async function GET() {
+export async function GET(request: Request) {
   try {
     const supabase = await createServerClient()
-
+    const { searchParams } = new URL(request.url)
+    const targetLocale = searchParams.get("locale") === "uk" ? "uk" : "en"
     // Get projects category ID
     const { data: category, error: categoryError } = await supabase
       .from("categories")
@@ -22,6 +23,7 @@ export async function GET() {
       .select("id, title, slug, excerpt, featured_image, content, created_at")
       .eq("category_id", category.id)
       .eq("status", "published")
+      .eq("locale", targetLocale)
       .order("created_at", { ascending: false })
 
     if (postsError) {
