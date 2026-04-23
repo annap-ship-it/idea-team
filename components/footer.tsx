@@ -311,6 +311,15 @@ export function Footer() {
                   {t.ecommercePlatform}
                 </Link>
               </li>
+              <li>
+                <Link
+                  href="/projects/waltair-robotics"
+                  onClick={handleLinkClick}
+                  className="text-[#A7A7A7] hover:text-[#FFFFFF] active:text-[#FBC6A3] text-sm transition-colors duration-300 line-clamp-2"
+                >
+                  {t./waltairRobotics}
+                </Link>
+              </li>              
             </ul>
           </div>
 
