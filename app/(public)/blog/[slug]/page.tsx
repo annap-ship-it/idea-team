@@ -394,16 +394,23 @@ export default function BlogPostPage() {
 
         // Fetch related posts - ONLY from current fetched post's locale
         // This ensures English articles show English related, Ukrainian show Ukrainian related
-        const { data: relatedData } = await supabase
+       const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
+        const projectsCategoryId = projectsCategory?.id
+
+        let relatedPostsQuery = supabase
           .from("posts")
           .select(`id, title, slug, excerpt, featured_image, category_id, created_at, author_id, locale`)
           .eq("status", "published")
           .eq("locale", data.locale)
           .neq("slug", slug)
-          .neq("category_id", "c812ffe4-c357-4ade-bd6a-6dab6d9b1d79")
           .order("created_at", { ascending: false })
           .limit(3)
 
+        if (projectsCategoryId) {
+          relatedPostsQuery = relatedPostsQuery.neq("category_id", projectsCategoryId)
+        }
+
+        const { data: relatedData } = await relatedPostsQuery
         // Fetch author profiles and categories for related posts
         if (relatedData && relatedData.length > 0) {
           const enrichedRelatedPosts = await Promise.all(
