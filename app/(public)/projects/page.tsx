@@ -322,9 +322,10 @@ export default function ProjectsPage() {
 
   useEffect(() => {
 async function fetchProjects() {
+      const fetchVersion = ++projectsFetchVersion.current
       try {
         const supabase = createBrowserClient()
-        const targetLocale = locale === "uk" ? "uk" : "en"
+        const targetLocale = String(locale || "").toLowerCase().startsWith("uk") ? "uk" : "en"
 
         // Get projects category ID
         const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").single()
@@ -338,8 +339,11 @@ async function fetchProjects() {
             .eq("locale", targetLocale)
             .order("created_at", { ascending: false })
 
-          if (posts && posts.length > 0) {
-            const mappedProjects = posts.map((post) => {
+          const localeSafePosts =
+            posts?.filter((post) => String(post.locale || "").toLowerCase().startsWith(targetLocale)) || []
+
+          if (localeSafePosts.length > 0) {
+            const mappedProjects = localeSafePosts.map((post) => {
               const projectData = extractProjectData(post.content)
               return {
                 id: post.id,
@@ -349,20 +353,31 @@ async function fetchProjects() {
                 ...projectData,
               }
             })
-            setProjects(mappedProjects)
+            if (fetchVersion === projectsFetchVersion.current) {
+              setProjects(mappedProjects)
           } else {
-            } catch (error) {
+            if (fetchVersion === projectsFetchVersion.current) {
+              setProjects(defaultProjects)
+            }
+          }
+        } else {
+          if (fetchVersion === projectsFetchVersion.current) {
+            setProjects(defaultProjects)
+          }
+        }
+      } catch (error) {
         console.error("Error fetching projects:", error)
+        if (fetchVersion === projectsFetchVersion.current) {
             setProjects(defaultProjects)
            } finally {
-        setLoading(false)
+        if (fetchVersion === projectsFetchVersion.current) {
+          setLoading(false)
+        }
           }
-      } else {
-        setProjects(defaultProjects)
-      }
     }
 
-  fetchProjects()
+   setLoading(true)
+    fetchProjects()
   }, [locale])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
