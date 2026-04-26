@@ -8,6 +8,8 @@ import Image from "next/image"
 import { useEffect, useState, useRef } from "react"
 import { createBrowserClient } from "@/lib/supabase/client"
 
+const PROJECTS_CATEGORY_FALLBACK_ID = "c812ffe4-c357-4ade-bd6a-6dab6d9b1d79"
+
 interface Post {
   id: string
   title: string
@@ -15,7 +17,7 @@ interface Post {
   excerpt: string
   featured_image: string | null
   category_id: string | null
-  categories: { name: string; slug: string }[] | null
+  categories: { name: string; slug: string } | { name: string; slug: string }[] | null
   created_at: string
   published_at: string | null
   author_id: string
@@ -114,46 +116,52 @@ export default function BlogContent() {
       
       // Fetch posts in the current locale
       const targetLocale = locale === "uk" ? "uk" : "en"
-      const { data: projectsCategory } = await supabase
-  .from("categories")
-  .select("id")
-  .eq("slug", "projects")
-  .single()
+      const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
+      const projectsCategoryId = projectsCategory?.id || PROJECTS_CATEGORY_FALLBACK_ID
 
-const projectsCategoryId = projectsCategory?.id
-      
-      const { data: postsData, error: localeError } = await supabase
+      let localePostsQuery = supabase
         .from("posts")
         .select(
           `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
         )
         .eq("status", "published")
         .eq("locale", targetLocale)
-        .neq("category_id", projectsCategoryId)
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(50)
+
+      localePostsQuery = localePostsQuery.neq("category_id", projectsCategoryId)
+
+      const { data: postsData, error: localeError } = await localePostsQuery
 
       let finalPostsData = postsData
 
       if ((!localeError && postsData && postsData.length === 0) || localeError) {
         // If requested Ukrainian but none found, fall back to English
         if (targetLocale === "uk") {
-          const { data: englishPosts } = await supabase
+          let englishPostsQuery = supabase
             .from("posts")
             .select(
               `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
             )
             .eq("status", "published")
-            .neq("category_id", projectsCategoryId)
             .eq("locale", "en")
             .order("published_at", { ascending: false, nullsFirst: false })
             .limit(50)
+
+          englishPostsQuery = englishPostsQuery.neq("category_id", projectsCategoryId)
+
+          const { data: englishPosts } = await englishPostsQuery
           finalPostsData = englishPosts
         }
       }
 
       if (finalPostsData && finalPostsData.length > 0) {
-        const authorIds = [...new Set(finalPostsData.map((p) => p.author_id).filter(Boolean))]
+        const nonProjectPosts = finalPostsData.filter((post) => {
+          const categorySlug = Array.isArray(post.categories) ? post.categories[0]?.slug : post.categories?.slug
+          return categorySlug !== "projects" && post.category_id !== projectsCategoryId
+        })
+
+        const authorIds = [...new Set(nonProjectPosts.map((p) => p.author_id).filter(Boolean))]
         let authorsMap: Record<string, { display_name: string | null; avatar_url: string | null }> = {}
 
         if (authorIds.length > 0) {
@@ -173,7 +181,7 @@ const projectsCategoryId = projectsCategory?.id
           }
         }
 
-        const postsWithAuthors = finalPostsData.map((post) => ({
+        const postsWithAuthors = nonProjectPosts.map((post) => ({
           ...post,
           author: authorsMap[post.author_id] || null,
         }))
