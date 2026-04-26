@@ -15,7 +15,7 @@ interface Post {
   excerpt: string
   featured_image: string | null
   category_id: string | null
-  categories: { name: string; slug: string }[] | null
+  categories: { name: string; slug: string } | { name: string; slug: string }[] | null
   created_at: string
   published_at: string | null
   author_id: string
