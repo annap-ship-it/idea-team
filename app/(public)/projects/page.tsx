@@ -321,51 +321,49 @@ export default function ProjectsPage() {
   }, [siteKey])
 
   useEffect(() => {
-useEffect(() => {
-  async function fetchProjects() {
-    try {
-      const supabase = createBrowserClient()
+async function fetchProjects() {
+      try {
+        const supabase = createBrowserClient()
+        const targetLocale = locale === "uk" ? "uk" : "en"
 
-      // Get projects category ID
-      const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").single()
+        // Get projects category ID
+        const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").single()
 
-      if (category) {
-        const { data: posts } = await supabase
-          .from("posts")
-          .select("*")
-          .eq("category_id", category.id)
-          .eq("status", "published")
-          .eq("locale", locale)  
-          .order("created_at", { ascending: false })
+        if (category) {
+          const { data: posts } = await supabase
+            .from("posts")
+            .select("*")
+            .eq("category_id", category.id)
+            .eq("status", "published")
+            .eq("locale", targetLocale)
+            .order("created_at", { ascending: false })
 
-        if (posts && posts.length > 0) {
-          const mappedProjects = posts.map((post) => {
-            const projectData = extractProjectData(post.content)
-            return {
-              id: post.id,
-              title: post.title,
-              slug: post.slug,
-              featured_image: post.featured_image || "/project-management-team.png",
-              ...projectData,
-            }
-          })
-          setProjects(mappedProjects)
-        } else {
-          setProjects(defaultProjects)
-        }
+          if (posts && posts.length > 0) {
+            const mappedProjects = posts.map((post) => {
+              const projectData = extractProjectData(post.content)
+              return {
+                id: post.id,
+                title: post.title,
+                slug: post.slug,
+                featured_image: post.featured_image || "/project-management-team.png",
+                ...projectData,
+              }
+            })
+            setProjects(mappedProjects)
+          } else {
+            } catch (error) {
+        console.error("Error fetching projects:", error)
+            setProjects(defaultProjects)
+           } finally {
+        setLoading(false)
+          }
       } else {
         setProjects(defaultProjects)
       }
-    } catch (error) {
-      console.error("Error fetching projects:", error)
-      setProjects(defaultProjects)
-    } finally {
-      setLoading(false)
     }
-  }
 
   fetchProjects()
-}, [])
+  }, [locale])
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || [])
