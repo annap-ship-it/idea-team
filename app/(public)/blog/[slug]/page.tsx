@@ -66,6 +66,8 @@ interface RelatedPost {
   profiles?: { display_name: string; avatar_url: string | null } | null
 }
 
+const PROJECTS_CATEGORY_FALLBACK_ID = "c812ffe4-c357-4ade-bd6a-6dab6d9b1d79"
+
 function formatDate(dateString: string, locale = "en-US"): string {
   const date = new Date(dateString)
   const localeMap = {
