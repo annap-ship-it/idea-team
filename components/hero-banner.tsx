@@ -237,16 +237,26 @@ export function HeroBanner() {
             </div>
           </div>
 
-          <style jsx>{`
+           <style jsx>{`
             @media (max-width: 479px) {
               .hero-banner { height: auto !important; min-height: 100vh !important; max-height: none !important; overflow: visible !important; padding-bottom: 60px !important; }
               .hero-content { padding: 0 20px 0 !important; height: auto !important; min-height: auto !important; }
               .hero-title { margin-top: 200px !important; font-size: 36px !important; line-height: 110% !important; width: 100% !important; max-width: 100% !important; margin-left: auto !important; margin-right: auto !important; margin-bottom: 24px !important; }
+              .stats-section { margin: 64px auto 0 !important; padding-left: 0 !important; padding-right: 0 !important; gap: 20px !important; }
+              .stats-section > div { width: 100% !important; justify-content: center !important; gap: 12px !important; }
+              .stats-section > div > .w-px { height: 36px !important; }
+              .stat-item { align-items: center !important; justify-content: center !important; flex: 1 1 0 !important; min-width: 0 !important; }
+              .stat-number { font-size: 40px !important; line-height: 1 !important; white-space: nowrap; }
+              .stat-label { font-size: 14px !important; line-height: 1.2 !important; padding-left: 8px !important; padding-right: 0 !important; text-align: left !important; word-break: break-word; }
             }
             @media (min-width: 480px) and (max-width: 767px) {
               .hero-banner { height: auto !important; min-height: 100vh !important; max-height: none !important; overflow: visible !important; padding-bottom: 60px !important; }
               .hero-content { padding: 0 28px 0 !important; height: auto !important; min-height: auto !important; }
               .hero-title { margin-top: 166px !important; font-size: 40px !important; line-height: 110% !important; width: 100% !important; max-width: 423px !important; margin-left: auto !important; margin-right: auto !important; margin-bottom: 24px !important; }
+              .stats-section { margin: 76px auto 0 !important; padding-left: 0 !important; padding-right: 0 !important; gap: 24px !important; }
+              .stats-section > div { width: 100% !important; justify-content: center !important; gap: 20px !important; }
+              .stat-item { min-width: 0 !important; }
+              .stat-label { font-size: 15px !important; line-height: 1.25 !important; text-align: left !important; }
             }
             @media (min-width: 768px) and (max-width: 1023px) { .hero-banner { min-height: 100vh !important; } .hero-content { padding: 0 40px !important; } .hero-title { margin-top: 180px !important; font-size: 52px !important; } }
             @media (min-width: 1024px) and (max-width: 1279px) { .hero-banner { min-height: 100vh !important; } .hero-title { margin-top: 140px !important; font-size: 56px !important; } }
