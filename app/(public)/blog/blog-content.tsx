@@ -114,25 +114,25 @@ export default function BlogContent() {
       
       // Fetch posts in the current locale
       const targetLocale = locale === "uk" ? "uk" : "en"
-      const { data: projectsCategory } = await supabase
-  .from("categories")
-  .select("id")
-  .eq("slug", "projects")
-  .single()
+      const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
+      const projectsCategoryId = projectsCategory?.id
 
-const projectsCategoryId = projectsCategory?.id
-      
-      const { data: postsData, error: localeError } = await supabase
+let localePostsQuery = supabase
         .from("posts")
         .select(
           `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
         )
         .eq("status", "published")
         .eq("locale", targetLocale)
-        .neq("category_id", projectsCategoryId)
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(50)
 
+        if (projectsCategoryId) {
+            englishPostsQuery = englishPostsQuery.neq("category_id", projectsCategoryId)
+          }
+
+          const { data: englishPosts } = await englishPostsQuery
+      
       let finalPostsData = postsData
 
       if ((!localeError && postsData && postsData.length === 0) || localeError) {
@@ -153,7 +153,12 @@ const projectsCategoryId = projectsCategory?.id
       }
 
       if (finalPostsData && finalPostsData.length > 0) {
-        const authorIds = [...new Set(finalPostsData.map((p) => p.author_id).filter(Boolean))]
+        const nonProjectPosts = finalPostsData.filter((post) => {
+          const categorySlug = Array.isArray(post.categories) ? post.categories[0]?.slug : post.categories?.slug
+          return categorySlug !== "projects" && (!projectsCategoryId || post.category_id !== projectsCategoryId)
+        })
+
+        const authorIds = [...new Set(nonProjectPosts.map((p) => p.author_id).filter(Boolean))]
         let authorsMap: Record<string, { display_name: string | null; avatar_url: string | null }> = {}
 
         if (authorIds.length > 0) {
@@ -173,7 +178,7 @@ const projectsCategoryId = projectsCategory?.id
           }
         }
 
-        const postsWithAuthors = finalPostsData.map((post) => ({
+         const postsWithAuthors = nonProjectPosts.map((post) => ({
           ...post,
           author: authorsMap[post.author_id] || null,
         }))
