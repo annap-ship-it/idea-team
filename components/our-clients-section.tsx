@@ -3,14 +3,22 @@
 import { useLocale } from "@/lib/locale-context"
 
 const partnerNames = [
-  "Ahrefs",
-  "Microsoft",
-  "Help Scout",
-  "Jotform",
-  "Amazon",
-  "Notion",
-  "LinkedIn",
-  "Circle",
+  "Viso",
+  "Sloboda Studio",
+  "Beetroot",
+  "IT Svit",
+  "Appexoft",
+  "Acropolium",
+  "InAppo",
+  "Talents Today",
+  "1GameChanger",
+  "Equinox",
+  "Abto Software",
+  "Yotewo",
+  "DreamX",
+  "Grade",
+  "Sonomics",
+  "Powercode",
 ]
 
 export function OurClientsSection() {

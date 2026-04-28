@@ -33,6 +33,7 @@ export default function HomePage() {
       <HeroBanner />
       <AwardsSection />
       <WhyUsSection />
+      <OurClientsSection />
       <AboutUsSection />
       <AutoPlayYouTube />
       <QuoteSection />
@@ -40,7 +41,6 @@ export default function HomePage() {
       <OurServicesSection />
       <ConsultationBanner />
       <TechnologiesSection />
-      <OurClientsSection />
       <OurProjectsSection />
       <WhyUsSection2 />
       <FeedbackSection />
