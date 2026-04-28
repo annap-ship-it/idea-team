@@ -15,10 +15,10 @@ const partnerNames = [
   "Equinox",
   "Abto Software",
   "Yotewo",
+  "DreamX",
   "Grade",
   "Sonomics",
   "Powercode",
-  "DreamX",
 ]
 
 export function OurClientsSection() {
