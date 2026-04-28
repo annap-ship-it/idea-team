@@ -354,6 +354,7 @@ export default function ProjectsPage() {
             })
             if (fetchVersion === projectsFetchVersion.current) {
               setProjects(mappedProjects)
+               }
           } else {
             if (fetchVersion === projectsFetchVersion.current) {
               setProjects(defaultProjects)
@@ -367,8 +368,9 @@ export default function ProjectsPage() {
       } catch (error) {
         console.error("Error fetching projects:", error)
         if (fetchVersion === projectsFetchVersion.current) {
-            setProjects(defaultProjects)
-           } finally {
+          setProjects(defaultProjects)
+        }
+      } finally {
         if (fetchVersion === projectsFetchVersion.current) {
           setLoading(false)
         }
