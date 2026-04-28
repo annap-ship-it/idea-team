@@ -174,50 +174,35 @@ export function HeroBanner() {
           </div>
 
           <div
-            className="stats-section flex flex-col w-full px-4 gap-8 sm:flex-row sm:flex-wrap sm:justify-center sm:gap-9 md:flex-nowrap items-center justify-center mt-16 md:mt-20"
-            style={{
-              maxWidth: "1116px",
-              height: "auto",
-              margin: "96px auto 0",
-            }}
+            className="stats-section mt-16 md:mt-20 w-full max-w-[1116px] mx-auto px-4 grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-8"
+            style={{ marginTop: "96px" }}
           >
-            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center gap-15">
-              <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
-                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
-                  50+
-                </span>
-                <span className="flex items-center px-3 pt-1 block mt-0 stat-label" style={{ fontSize: "16px" }}>
-                  {t.estimations}
-                </span>
-              </div>
-
-              <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
-                <span className="block font-bold stat-number " style={{ fontSize: "32px" }}>
-                  30+
-                </span>
-                <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
-                  {t.totalProjects}
-                </span>
-              </div>
+            <div className="stat-item flex flex-col items-center text-center min-w-0">
+              <span className="block font-bold stat-number leading-none" style={{ fontSize: "32px" }}>
+                50+
+              </span>
+              <span className="block mt-2 stat-label text-sm sm:text-base break-words">{t.estimations}</span>
             </div>
-            <div className="flex items-center gap-4 w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-12">
-              <div className="flex stat-item text-center flex-1 sm:flex-none px-5">
-                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
-                  20+
-                </span>
-                <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
-                  {t.successfulClients}
-                </span>
-              </div>
 
-              <div className="flex stat-item text-center flex-1 sm:flex-none">
-                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
-                  40+
-                </span>
-                <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
-                  {t.professionals}
-                </span>
-              </div>
+            <div className="stat-item flex flex-col items-center text-center min-w-0">
+              <span className="block font-bold stat-number leading-none" style={{ fontSize: "32px" }}>
+                30+
+              </span>
+              <span className="block mt-2 stat-label text-sm sm:text-base break-words">{t.totalProjects}</span>
+            </div>
+
+            <div className="stat-item flex flex-col items-center text-center min-w-0">
+              <span className="block font-bold stat-number leading-none" style={{ fontSize: "32px" }}>
+                20+
+              </span>
+              <span className="block mt-2 stat-label text-sm sm:text-base break-words">{t.successfulClients}</span>
+            </div>
+
+            <div className="stat-item flex flex-col items-center text-center min-w-0">
+              <span className="block font-bold stat-number leading-none" style={{ fontSize: "32px" }}>
+                40+
+              </span>
+              <span className="block mt-2 stat-label text-sm sm:text-base break-words">{t.professionals}</span>
             </div>
           </div>
 
