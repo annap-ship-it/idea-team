@@ -12,6 +12,7 @@ import { TechnologiesSection } from "@/components/technologies"
 import { OurProjectsSection } from "@/components/our-projects-section"
 import { WhyUsSection2 } from "@/components/why-us-section"
 import { FeedbackSection } from "@/components/feedback-section"
+import { OurClientsSection } from "@/components/our-clients-section"
 import { RequestConsultationSection } from "@/components/request-consultation-section"
 import { FAQSection } from "@/components/faq-section"
 
@@ -42,6 +43,7 @@ export default function HomePage() {
       <OurProjectsSection />
       <WhyUsSection2 />
       <FeedbackSection />
+      <OurClientsSection />
       <RequestConsultationSection />
       <FAQSection />
     </main>
