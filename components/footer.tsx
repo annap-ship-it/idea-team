@@ -12,6 +12,8 @@ interface BlogPost {
   locale?: string
 }
 
+const WALTAIR_ROBOTICS_LABEL = "Waltair Robotics (Mobile App v4)"
+
 const footerContent = {
   en: {
     company: "Company",
@@ -25,7 +27,7 @@ const footerContent = {
     statisticsPlatform: "Statistics Platform",
     sensorInfobox: "Sensor Infobox",
     ecommercePlatform: "High-performance eCommerce platform",
-    waltairRobotics: "Waltair Robotics (Mobile App v4)",
+    waltairRobotics: WALTAIR_ROBOTICS_LABEL,
     customWeb: "Custom web solutions",
     mobileApps: "Mobile applications",
     uxui: "UI/UX and Graphic Design",
@@ -51,7 +53,7 @@ const footerContent = {
     statisticsPlatform: "Платформа статистики",
     sensorInfobox: "Sensor Infobox",
     ecommercePlatform: "Високопродуктивна платформа eCommerce",
-    waltairRobotics: "Waltair Robotics (Mobile App v4)",
+    waltairRobotics: WALTAIR_ROBOTICS_LABEL,
     customWeb: "Кастомні веб-рішення",
     mobileApps: "Мобільні додатки",
     uxui: "Дизайн UI/UX та графіка",
