@@ -300,6 +300,10 @@ export default function BlogPostPage() {
     async function fetchPost() {
       try {
         const supabase = createBrowserClient()
+        if (!supabase) {
+          setPost(null)
+          return
+        }
 
         // Try multiple slug variations to support both direct and localized slugs
         let { data, error } = await supabase

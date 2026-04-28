@@ -613,6 +613,10 @@ export default function ProjectDetailPage() {
   async function fetchProjects() {
     try {
       const supabase = createBrowserClient()
+      if (!supabase) {
+        setProjects(defaultProjects)
+        return
+      }
 
       // Get projects category ID
       const { data: category } = await supabase

@@ -324,6 +324,12 @@ export default function ProjectsPage() {
       const fetchVersion = ++projectsFetchVersion.current
       try {
         const supabase = createBrowserClient()
+        if (!supabase) {
+          if (fetchVersion === projectsFetchVersion.current) {
+            setProjects(defaultProjects)
+          }
+          return
+        }
         const targetLocale = String(locale || "").toLowerCase().startsWith("uk") ? "uk" : "en"
 
         // Get projects category ID

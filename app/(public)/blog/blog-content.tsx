@@ -110,49 +110,61 @@ export default function BlogContent() {
 
   useEffect(() => {
     async function fetchPosts() {
-      const supabase = createBrowserClient()
-      
-      // Fetch posts in the current locale
-      const targetLocale = locale === "uk" ? "uk" : "en"
-      const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
-      const projectsCategoryId = projectsCategory?.id
+      try {
+        const supabase = createBrowserClient()
+        if (!supabase) {
+          setPosts([])
+          return
+        }
 
-let localePostsQuery = supabase
-        .from("posts")
-        .select(
-          `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
-        )
-        .eq("status", "published")
-        .eq("locale", targetLocale)
-        .order("published_at", { ascending: false, nullsFirst: false })
-        .limit(50)
+        // Fetch posts in the current locale
+        const targetLocale = locale === "uk" ? "uk" : "en"
+        const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
+        const projectsCategoryId = projectsCategory?.id
+
+        let localePostsQuery = supabase
+          .from("posts")
+          .select(
+            `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
+          )
+          .eq("status", "published")
+          .eq("locale", targetLocale)
+          .order("published_at", { ascending: false, nullsFirst: false })
+          .limit(50)
 
         if (projectsCategoryId) {
-            englishPostsQuery = englishPostsQuery.neq("category_id", projectsCategoryId)
-          }
+          localePostsQuery = localePostsQuery.neq("category_id", projectsCategoryId)
+        }
 
-          const { data: englishPosts } = await englishPostsQuery
-      
-      let finalPostsData = postsData
+        const { data: localePosts, error: localeError } = await localePostsQuery
 
-      if ((!localeError && postsData && postsData.length === 0) || localeError) {
+        let finalPostsData = localePosts || []
+
         // If requested Ukrainian but none found, fall back to English
-        if (targetLocale === "uk") {
-          const { data: englishPosts } = await supabase
+        if (((!localeError && finalPostsData.length === 0) || localeError) && targetLocale === "uk") {
+          let englishPostsQuery = supabase
             .from("posts")
             .select(
               `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
             )
             .eq("status", "published")
-            .neq("category_id", projectsCategoryId)
             .eq("locale", "en")
             .order("published_at", { ascending: false, nullsFirst: false })
             .limit(50)
-          finalPostsData = englishPosts
-        }
-      }
 
-      if (finalPostsData && finalPostsData.length > 0) {
+          if (projectsCategoryId) {
+            englishPostsQuery = englishPostsQuery.neq("category_id", projectsCategoryId)
+          }
+
+          const { data: englishPosts } = await englishPostsQuery
+          finalPostsData = englishPosts || []
+        }
+
+        if (finalPostsData.length === 0) {
+          setPosts([])
+          return
+        }
+
         const nonProjectPosts = finalPostsData.filter((post) => {
           const categorySlug = Array.isArray(post.categories) ? post.categories[0]?.slug : post.categories?.slug
           return categorySlug !== "projects" && (!projectsCategoryId || post.category_id !== projectsCategoryId)
@@ -178,13 +190,17 @@ let localePostsQuery = supabase
           }
         }
 
-         const postsWithAuthors = nonProjectPosts.map((post) => ({
+        const postsWithAuthors = nonProjectPosts.map((post) => ({
           ...post,
           author: authorsMap[post.author_id] || null,
         }))
         setPosts(postsWithAuthors)
+      } catch (error) {
+        console.error("[v0] Error fetching blog posts:", error)
+        setPosts([])
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
     fetchPosts()
   }, [locale])
