@@ -146,8 +146,7 @@ const defaultProjects = [
     slug: "waltair-robotics",
     featured_image: "/Waltair-Robotics-1.png",
     challenge: {
-      en: "Mobile version was stabilized and improved. Fixed regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. Resolved socket synchronization issues, improved overall code maintainability by reducing monolithic structure, and addressed instability caused by third-party libraries. Added proper localization support and enhanced data visualization capabilities.
-",
+      en: "Mobile version was stabilized and improved. Fixed regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. Resolved socket synchronization issues, improved overall code maintainability by reducing monolithic structure, and addressed instability caused by third-party libraries. Added proper localization support and enhanced data visualization capabilities.",
       uk: "Виправлена мобільна версія, яка мала низку проблем, що впливали на зручність використання та підтримку, зокрема регресії в таймерах сесій, навігації та відтворенні відео, а також нестабільну поведінку інтерфейсу на різних пристроях і в різних орієнтаціях. Додатково виникали проблеми із синхронізацією socket-подій, монолітною та складною для підтримки структурою коду й нестабільністю сторонніх бібліотек. Крім того, бракувало підтримки локалізації та можливостей для візуалізації даних.",
     },
     solution: {
@@ -321,7 +320,7 @@ export default function ProjectsPage() {
   }, [siteKey])
 
   useEffect(() => {
-async function fetchProjects() {
+    async function fetchProjects() {
       const fetchVersion = ++projectsFetchVersion.current
       try {
         const supabase = createBrowserClient()
@@ -355,6 +354,7 @@ async function fetchProjects() {
             })
             if (fetchVersion === projectsFetchVersion.current) {
               setProjects(mappedProjects)
+            }
           } else {
             if (fetchVersion === projectsFetchVersion.current) {
               setProjects(defaultProjects)
@@ -368,15 +368,16 @@ async function fetchProjects() {
       } catch (error) {
         console.error("Error fetching projects:", error)
         if (fetchVersion === projectsFetchVersion.current) {
-            setProjects(defaultProjects)
-           } finally {
+          setProjects(defaultProjects)
+        }
+      } finally {
         if (fetchVersion === projectsFetchVersion.current) {
           setLoading(false)
         }
-          }
+      }
     }
 
-   setLoading(true)
+    setLoading(true)
     fetchProjects()
   }, [locale])
 

@@ -188,7 +188,8 @@ export function HeroBanner() {
                 </span>
                 <span className="flex items-center px-3 pt-1 block mt-0 stat-label" style={{ fontSize: "16px" }}>
                   {t.estimations}
-@@ -193,7 +193,7 @@
+                </span>
+              </div>
 
               <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
                 <span className="block font-bold stat-number " style={{ fontSize: "32px" }}>
@@ -196,7 +197,9 @@ export function HeroBanner() {
                 </span>
                 <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
                   {t.totalProjects}
-@@ -209,7 +209,7 @@
+                </span>
+              </div>
+            </div>
             <div className="flex items-center gap-4 w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-12">
               <div className="flex stat-item text-center flex-1 sm:flex-none px-5">
                 <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
@@ -204,7 +207,8 @@ export function HeroBanner() {
                 </span>
                 <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
                   {t.successfulClients}
-@@ -223,128 +223,128 @@
+                </span>
+              </div>
 
               <div className="flex stat-item text-center flex-1 sm:flex-none">
                 <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
