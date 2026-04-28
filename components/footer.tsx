@@ -26,6 +26,7 @@ const footerContent = {
     sensorInfobox: "Sensor Infobox",
     ecommercePlatform: "High-performance eCommerce platform",
     customWeb: "Custom web solutions",
+    waltairRobotics: "Waltair Robotics (Mobile App v4)
     mobileApps: "Mobile applications",
     uxui: "UI/UX and Graphic Design",
     qa: "Manual and Automation QA",
@@ -51,6 +52,7 @@ const footerContent = {
     sensorInfobox: "Sensor Infobox",
     ecommercePlatform: "Високопродуктивна платформа eCommerce",
     customWeb: "Кастомні веб-рішення",
+    waltairRobotics: "Waltair Robotics (Mobile App v4)",  
     mobileApps: "Мобільні додатки",
     uxui: "Дизайн UI/UX та графіка",
     qa: "Ручне тестування та автоматизація QA",
@@ -317,7 +319,7 @@ export function Footer() {
                   onClick={handleLinkClick}
                   className="text-[#A7A7A7] hover:text-[#FFFFFF] active:text-[#FBC6A3] text-sm transition-colors duration-300 line-clamp-2"
                 >
-                  {t./waltairRobotics}
+                 {t.waltairRobotics}
                 </Link>
               </li>              
             </ul>
