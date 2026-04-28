@@ -9,6 +9,7 @@ import { ExpertiseSection } from "@/components/expertise"
 import { OurServicesSection } from "@/components/our-services-section"
 import { ConsultationBanner } from "@/components/consultation-banner"
 import { TechnologiesSection } from "@/components/technologies"
+import { OurClientsSection } from "@/components/our-clients-section"
 import { OurProjectsSection } from "@/components/our-projects-section"
 import { WhyUsSection2 } from "@/components/why-us-section"
 import { FeedbackSection } from "@/components/feedback-section"
@@ -39,6 +40,7 @@ export default function HomePage() {
       <OurServicesSection />
       <ConsultationBanner />
       <TechnologiesSection />
+      <OurClientsSection />
       <OurProjectsSection />
       <WhyUsSection2 />
       <FeedbackSection />
