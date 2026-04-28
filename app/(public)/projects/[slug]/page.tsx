@@ -610,68 +610,26 @@ export default function ProjectDetailPage() {
   }
 
   useEffect(() => {
-  async function fetchProjects() {
-    try {
-      const supabase = createBrowserClient()
-      if (!supabase) {
-        setProjects(defaultProjects)
-        return
-      }
-
-      // Get projects category ID
-      const { data: category } = await supabase
-        .from("categories")
-        .select("id")
-        .eq("slug", "projects")
-        .single()
-
-      if (category) {
-        const { data: posts } = await supabase
-          .from("posts")
-          .select("*")
-          .eq("category_id", category.id)
-          .eq("status", "published")
-          .eq("locale", locale === "uk" ? "uk" : "en")
-          .order("created_at", { ascending: false })
-
-        if (posts && posts.length > 0) {
-          const mappedProjects = posts.map((post) => {
-            const projectData = extractProjectData(post.content)
-            return {
-              id: post.id,
-              title: post.title,
-              slug: post.slug,
-              featured_image: post.featured_image || "/project-management-team.png",
-              ...projectData,
-            }
-          })
-
-          // Объединяем проекты из БД + defaultProjects (без дублей по slug)
-          const mergedProjects = [
-            ...mappedProjects,
-            ...defaultProjects.filter(
-              (defProject) =>
-                !mappedProjects.some((dbProject) => dbProject.slug === defProject.slug),
-            ),
-          ]
-
-          setProjects(mergedProjects)
-        } else {
-          setProjects(defaultProjects)
-        }
-      } else {
-        setProjects(defaultProjects)
-      }
-    } catch (error) {
-      console.error("Error fetching projects:", error)
-      setProjects(defaultProjects)
-    } finally {
-      setLoading(false)
+    const checkTheme = () => {
+      setIsDark(document.documentElement.classList.contains("dark"))
     }
-  }
+    checkTheme()
 
-  fetchProjects()
-}, [locale])
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+
+    const normalizedSlug = String(slug || "").replace(/-uk$/, "")
+    const projectData = defaultProjectsData[slug] || defaultProjectsData[normalizedSlug]
+
+    setProject(projectData || null)
+    setLoading(false)
+  }, [slug, locale])
 
   const titleGradient = isDark ? "#FFFFFF" : "#000000"
 

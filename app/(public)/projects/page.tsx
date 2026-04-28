@@ -268,6 +268,7 @@ export default function ProjectsPage() {
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [siteKey, setSiteKey] = useState<string>("")
   const scriptLoaded = useRef(false)
+  const projectsFetchVersion = useRef(0)
 
   useEffect(() => {
     const fetchSiteKey = async () => {
