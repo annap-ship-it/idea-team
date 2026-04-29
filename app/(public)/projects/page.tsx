@@ -5,7 +5,6 @@ import { useLocale } from "@/lib/locale-context"
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { createBrowserClient } from "@/lib/supabase/client"
 import { getRecaptchaSiteKey } from "@/app/actions/recaptcha"
 import { ProjectsOverlappingSection } from "@/components/projects-overlapping-section"
 import {Loader2} from "lucide-react";
@@ -27,46 +26,6 @@ interface Project {
 type SubmitState = {
   status: "idle" | "success" | "error"
   message?: string
-}
-
-// Extract project data from content blocks
-function extractProjectData(content: any) {
-  const data = {
-    challenge: "",
-    solution: "",
-    result: "",
-    stack: [] as string[],
-  }
-
-  if (!content || !Array.isArray(content)) return data
-
-  content.forEach((block: any) => {
-    if (block.type === "paragraph" || block.type === "heading") {
-      const text = block.content || ""
-      if (text.toLowerCase().startsWith("challenge:")) {
-        data.challenge = text.replace(/^challenge:\s*/i, "")
-      } else if (text.toLowerCase().startsWith("solution:")) {
-        data.solution = text.replace(/^solution:\s*/i, "")
-      } else if (text.toLowerCase().startsWith("result:")) {
-        data.result = text.replace(/^result:\s*/i, "")
-      } else if (text.toLowerCase().startsWith("stack:")) {
-        data.stack = text
-          .replace(/^stack:\s*/i, "")
-          .split(",")
-          .map((s: string) => s.trim())
-      }
-    }
-  })
-
-  // Try to extract from metafields if available
-  if (content.metafields) {
-    if (content.metafields.challenge) data.challenge = content.metafields.challenge
-    if (content.metafields.solution) data.solution = content.metafields.solution
-    if (content.metafields.result) data.result = content.metafields.result
-    if (content.metafields.stack) data.stack = content.metafields.stack.split(",").map((s: string) => s.trim())
-  }
-
-  return data
 }
 
 // Default projects for display when no posts exist
@@ -342,50 +301,33 @@ export default function ProjectsPage() {
   }, [siteKey])
 
   useEffect(() => {
-      async function fetchProjects() {
+    async function fetchProjects() {
       const fetchVersion = ++projectsFetchVersion.current
       try {
-        const supabase = createBrowserClient()
         const targetLocale = String(locale || "").toLowerCase().startsWith("uk") ? "uk" : "en"
+        const response = await fetch(`/api/projects?locale=${targetLocale}`, { cache: "no-store" })
+        const projectsData = await response.json()
 
-        // Get projects category ID
-        const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").single()
-
-        if (category) {
-          const { data: posts } = await supabase
-            .from("posts")
-            .select("*")
-            .eq("category_id", category.id)
-            .eq("status", "published")
-            .eq("locale", targetLocale)
-            .order("created_at", { ascending: false })
-
-          const localeSafePosts =
-            posts?.filter((post) => String(post.locale || "").toLowerCase().startsWith(targetLocale)) || []
-
-          if (localeSafePosts.length > 0) {
-            const mappedProjects = localeSafePosts.map((post) => {
-              const projectData = extractProjectData(post.content)
-              return {
-                id: post.id,
-                title: post.title,
-                slug: post.slug,
-                featured_image: post.featured_image || "/project-management-team.png",
-                ...projectData,
-              }
-            })
-            if (fetchVersion === projectsFetchVersion.current) {
-              setProjects(mappedProjects)
-               }
-          } else {
-            if (fetchVersion === projectsFetchVersion.current) {
-              setProjects(defaultProjects)
-            }
-          }
-        } else {
+        if (!response.ok || !Array.isArray(projectsData)) {
           if (fetchVersion === projectsFetchVersion.current) {
             setProjects(defaultProjects)
           }
+          return
+        }
+
+        const mappedProjects = projectsData.map((project: any) => ({
+          id: project.id,
+          title: project.title,
+          slug: project.slug,
+          featured_image: project.image || project.featured_image || "/project-management-team.png",
+          challenge: project.challenge || "",
+          solution: project.solution || "",
+          result: project.result || "",
+          stack: project.stack || [],
+        }))
+
+        if (fetchVersion === projectsFetchVersion.current) {
+          setProjects(mappedProjects.length > 0 ? mappedProjects : defaultProjects)
         }
       } catch (error) {
         console.error("Error fetching projects:", error)
@@ -396,10 +338,10 @@ export default function ProjectsPage() {
         if (fetchVersion === projectsFetchVersion.current) {
           setLoading(false)
         }
-          }
+        }
     }
 
-   setLoading(true)
+    setLoading(true)
     fetchProjects()
   }, [locale])
 
