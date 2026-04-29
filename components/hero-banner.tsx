@@ -181,7 +181,7 @@ export function HeroBanner() {
               margin: "96px auto 0",
             }}
           >
-            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center gap-15">
+            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center gap-6">
               <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
                 <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
                   50+
@@ -200,7 +200,7 @@ export function HeroBanner() {
                 </span>
               </div>
             </div>
-            <div className="flex items-center gap-4 w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-12">
+            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-6 sm:gap-12">
               <div className="flex stat-item text-center flex-1 sm:flex-none px-5">
                 <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
                   20+
