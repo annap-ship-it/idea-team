@@ -723,7 +723,22 @@ export default function ProjectDetailPage() {
     fetchProjectBySlug()
   }, [locale, slug])
 
-  const titleGradient = isDark ? "#FFFFFF" : "#000000"
+  useEffect(() => {
+    const checkTheme = () => {
+      if (typeof document === "undefined") return
+      setIsDark(document.documentElement.classList.contains("dark"))
+    }
+
+    checkTheme()
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const titleGradient = isDark
+    ? "linear-gradient(90.39deg, #FF6200 34.5%, #FFFFFF 66.76%)"
+    : "linear-gradient(90.39deg, #FF6200 34.5%, #000000 66.76%)"
 
   if (loading) {
     return (
@@ -803,7 +818,10 @@ export default function ProjectDetailPage() {
 
           {project.overview && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-4" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-4"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.overview}
               </h2>
               <p className="text-lg leading-relaxed" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
@@ -864,7 +882,10 @@ export default function ProjectDetailPage() {
 
           {project.stack && project.stack.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.technologyStack}
               </h2>
               <div className="flex flex-wrap gap-3">
@@ -888,7 +909,10 @@ export default function ProjectDetailPage() {
 
           {project.features && project.features.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.keyFeatures}
               </h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -908,7 +932,10 @@ export default function ProjectDetailPage() {
 
           {project.gallery && project.gallery.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.projectGallery}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
