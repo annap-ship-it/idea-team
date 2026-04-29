@@ -247,6 +247,32 @@ export function HeroBanner() {
                 margin-right: auto !important;
                 margin-bottom: 24px !important;
               }
+
+              .stats-section {
+                margin-top: 56px !important;
+                gap: 16px !important;
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+              }
+
+              .stats-section > div {
+                width: 100% !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
+              }
+
+              .stat-item {
+                min-width: 0 !important;
+                flex: 1 1 0 !important;
+                justify-content: center !important;
+              }
+
+              .stat-label {
+                padding-left: 4px !important;
+                padding-right: 4px !important;
+                font-size: 14px !important;
+                text-align: left !important;
+              }
             }
             
             @media (min-width: 480px) and (max-width: 767px) {
@@ -273,6 +299,23 @@ export function HeroBanner() {
                 margin-left: auto !important;
                 margin-right: auto !important;
                 margin-bottom: 24px !important;
+              }
+
+              .stats-section {
+                margin-top: 64px !important;
+                gap: 20px !important;
+              }
+
+              .stats-section > div {
+                width: 100% !important;
+                justify-content: space-between !important;
+                gap: 16px !important;
+              }
+
+              .stat-item {
+                min-width: 0 !important;
+                flex: 1 1 0 !important;
+                justify-content: center !important;
               }
             }
 
