@@ -22,22 +22,24 @@ const partnerNames = [
 ]
 
 export function OurClientsSection() {
-  const { t } = useLocale()
+  const { t, locale } = useLocale()
 
   return (
     <section className="bg-background py-16 md:py-24">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="rounded-[24px] border border-black/10 bg-card px-4 py-10 sm:px-8 md:px-12 md:py-14 dark:border-white/15">
           <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.2em] text-primary md:text-sm">
+            <p className="mb-4 text-sm font-medium uppercase tracking-[0.16em] text-primary md:text-base">
               {t.ourClientsEyebrow}
             </p>
-            <h2 className="text-3xl font-extrabold leading-tight md:text-5xl">
-              <span className="bg-gradient-to-r from-[#FF6200] to-foreground bg-clip-text text-transparent">
-                {t.ourClientsTitle}
-              </span>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
+              {t.ourClientsTitle}
             </h2>
-            <div className="mx-auto mt-4 h-[2px] w-20 rounded-full bg-gradient-to-r from-[#FF6200] to-[#FFB36B]" />
+            <p className="text-lg md:text-xl max-w-2xl mx-auto text-muted-foreground">
+              {locale === "uk"
+                ? "Ми робимо все можливе, щоб втілити вашу ідею в життя саме так, як ви її уявляли"
+                : "We do our very best to bring your idea to life just as it was envisioned"}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
