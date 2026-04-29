@@ -192,6 +192,19 @@ const techIcons: Record<string, string> = {
   NodeJS: "/icons/tech/nodejs.svg",
   Apollo: "/icons/tech/apollo.svg",
   Mongo: "/icons/tech/mongodb.svg",
+  "React Native": "/icons/tech/nodejs.svg",
+  Redux: "/icons/tech/apollo.svg",
+  Python: "/icons/tech/php.svg",
+  "Socket.io": "/icons/tech/graphql.svg",
+  "react-hook-form": "/icons/tech/css.svg",
+  Zod: "/icons/tech/bullet.svg",
+  i18n: "/icons/tech/telegram.svg",
+  Unity: "/icons/tech/unity.svg",
+  "AR Foundation": "/icons/tech/ar-foundation.svg",
+  "ARKit Face Tracking": "/icons/tech/arkit.svg",
+  "C#": "/icons/tech/csharp.svg",
+  "3D Rigging": "/icons/tech/backbone.svg",
+  TestFlight: "/icons/tech/linkedin.svg",
 }
 
 function AnimatedCard({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
