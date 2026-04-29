@@ -52,6 +52,22 @@ const translations = {
   },
 }
 
+const techIcons: Record<string, string> = {
+  "React Native": "/icons/tech/nodejs.svg",
+  Redux: "/icons/tech/apollo.svg",
+  Python: "/icons/tech/php.svg",
+  "Socket.io": "/icons/tech/graphql.svg",
+  "react-hook-form": "/icons/tech/css.svg",
+  Zod: "/icons/tech/bullet.svg",
+  i18n: "/icons/tech/telegram.svg",
+  Unity: "/icons/tech/vuejs.svg",
+  "AR Foundation": "/icons/tech/graphql.svg",
+  "ARKit Face Tracking": "/icons/tech/apollo.svg",
+  "C#": "/icons/tech/mssql.svg",
+  "3D Rigging": "/icons/tech/backbone.svg",
+  TestFlight: "/icons/tech/linkedin.svg",
+}
+
 // Default project data for fallback
 const defaultProjectsData: Record<string, any> = {
   "ar-earring-virtual-try-on": {
@@ -859,13 +875,14 @@ export default function ProjectDetailPage() {
                 {project.stack.map((tech: string, i: number) => (
                   <span
                     key={i}
-                    className="px-4 py-2 rounded-full text-sm font-medium"
+                    className="px-4 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2"
                     style={{
                       backgroundColor: isDark ? "#2A2A2A" : "#F5F5F5",
                       color: isDark ? "#FFFFFF" : "#000000",
                       border: `1px solid ${isDark ? "#3A3A3A" : "#E0E0E0"}`,
                     }}
                   >
+                    {techIcons[tech] && <Image src={techIcons[tech] || "/placeholder.svg"} alt={`${tech} icon`} width={18} height={18} />}
                     {tech}
                   </span>
                 ))}
