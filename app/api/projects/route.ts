@@ -110,6 +110,32 @@ export async function GET(request: Request) {
           uk: "Підвищена стабільність релізів, вища якість продукту та плавніші процеси QA.",
         },
       },
+      {
+        id: "7",
+        title: {
+          en: "DevOps for Yotewo",
+          uk: "DevOps для Yotewo",
+        },
+        slug: "devops-for-yotewo",
+        image: "/placeholder.svg",
+        shortDescription: {
+          en: "Built end-to-end DevOps infrastructure across AWS and Azure with automated CI/CD, secure networking, cost controls, and scalable delivery.",
+          uk: "Побудовано end-to-end DevOps-інфраструктуру на AWS та Azure з автоматизованим CI/CD, secure networking, контролем витрат і готовністю до масштабування.",
+        },
+      },
+      {
+        id: "7",
+        title: {
+          en: "DevOps for Yotewo",
+          uk: "DevOps для Yotewo",
+        },
+        slug: "devops-for-yotewo",
+        image: "/placeholder.svg",
+        shortDescription: {
+          en: "Built end-to-end DevOps infrastructure across AWS and Azure with automated CI/CD, secure networking, cost controls, and scalable delivery.",
+          uk: "Побудовано end-to-end DevOps-інфраструктуру на AWS та Azure з автоматизованим CI/CD, secure networking, контролем витрат і готовністю до масштабування.",
+        },
+      },
     ]
 
     // Map posts to the format needed for Our Projects section

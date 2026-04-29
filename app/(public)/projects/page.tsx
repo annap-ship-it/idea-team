@@ -170,6 +170,28 @@ const defaultProjects = [
     },
     stack: ["Manual Testing", "Team Collaboration Tools"],
   },
+  {
+    id: "7",
+    title: {
+      en: "DevOps for Yotewo",
+      uk: "DevOps для Yotewo",
+    },
+    slug: "devops-for-yotewo",
+    featured_image: "/placeholder.svg",
+    challenge: {
+      en: "The project started without configured infrastructure or processes: no stable dev/prod environments, manual deployments with high error risk, no security and cost controls, and difficult AWS/Azure integration.",
+      uk: "Проєкт стартував без налаштованої інфраструктури та процесів: відсутність стабільного середовища (dev/prod), ручні деплої та ризики помилок, відсутність контролю витрат і безпеки, складна інтеграція між AWS та Azure.",
+    },
+    solution: {
+      en: "Built a complete DevOps ecosystem from scratch: configured VPC, EC2, RDS, S3, ECR, IAM, KMS; launched dev/prod environments; implemented secure networking and AWS↔Azure VPN; automated pipelines (GitHub Actions → ECR → EC2) with SSH-less deploys via SSM; added rollback and health checks; automated Docker image delivery; enforced IAM/OIDC access controls; set backup policies (EBS snapshots); established monitoring and budget alerts; optimized costs; and added Lambda auto start/stop.",
+      uk: "Ми побудували повноцінну DevOps-екосистему з нуля: налаштовано VPC, EC2, RDS, S3, ECR, IAM, KMS; розгорнуто dev і prod середовища; реалізовано secure networking і VPN (AWS↔Azure); автоматизовано пайплайни (GitHub Actions → ECR → EC2) і деплой без SSH через SSM; додано rollback і health-check; автоматичну збірку та доставку Docker-образів; контроль доступів (IAM, OIDC); backup-політики (EBS snapshots); моніторинг і budget alerts; cost tracking та оптимізацію; автостарт/стоп серверів через Lambda.",
+    },
+    result: {
+      en: "Fully automated and predictable delivery, stable infrastructure for dev and production, lower deployment risk, reduced infrastructure costs, and readiness for scaling.",
+      uk: "Повністю автоматизований і передбачуваний delivery, стабільна інфраструктура для dev і production, зниження ризиків помилок при деплої, контроль і зниження інфраструктурних витрат, готовність продукту до масштабування.",
+    },
+    stack: ["AWS", "Azure", "GitHub Actions", "Docker", "ECR", "SSM", "VPC", "VPN", "IAM", "KMS", "Nginx", "Certbot"],
+  },
 ]
 
 const techIcons: Record<string, string> = {
@@ -205,6 +227,18 @@ const techIcons: Record<string, string> = {
   "C#": "/icons/tech/csharp.svg",
   "3D Rigging": "/icons/tech/backbone.svg",
   TestFlight: "/icons/tech/linkedin.svg",
+  AWS: "/icons/tech/mongodb.svg",
+  Azure: "/icons/tech/vuejs.svg",
+  "GitHub Actions": "/icons/tech/jquery.svg",
+  Docker: "/icons/tech/nodejs.svg",
+  ECR: "/icons/tech/apollo.svg",
+  SSM: "/icons/tech/graphql.svg",
+  VPC: "/icons/tech/mssql.svg",
+  VPN: "/icons/tech/requirejs.svg",
+  IAM: "/icons/tech/php.svg",
+  KMS: "/icons/tech/mysql.svg",
+  Nginx: "/icons/tech/html.svg",
+  Certbot: "/icons/tech/css.svg",
 }
 
 function AnimatedCard({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {

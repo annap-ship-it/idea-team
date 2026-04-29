@@ -22,6 +22,10 @@ export async function generateMetadata({ params }: { params: { slug: string } | 
       title: "AR Earring Virtual Try-On (Unity / Face Tracking)",
       excerpt: "Markerless AR earring try-on PoC built with Unity face tracking, dynamic anchors, and realistic accessory physics.",
     },
+    "devops-for-yotewo": {
+      title: "DevOps for Yotewo",
+      excerpt: "End-to-end DevOps ecosystem across AWS and Azure with CI/CD automation, secure networking, and cost governance.",
+    },
   }
 
   const project = projectsData[resolvedParams.slug]
