@@ -233,8 +233,8 @@ function AnimatedCard({ children, delay = 0 }: { children: React.ReactNode; dela
 export default function ProjectsPage() {
   const { locale } = useLocale()
 
-  const [projects, setProjects] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [projects, setProjects] = useState<any[]>(defaultProjects)
+  const [loading, setLoading] = useState(false)
   const [isDark, setIsDark] = useState(false)
 
   // Form state
@@ -341,7 +341,7 @@ export default function ProjectsPage() {
         }
     }
 
-    setLoading(true)
+    setLoading(false)
     fetchProjects()
   }, [locale])
 
