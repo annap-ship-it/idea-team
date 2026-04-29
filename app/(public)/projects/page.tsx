@@ -177,7 +177,7 @@ const defaultProjects = [
       uk: "DevOps для Yotewo",
     },
     slug: "devops-for-yotewo",
-    featured_image: "/placeholder.svg",
+    featured_image: "/yotewo-blog.png",
     challenge: {
       en: "The project started without configured infrastructure or processes: no stable dev/prod environments, manual deployments with high error risk, no security and cost controls, and difficult AWS/Azure integration.",
       uk: "Проєкт стартував без налаштованої інфраструктури та процесів: відсутність стабільного середовища (dev/prod), ручні деплої та ризики помилок, відсутність контролю витрат і безпеки, складна інтеграція між AWS та Azure.",
