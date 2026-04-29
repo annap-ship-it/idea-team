@@ -123,19 +123,6 @@ export async function GET(request: Request) {
           uk: "Побудовано end-to-end DevOps-інфраструктуру на AWS та Azure з автоматизованим CI/CD, secure networking, контролем витрат і готовністю до масштабування.",
         },
       },
-      {
-        id: "7",
-        title: {
-          en: "DevOps for Yotewo",
-          uk: "DevOps для Yotewo",
-        },
-        slug: "devops-for-yotewo",
-        image: "/placeholder.svg",
-        shortDescription: {
-          en: "Built end-to-end DevOps infrastructure across AWS and Azure with automated CI/CD, secure networking, cost controls, and scalable delivery.",
-          uk: "Побудовано end-to-end DevOps-інфраструктуру на AWS та Azure з автоматизованим CI/CD, secure networking, контролем витрат і готовністю до масштабування.",
-        },
-      },
     ]
 
     // Map posts to the format needed for Our Projects section
@@ -158,8 +145,9 @@ export async function GET(request: Request) {
 
     const fallbackOnly = defaultProjects.filter((fallbackProject) => !mappedPosts.some((post) => post.slug === fallbackProject.slug))
     const projects = mappedPosts.length > 0 ? [...mappedPosts, ...fallbackOnly] : defaultProjects
+    const uniqueProjects = projects.filter((project, index, array) => index === array.findIndex((item) => item.slug === project.slug))
 
-    return NextResponse.json(projects)
+    return NextResponse.json(uniqueProjects)
   } catch (error) {
     console.error("[v0] Error fetching projects:", error)
     // Return default projects on error - these have proper { en, uk } structure
