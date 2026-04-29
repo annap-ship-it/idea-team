@@ -42,8 +42,8 @@ export default function HomePage() {
       <TechnologiesSection />
       <OurProjectsSection />
       <WhyUsSection2 />
-      <FeedbackSection />
       <OurClientsSection />
+      <FeedbackSection />
       <RequestConsultationSection />
       <FAQSection />
     </main>
