@@ -625,7 +625,8 @@ With improved performance, a consistent user interface, and powerful analytics c
 
 export default function ProjectDetailPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slugParam = params?.slug
+  const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam
   const { locale } = useLocale()
   const [project, setProject] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -668,64 +669,59 @@ export default function ProjectDetailPage() {
   }
 
   useEffect(() => {
-  async function fetchProjects() {
-    try {
-      const supabase = createBrowserClient()
+    if (!slug) return
 
-      // Get projects category ID
-      const { data: category } = await supabase
-        .from("categories")
-        .select("id")
-        .eq("slug", "projects")
-        .single()
+    async function fetchProjectBySlug() {
+      try {
+        const fallbackProject = defaultProjectsData[slug]
+        const supabase = createBrowserClient()
 
-      if (category) {
-        const { data: posts } = await supabase
+        if (!supabase) {
+          setProject(fallbackProject || null)
+          return
+        }
+
+        const targetLocale = locale === "uk" ? "uk" : "en"
+        const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").maybeSingle()
+
+        if (!category) {
+          setProject(fallbackProject || null)
+          return
+        }
+
+        const { data: post } = await supabase
           .from("posts")
           .select("*")
           .eq("category_id", category.id)
           .eq("status", "published")
-          .eq("locale", locale === "uk" ? "uk" : "en")
-          .order("created_at", { ascending: false })
+          .eq("locale", targetLocale)
+          .eq("slug", slug)
+          .maybeSingle()
 
-        if (posts && posts.length > 0) {
-          const mappedProjects = posts.map((post) => {
-            const projectData = extractProjectData(post.content)
-            return {
-              id: post.id,
-              title: post.title,
-              slug: post.slug,
-              featured_image: post.featured_image || "/project-management-team.png",
-              ...projectData,
-            }
+        if (post) {
+          const projectData = extractProjectData(post.content)
+          setProject({
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            featured_image: post.featured_image || "/project-management-team.png",
+            ...projectData,
+            ...fallbackProject,
           })
-
-          // Объединяем проекты из БД + defaultProjects (без дублей по slug)
-          const mergedProjects = [
-            ...mappedProjects,
-            ...defaultProjects.filter(
-              (defProject) =>
-                !mappedProjects.some((dbProject) => dbProject.slug === defProject.slug),
-            ),
-          ]
-
-          setProjects(mergedProjects)
         } else {
-          setProjects(defaultProjects)
+          setProject(fallbackProject || null)
         }
-      } else {
-        setProjects(defaultProjects)
+      } catch (error) {
+        console.error("Error fetching project:", error)
+        setProject(defaultProjectsData[slug] || null)
+      } finally {
+        setLoading(false)
       }
-    } catch (error) {
-      console.error("Error fetching projects:", error)
-      setProjects(defaultProjects)
-    } finally {
-      setLoading(false)
     }
-  }
 
-  fetchProjects()
-}, [locale])
+    setLoading(true)
+    fetchProjectBySlug()
+  }, [locale, slug])
 
   const titleGradient = isDark ? "#FFFFFF" : "#000000"
 

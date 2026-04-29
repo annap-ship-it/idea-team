@@ -1,7 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } | Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
   // Projects are currently stored as hardcoded data in the component
   // When projects are added to the database, update this to query from the database
   const projectsData: Record<string, any> = {
@@ -23,7 +24,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     },
   }
 
-  const project = projectsData[params.slug]
+  const project = projectsData[resolvedParams.slug]
 
   if (!project) {
     return {
