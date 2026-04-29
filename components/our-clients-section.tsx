@@ -28,13 +28,13 @@ export function OurClientsSection() {
     <section className="bg-background py-16 md:py-24">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="rounded-2xl border border-black/10 bg-card px-4 py-10 sm:px-8 md:px-12 md:py-14 dark:border-white/15">
-          <div className="mx-auto mb-8 max-w-3xl text-center md:mb-12">
-            <p className="mb-4 text-sm font-medium uppercase tracking-[0.16em] text-primary md:text-base">
+          <div className="mx-auto mb-8 max-w-4xl text-center md:mb-12">
+            <h2 className="text-4xl font-bold leading-[1.1] text-foreground md:text-6xl">
               {t.ourClientsEyebrow}
-            </p>
-            <h2 className="text-3xl font-bold leading-tight text-foreground md:text-5xl">
-              {t.ourClientsTitle}
             </h2>
+            <p className="mx-auto mt-4 max-w-3xl text-lg leading-relaxed text-muted-foreground md:text-2xl">
+              {t.ourClientsTitle}
+            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
