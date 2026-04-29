@@ -117,7 +117,7 @@ export async function GET(request: Request) {
           uk: "DevOps для Yotewo",
         },
         slug: "devops-for-yotewo",
-        image: "/yotewo-blog.png,
+        image: "/yotewo-blog.png",
         shortDescription: {
           en: "Built end-to-end DevOps infrastructure across AWS and Azure with automated CI/CD, secure networking, cost controls, and scalable delivery.",
           uk: "Побудовано end-to-end DevOps-інфраструктуру на AWS та Azure з автоматизованим CI/CD, secure networking, контролем витрат і готовністю до масштабування.",
