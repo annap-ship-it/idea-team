@@ -26,7 +26,7 @@ const footerContent = {
     sensorInfobox: "Sensor Infobox",
     ecommercePlatform: "High-performance eCommerce platform",
     customWeb: "Custom web solutions",
-    waltairRobotics: "Waltair Robotics (Mobile App v4)
+    waltairRobotics: "Waltair Robotics (Mobile App v4)",
     mobileApps: "Mobile applications",
     uxui: "UI/UX and Graphic Design",
     qa: "Manual and Automation QA",
