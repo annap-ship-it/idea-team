@@ -25,7 +25,7 @@ export function OurClientsSection() {
   const { t } = useLocale()
 
   return (
-    <section className="bg-background py-16 md:py-24">
+    <section id="our-clients" className="bg-background py-16 md:py-24">
       <div className="mx-auto w-full max-w-7xl px-4">
         <div className="rounded-2xl border border-black/10 bg-card px-4 py-10 sm:px-8 md:px-12 md:py-14 dark:border-white/15">
           <div className="text-center mb-12 md:mb-20">
@@ -44,7 +44,7 @@ export function OurClientsSection() {
                 className="flex min-h-24 items-center justify-center rounded-2xl border border-black/10 bg-background px-4 py-6 transition-colors duration-300 hover:border-primary/60 dark:border-white/15"
                 aria-label={name}
               >
-                <span className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">{name}</span>
+                <span className="text-xl font-semibold tracking-tight text-foreground md:text-2xl">{name}</span>
               </article>
             ))}
           </div>
