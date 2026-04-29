@@ -117,7 +117,7 @@ export default function BlogContent() {
       const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
       const projectsCategoryId = projectsCategory?.id
 
-let localePostsQuery = supabase
+      let localePostsQuery = supabase
         .from("posts")
         .select(
           `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
@@ -127,15 +127,15 @@ let localePostsQuery = supabase
         .order("published_at", { ascending: false, nullsFirst: false })
         .limit(50)
 
-        if (projectsCategoryId) {
-            englishPostsQuery = englishPostsQuery.neq("category_id", projectsCategoryId)
-          }
+      if (projectsCategoryId) {
+        localePostsQuery = localePostsQuery.neq("category_id", projectsCategoryId)
+      }
 
-          const { data: englishPosts } = await englishPostsQuery
+      const { data: localePostsData, error: localeError } = await localePostsQuery
       
-      let finalPostsData = postsData
+      let finalPostsData = localePostsData
 
-      if ((!localeError && postsData && postsData.length === 0) || localeError) {
+      if ((!localeError && localePostsData && localePostsData.length === 0) || localeError) {
         // If requested Ukrainian but none found, fall back to English
         if (targetLocale === "uk") {
           const { data: englishPosts } = await supabase
