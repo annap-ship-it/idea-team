@@ -134,7 +134,7 @@ const defaultProjectsData: Record<string, any> = {
       en: ["Multi-cloud networking", "Automated CI/CD pipeline", "Secure SSH-less deploy flow", "Cost-aware cloud operations"],
       uk: ["Мультихмарний networking", "Автоматизований CI/CD pipeline", "Безпечний деплой без SSH", "Керовані за вартістю cloud-операції"],
     },
-    gallery: ["/placeholder.svg"],
+    gallery: ["/devops.png"],
   },
   "ar-earring-virtual-try-on": {
     title: { en: "AR Earring Virtual Try-On (Unity / Face Tracking)", uk: "AR примірка сережок (Unity / Face Tracking)" },
@@ -176,7 +176,7 @@ const defaultProjectsData: Record<string, any> = {
       en: ["Markerless face-based try-on", "Real-time earring alignment", "Physics-driven accessory motion", "Mobile PoC validation flow"],
       uk: ["Markerless примірка на основі трекінгу обличчя", "Вирівнювання сережок у реальному часі", "Фізично коректна анімація аксесуарів", "Мобільний PoC для валідації"],
     },
-    gallery: ["/1600x400_Earring_Collection_1.webp", "/earrings-galery.png", "/videos/ar-earring-try-on-1.mp4", "/videos/ar-earring-try-on-2.mp4"],
+    gallery: ["/earrings-galery.png", "/ar-earring-try-on-1.mp4", "/ar-earring-try-on-2.mp4"],
   },
   "waltair-robotics": {
   title: {
