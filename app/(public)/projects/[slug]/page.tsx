@@ -54,6 +54,48 @@ const translations = {
 
 // Default project data for fallback
 const defaultProjectsData: Record<string, any> = {
+  "ar-earring-virtual-try-on": {
+    title: { en: "AR Earring Virtual Try-On (Unity / Face Tracking)", uk: "AR примірка сережок (Unity / Face Tracking)" },
+    featured_image: "/1600x400_Earring_Collection_1.webp",
+    client: { en: "Jewelry E-commerce Brand", uk: "Ювелірний e-commerce бренд" },
+    industry: { en: "Fashion Tech / AR Commerce", uk: "Fashion Tech / AR Commerce" },
+    duration: { en: "PoC phase", uk: "PoC етап" },
+    team: { en: "Unity Developer", uk: "Unity Developer" },
+    overview: {
+      en: "We built a Proof of Concept for markerless AR earring try-on with natural behavior and stable face tracking in mobile conditions.",
+      uk: "Ми створили Proof of Concept для markerless AR-примірки сережок із природною поведінкою та стабільним face tracking у мобільних умовах.",
+    },
+    challenge: {
+      en: "The client needed online earring try-on without markers, with natural behavior and stable face tracking. The key challenge was precise attachment and realistic movement during head turns.",
+      uk: "Клієнту потрібно було впровадити онлайн-примірку сережок без маркерів із максимально природною поведінкою та стабільним трекінгом обличчя. Основний виклик — точна фіксація сережок і реалістичний рух при повороті голови.",
+    },
+    solution: {
+      en: [
+        "Implemented face detection using the front camera",
+        "Added dynamic anchor points for earring attachment",
+        "Ensured stable tracking during head movement",
+        "Simulated physical earring behavior (swing and gravity)",
+        "Prepared a mobile build for TestFlight validation",
+      ],
+      uk: [
+        "Реалізували визначення обличчя через фронтальну камеру",
+        "Додали динамічні anchor points для кріплення сережок",
+        "Забезпечили стабільний трекінг при русі голови",
+        "Змоделювали фізичну поведінку сережок (рух, гравітація)",
+        "Підготували mobile build для тестування (TestFlight)",
+      ],
+    },
+    result: {
+      en: "Delivered realistic markerless AR try-on, stable performance during active movement, and a production-ready PoC that improved customer engagement potential.",
+      uk: "Отримали реалістичну AR-примірку без маркерів, стабільну роботу навіть при активному русі та готовий PoC для подальшого розвитку продукту й зростання залучення клієнтів.",
+    },
+    stack: ["Unity", "AR Foundation", "ARKit Face Tracking", "C#", "3D Rigging", "TestFlight"],
+    features: {
+      en: ["Markerless face-based try-on", "Real-time earring alignment", "Physics-driven accessory motion", "Mobile PoC validation flow"],
+      uk: ["Markerless примірка на основі трекінгу обличчя", "Вирівнювання сережок у реальному часі", "Фізично коректна анімація аксесуарів", "Мобільний PoC для валідації"],
+    },
+    gallery: ["/1600x400_Earring_Collection_1.webp", "/earrings-galery.png", "/videos/ar-earring-try-on-1.mp4", "/videos/ar-earring-try-on-2.mp4"],
+  },
   "waltair-robotics": {
   title: {
     en: "Waltair Robotics (Mobile App v4)",
@@ -857,14 +899,18 @@ export default function ProjectDetailPage() {
                 {t.projectGallery}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {project.gallery.map((image: string, i: number) => (
+                {project.gallery.map((media: string, i: number) => (
                   <div key={i} className="relative aspect-[3/2] rounded-[4px] overflow-hidden">
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt={`${String(getLocalizedText(project.title))} screenshot ${i + 1}`}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                    {media.toLowerCase().endsWith(".mp4") ? (
+                      <video src={media} controls className="w-full h-full object-cover" playsInline preload="metadata" />
+                    ) : (
+                      <Image
+                        src={media || "/placeholder.svg"}
+                        alt={`${String(getLocalizedText(project.title))} screenshot ${i + 1}`}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    )}
                   </div>
                 ))}
               </div>

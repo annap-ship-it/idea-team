@@ -137,8 +137,30 @@ const defaultProjects = [
     },
     stack: ["HTML", "CSS", "RequireJS", "Grunt", "jQuery", "Backbone"],
   },
-    {
-      id: "4",
+  {
+    id: "6",
+    title: {
+      en: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+      uk: "AR примірка сережок (Unity / Face Tracking)",
+    },
+    slug: "ar-earring-virtual-try-on",
+    featured_image: "/1600x400_Earring_Collection_1.webp",
+    challenge: {
+      en: "Build markerless online earring try-on with natural behavior and stable face tracking.",
+      uk: "Реалізувати markerless онлайн-примірку сережок із природною поведінкою та стабільним face tracking.",
+    },
+    solution: {
+      en: "Built a Unity PoC with front camera face detection, dynamic anchor points, and realistic earring physics.",
+      uk: "Створили Unity PoC із визначенням обличчя через фронтальну камеру, динамічними anchor points та реалістичною фізикою сережок.",
+    },
+    result: {
+      en: "Delivered realistic AR try-on and a validated mobile PoC for product growth.",
+      uk: "Отримали реалістичну AR-примірку та валідований mobile PoC для розвитку продукту.",
+    },
+    stack: ["Unity", "AR Foundation", "ARKit Face Tracking", "C#"],
+  },
+  {
+    id: "4",
     title: {
       en: "Waltair Robotics (Mobile App v4)",
       uk: "Waltair Robotics (Mobile App v4)",

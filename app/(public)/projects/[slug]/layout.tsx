@@ -17,6 +17,10 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: "Waltair Robotics (Mobile App v4) Case Study",
       excerpt: "Waltair Robotics is a mobile application built for tennis coaches to remotely control a smart ball-feeding machine, record training sessions, and analyze performance through real-time statistics and charts.",
     },
+    "ar-earring-virtual-try-on": {
+      title: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+      excerpt: "Markerless AR earring try-on PoC built with Unity face tracking, dynamic anchors, and realistic accessory physics.",
+    },
   }
 
   const project = projectsData[params.slug]

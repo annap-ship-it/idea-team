@@ -72,6 +72,19 @@ export async function GET(request: Request) {
         },
       },
       {
+        id: "6",
+        title: {
+          en: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+          uk: "AR примірка сережок (Unity / Face Tracking)",
+        },
+        slug: "ar-earring-virtual-try-on",
+        image: "/1600x400_Earring_Collection_1.webp",
+        shortDescription: {
+          en: "Markerless AR earring try-on with realistic movement and stable face tracking.",
+          uk: "Markerless AR-примірка сережок із реалістичним рухом та стабільним face tracking.",
+        },
+      },
+      {
         id: "4",
         title: {
           en: "Waltair Robotics (Mobile App v4)",
@@ -159,6 +172,19 @@ export async function GET(request: Request) {
         shortDescription: {
           en: "Enhanced user engagement and increased visibility for marketing efforts.",
           uk: "Посилена залученість користувачів та збільшена видимість при маркетингових зусиллях.",
+        },
+      },
+      {
+        id: "6",
+        title: {
+          en: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+          uk: "AR примірка сережок (Unity / Face Tracking)",
+        },
+        slug: "ar-earring-virtual-try-on",
+        image: "/1600x400_Earring_Collection_1.webp",
+        shortDescription: {
+          en: "Markerless AR earring try-on with realistic movement and stable face tracking.",
+          uk: "Markerless AR-примірка сережок із реалістичним рухом та стабільним face tracking.",
         },
       },
       {
