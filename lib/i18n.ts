@@ -13,8 +13,7 @@ export const translations = {
     viewAll: "View All",
 
     // Our Clients
-    ourClientsEyebrow: "Our clients",
-    ourClientsTitle: "We work with the best partners",
+    ourClientsTitle: "Our clients",
     
     // Hero Banner
     heroTitle: "Expert Software Development Studio",
@@ -241,8 +240,7 @@ export const translations = {
     viewAll: "Переглянути все",
 
       // Наші клієнти
-    ourClientsEyebrow: "Наші клієнти",
-    ourClientsTitle: "Ми працюємо з найкращими партнерами",
+    ourClientsTitlew: "Наші клієнти",
 
     // Hero Banner
     heroTitle: "Студія експертної розробки програмного забезпечення",
@@ -383,8 +381,8 @@ export const translations = {
 
     // Projects Page
     ourProjectsTitle: "Наші проекти",
-    ourProjectsSubtitle: "Розглянути нашу останню роботу та тематичні дослідження",
-    projectsDescription: "Див як ми допомогли клієнтам досягти своїх цілей",
+    ourProjectsSubtitle: "Подивіться наші останні роботи та тематичні дослідження",
+    projectsDescription: "Дивіться як ми допомогли клієнтам досягти своїх цілей",
     multibrandEcommerce: "Багатобрендові посадочні сторінки для електронної комерції",
 
     // Careers Page
