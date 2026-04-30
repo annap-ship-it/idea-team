@@ -239,7 +239,7 @@ export const translations = {
     allServices: "Наші сервіси",
     viewAll: "Переглянути все",
 
-      // Наші клієнти
+      // Our Clients
     ourClientsTitle: "Наші клієнти",
 
     // Hero Banner
