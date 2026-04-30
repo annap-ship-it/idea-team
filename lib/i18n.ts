@@ -13,8 +13,7 @@ export const translations = {
     viewAll: "View All",
 
     // Our Clients
-    ourClientsEyebrow: "Our clients",
-    ourClientsTitle: "We work with the best partners",
+    ourClientsTitle: "Our clients",
     
     // Hero Banner
     heroTitle: "Expert Software Development Studio",
@@ -241,8 +240,7 @@ export const translations = {
     viewAll: "Переглянути все",
 
       // Наші клієнти
-    ourClientsEyebrow: "Наші клієнти",
-    ourClientsTitle: "Ми працюємо з найкращими партнерами",
+    ourClientsTitle: "Наші клієнти",
 
     // Hero Banner
     heroTitle: "Студія експертної розробки програмного забезпечення",
