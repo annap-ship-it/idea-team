@@ -1,6 +1,5 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { Onest } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import { ThemeProvider } from "@/lib/theme-context"
 import { LocaleProvider } from "@/lib/locale-context"
@@ -9,13 +8,6 @@ import { CookiesConsent } from "@/components/cookies-consent"
 import { ScrollToTop } from "@/components/scroll-to-top"
 import { ClientOnlyPopups } from "@/components/client-only-popups"
 import "./globals.css"
-
-const onest = Onest({
-  subsets: ["latin"],
-  weight: ["400", "500", "800"],
-  variable: "--font-onest",
-  display: "swap",
-})
 
 export const metadata: Metadata = {
   title: "Software Development Company | Hire Expert Engineers",
@@ -67,7 +59,7 @@ export default function RootLayout({
         />
       </head>
 
-      <body className={`${onest.variable} font-sans antialiased`}>
+      <body className="font-sans antialiased">
         <ThemeProvider>
           <LocaleProvider>
             <ScrollAnimationProvider>{children}</ScrollAnimationProvider>
