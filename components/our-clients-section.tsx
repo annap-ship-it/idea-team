@@ -1,28 +1,30 @@
 "use client"
 
-import { useLocale } from "@/lib/locale-context"
+import { useTheme } from "@/lib/theme-context"
 
-const partnerNames = [
-  "Viso",
-  "Sloboda Studio",
-  "Beetroot",
-  "IT Svit",
-  "Appexoft",
-  "Acropolium",
-  "InAppo",
-  "Talents Today",
-  "1GameChanger",
-  "Equinox",
-  "Abto Software",
-  "Yotewo",
-  "DreamX",
-  "Grade",
-  "Sonomics",
-  "Powercode",
-]
+const clientLogos = [
+  { name: "Viso", light: "/icons/tech/viso.svg", dark: "/icons/tech/viso.svg" },
+  { name: "Sloboda Studio", light: "/icons/tech/sloboda-light.svg", dark: "/icons/tech/sloboda-dark.svg" },
+  { name: "Beetroot", light: "/icons/tech/beetroot-light.svg", dark: "/icons/tech/beetroot-dark.svg" },
+  { name: "ITSvit", light: "/icons/tech/itsvit-light.svg", dark: "/icons/tech/itsvit-dark.svg" },
+  { name: "Appexoft", light: "/icons/tech/appexoft-light.svg", dark: "/icons/tech/appexoft-dark.svg" },
+  { name: "Acropolium", light: "/icons/tech/acropolium-light.svg", dark: "/icons/tech/acropolium-dark.svg" },
+  { name: "InAppo", light: "/icons/tech/inappo-light.svg", dark: "/icons/tech/inappo-dark.svg" },
+  { name: "Talents Today", light: "/icons/tech/talents-today-light.svg", dark: "/icons/tech/talents-today-dark.svg" },
+  { name: "1GameChanger", light: "/icons/tech/1gamechanger-light.svg", dark: "/icons/tech/1gamechanger-dark.svg" },
+  { name: "Equinox", light: "/icons/tech/equinox-light.svg", dark: "/icons/tech/equinox-dark.svg" },
+  { name: "ABTO Software", light: "/icons/tech/abto-software-light.svg", dark: "/icons/tech/abtosoftware-dark.svg" },
+  { name: "Yotewo", light: "/icons/tech/yotewo-light.svg", dark: "/icons/tech/yotewo-dark.svg" },
+  { name: "DreamX", light: "/icons/tech/dreamx-light.svg", dark: "/icons/tech/dreamx-dark.svg" },
+  { name: "Grade", light: "/icons/tech/grade-light.svg", dark: "/icons/tech/grade-dark.svg" },
+  { name: "Softengi", light: "/icons/tech/softengi-light.svg", dark: "/icons/tech/softengi-dark.svg" },
+  { name: "Sonomics", light: "/icons/tech/son-light.svg", dark: "/icons/tech/son-dark.svg" },
+  { name: "Powercode", light: "/icons/tech/powercode-light.svg", dark: "/icons/tech/powercode-dark.svg" },
+  ]
 
 export function OurClientsSection() {
   const { t, locale } = useLocale()
+  const { theme } = useTheme()
 
   return (
     <section className="bg-background py-16 md:py-24">
@@ -43,13 +45,18 @@ export function OurClientsSection() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {partnerNames.map((name) => (
+            {clientLogos.map((client) => (
               <article
-                key={name}
+                key={client.name}
                 className="flex min-h-24 items-center justify-center rounded-2xl border border-black/10 bg-background px-4 py-6 transition-colors duration-300 hover:border-primary/60 dark:border-white/15"
-                aria-label={name}
+                aria-label={client.name}
               >
-                <span className="text-2xl font-semibold tracking-tight text-foreground md:text-3xl">{name}</span>
+                <img
+                  src={theme === "dark" ? client.dark : client.light}
+                  alt={client.name}
+                  className="h-9 w-auto max-w-[180px] object-contain md:h-10"
+                  loading="lazy"
+                />
               </article>
             ))}
           </div>
