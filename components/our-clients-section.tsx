@@ -1,6 +1,7 @@
 "use client"
 
 import { useTheme } from "@/lib/theme-context"
+import { useLocale } from "@/lib/locale-context"
 
 const clientLogos = [
   { name: "Viso", light: "/icons/tech/viso.svg", dark: "/icons/tech/viso.svg" },
