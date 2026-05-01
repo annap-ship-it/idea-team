@@ -1,5 +1,6 @@
 "use client"
 
+import { useLocale } from "@/lib/locale-context"
 import { useTheme } from "@/lib/theme-context"
 
 const clientLogos = [
