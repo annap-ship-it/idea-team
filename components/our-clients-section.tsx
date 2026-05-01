@@ -39,8 +39,8 @@ export function OurClientsSection() {
             </h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto text-muted-foreground">
               {locale === "uk"
-                ? "Ми працюємо з найкращими партнерами"
-                : "We work with the best partners"}
+                ? "Ми горді працювати з найкращими партнерами"
+                : "We proud to work with the best partners"}
             </p>
           </div>
 
