@@ -1,7 +1,8 @@
 import type React from "react"
 import type { Metadata } from "next"
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: { slug: string } | Promise<{ slug: string }> }): Promise<Metadata> {
+  const resolvedParams = await params
   // Projects are currently stored as hardcoded data in the component
   // When projects are added to the database, update this to query from the database
   const projectsData: Record<string, any> = {
@@ -17,9 +18,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: "Waltair Robotics (Mobile App v4) Case Study",
       excerpt: "Waltair Robotics is a mobile application built for tennis coaches to remotely control a smart ball-feeding machine, record training sessions, and analyze performance through real-time statistics and charts.",
     },
+    "ar-earring-virtual-try-on": {
+      title: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+      excerpt: "Markerless AR earring try-on PoC built with Unity face tracking, dynamic anchors, and realistic accessory physics.",
+    },
+    "devops-for-yotewo": {
+      title: "DevOps for Yotewo",
+      excerpt: "End-to-end DevOps ecosystem across AWS and Azure with CI/CD automation, secure networking, and cost governance.",
+    },
   }
 
-  const project = projectsData[params.slug]
+  const project = projectsData[resolvedParams.slug]
 
   if (!project) {
     return {

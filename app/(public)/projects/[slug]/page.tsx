@@ -52,8 +52,132 @@ const translations = {
   },
 }
 
+const techIcons: Record<string, string> = {
+  "React Native": "/icons/tech/nodejs.svg",
+  Redux: "/icons/tech/apollo.svg",
+  Python: "/icons/tech/php.svg",
+  "Socket.io": "/icons/tech/graphql.svg",
+  "react-hook-form": "/icons/tech/css.svg",
+  Zod: "/icons/tech/bullet.svg",
+  i18n: "/icons/tech/telegram.svg",
+  Unity: "/icons/tech/unity.svg",
+  "AR Foundation": "/icons/tech/ar-foundation.svg",
+  "ARKit Face Tracking": "/icons/tech/arkit.svg",
+  "C#": "/icons/tech/csharp.svg",
+  "3D Rigging": "/icons/tech/backbone.svg",
+  TestFlight: "/icons/tech/linkedin.svg",
+  AWS: "/icons/tech/mongodb.svg",
+  Azure: "/icons/tech/vuejs.svg",
+  "GitHub Actions": "/icons/tech/jquery.svg",
+  Docker: "/icons/tech/nodejs.svg",
+  ECR: "/icons/tech/apollo.svg",
+  SSM: "/icons/tech/graphql.svg",
+  VPC: "/icons/tech/mssql.svg",
+  VPN: "/icons/tech/requirejs.svg",
+  IAM: "/icons/tech/php.svg",
+  KMS: "/icons/tech/mysql.svg",
+  Nginx: "/icons/tech/html.svg",
+  Certbot: "/icons/tech/css.svg",
+}
+
 // Default project data for fallback
 const defaultProjectsData: Record<string, any> = {
+  "devops-for-yotewo": {
+    title: { en: "DevOps for Yotewo", uk: "DevOps для Yotewo" },
+    featured_image: "/placeholder.svg",
+    client: { en: "Yotewo", uk: "Yotewo" },
+    industry: { en: "Cloud Infrastructure / DevOps", uk: "Хмарна інфраструктура / DevOps" },
+    duration: { en: "Infrastructure setup phase", uk: "Етап побудови інфраструктури" },
+    team: { en: "DevOps Engineer", uk: "DevOps Engineer" },
+    overview: {
+      en: "We designed and deployed a production-ready DevOps ecosystem across AWS and Azure with secure networking, full CI/CD automation, and cost governance.",
+      uk: "Ми спроєктували та розгорнули production-ready DevOps-екосистему на AWS та Azure із secure networking, повною CI/CD автоматизацією і контролем витрат.",
+    },
+    challenge: {
+      en: "The project started without configured infrastructure and delivery processes: no stable dev/prod environments, manual deployments with high error risks, missing security/cost controls, and complex AWS-Azure integration.",
+      uk: "Проєкт стартував без налаштованої інфраструктури та процесів: відсутність стабільного середовища (dev/prod), ручні деплої та ризики помилок, відсутність контролю витрат і безпеки, складна інтеграція між AWS та Azure.",
+    },
+    solution: {
+      en: [
+        "Configured VPC, EC2, RDS, S3, ECR, IAM, and KMS",
+        "Deployed separate dev and production environments",
+        "Implemented secure networking and AWS-Azure VPN",
+        "Automated CI/CD: GitHub Actions → ECR → EC2",
+        "Enabled SSH-less deployments via AWS SSM",
+        "Added rollback mechanisms and health checks",
+        "Automated Docker image build and delivery",
+        "Implemented access controls with IAM and OIDC",
+        "Configured backup policies with EBS snapshots",
+        "Set up monitoring, budget alerts, and cost optimization",
+        "Added Lambda-based auto start/stop for servers",
+      ],
+      uk: [
+        "Налаштовано VPC, EC2, RDS, S3, ECR, IAM і KMS",
+        "Розгорнуто окремі dev і production середовища",
+        "Реалізовано secure networking і VPN між AWS та Azure",
+        "Автоматизовано CI/CD: GitHub Actions → ECR → EC2",
+        "Налаштовано деплой без SSH через AWS SSM",
+        "Додано rollback-механізми та health-check",
+        "Автоматизовано збірку і доставку Docker-образів",
+        "Впроваджено контроль доступів через IAM і OIDC",
+        "Налаштовано backup-політики через EBS snapshots",
+        "Запущено моніторинг, budget alerts і cost optimization",
+        "Додано автостарт/стоп серверів через Lambda",
+      ],
+    },
+    result: {
+      en: "Fully automated and predictable delivery, stable infrastructure for dev and production, reduced deployment risks, lower infrastructure costs, and readiness for future scaling.",
+      uk: "Повністю автоматизований і передбачуваний delivery, стабільна інфраструктура для dev і production, зниження ризиків помилок при деплої, контроль і зниження інфраструктурних витрат, готовність продукту до масштабування.",
+    },
+    stack: ["AWS", "Azure", "GitHub Actions", "Docker", "ECR", "SSM", "VPC", "VPN", "IAM", "KMS", "Nginx", "Certbot"],
+    features: {
+      en: ["Multi-cloud networking", "Automated CI/CD pipeline", "Secure SSH-less deploy flow", "Cost-aware cloud operations"],
+      uk: ["Мультихмарний networking", "Автоматизований CI/CD pipeline", "Безпечний деплой без SSH", "Керовані за вартістю cloud-операції"],
+    },
+    gallery: ["/placeholder.svg"],
+  },
+  "ar-earring-virtual-try-on": {
+    title: { en: "AR Earring Virtual Try-On (Unity / Face Tracking)", uk: "AR примірка сережок (Unity / Face Tracking)" },
+    featured_image: "/1600x400_Earring_Collection_1.webp",
+    client: { en: "Jewelry E-commerce Brand", uk: "Ювелірний e-commerce бренд" },
+    industry: { en: "Fashion Tech / AR Commerce", uk: "Fashion Tech / AR Commerce" },
+    duration: { en: "PoC phase", uk: "PoC етап" },
+    team: { en: "Unity Developer", uk: "Unity Developer" },
+    overview: {
+      en: "We built a Proof of Concept for markerless AR earring try-on with natural behavior and stable face tracking in mobile conditions.",
+      uk: "Ми створили Proof of Concept для markerless AR-примірки сережок із природною поведінкою та стабільним face tracking у мобільних умовах.",
+    },
+    challenge: {
+      en: "The client needed online earring try-on without markers, with natural behavior and stable face tracking. The key challenge was precise attachment and realistic movement during head turns.",
+      uk: "Клієнту потрібно було впровадити онлайн-примірку сережок без маркерів із максимально природною поведінкою та стабільним трекінгом обличчя. Основний виклик — точна фіксація сережок і реалістичний рух при повороті голови.",
+    },
+    solution: {
+      en: [
+        "Implemented face detection using the front camera",
+        "Added dynamic anchor points for earring attachment",
+        "Ensured stable tracking during head movement",
+        "Simulated physical earring behavior (swing and gravity)",
+        "Prepared a mobile build for TestFlight validation",
+      ],
+      uk: [
+        "Реалізували визначення обличчя через фронтальну камеру",
+        "Додали динамічні anchor points для кріплення сережок",
+        "Забезпечили стабільний трекінг при русі голови",
+        "Змоделювали фізичну поведінку сережок (рух, гравітація)",
+        "Підготували mobile build для тестування (TestFlight)",
+      ],
+    },
+    result: {
+      en: "Delivered realistic markerless AR try-on, stable performance during active movement, and a production-ready PoC that improved customer engagement potential.",
+      uk: "Отримали реалістичну AR-примірку без маркерів, стабільну роботу навіть при активному русі та готовий PoC для подальшого розвитку продукту й зростання залучення клієнтів.",
+    },
+    stack: ["Unity", "AR Foundation", "ARKit Face Tracking", "C#", "3D Rigging", "TestFlight"],
+    features: {
+      en: ["Markerless face-based try-on", "Real-time earring alignment", "Physics-driven accessory motion", "Mobile PoC validation flow"],
+      uk: ["Markerless примірка на основі трекінгу обличчя", "Вирівнювання сережок у реальному часі", "Фізично коректна анімація аксесуарів", "Мобільний PoC для валідації"],
+    },
+    gallery: ["/1600x400_Earring_Collection_1.webp", "/earrings-galery.png", "/videos/ar-earring-try-on-1.mp4", "/videos/ar-earring-try-on-2.mp4"],
+  },
   "waltair-robotics": {
   title: {
     en: "Waltair Robotics (Mobile App v4)",
@@ -567,7 +691,8 @@ With improved performance, a consistent user interface, and powerful analytics c
 
 export default function ProjectDetailPage() {
   const params = useParams()
-  const slug = params.slug as string
+  const slugParam = params?.slug
+  const slug = Array.isArray(slugParam) ? slugParam[0] : slugParam
   const { locale } = useLocale()
   const [project, setProject] = useState<any>(null)
   const [loading, setLoading] = useState(true)
@@ -610,66 +735,76 @@ export default function ProjectDetailPage() {
   }
 
   useEffect(() => {
-  async function fetchProjects() {
-    try {
-      const supabase = createBrowserClient()
+    if (!slug) return
 
-      // Get projects category ID
-      const { data: category } = await supabase
-        .from("categories")
-        .select("id")
-        .eq("slug", "projects")
-        .single()
+    async function fetchProjectBySlug() {
+      try {
+        const fallbackProject = defaultProjectsData[slug]
+        const supabase = createBrowserClient()
 
-      if (category) {
-        const { data: posts } = await supabase
+        if (!supabase) {
+          setProject(fallbackProject || null)
+          return
+        }
+
+        const targetLocale = locale === "uk" ? "uk" : "en"
+        const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").maybeSingle()
+
+        if (!category) {
+          setProject(fallbackProject || null)
+          return
+        }
+
+        const { data: post } = await supabase
           .from("posts")
           .select("*")
           .eq("category_id", category.id)
           .eq("status", "published")
-          .eq("locale", locale === "uk" ? "uk" : "en")
-          .order("created_at", { ascending: false })
+          .eq("locale", targetLocale)
+          .eq("slug", slug)
+          .maybeSingle()
 
-        if (posts && posts.length > 0) {
-          const mappedProjects = posts.map((post) => {
-            const projectData = extractProjectData(post.content)
-            return {
-              id: post.id,
-              title: post.title,
-              slug: post.slug,
-              featured_image: post.featured_image || "/project-management-team.png",
-              ...projectData,
-            }
+        if (post) {
+          const projectData = extractProjectData(post.content)
+          setProject({
+            id: post.id,
+            title: post.title,
+            slug: post.slug,
+            featured_image: post.featured_image || "/project-management-team.png",
+            ...projectData,
+            ...fallbackProject,
           })
-
-          // Объединяем проекты из БД + defaultProjects (без дублей по slug)
-          const mergedProjects = [
-            ...mappedProjects,
-            ...defaultProjects.filter(
-              (defProject) =>
-                !mappedProjects.some((dbProject) => dbProject.slug === defProject.slug),
-            ),
-          ]
-
-          setProjects(mergedProjects)
         } else {
-          setProjects(defaultProjects)
+          setProject(fallbackProject || null)
         }
-      } else {
-        setProjects(defaultProjects)
+      } catch (error) {
+        console.error("Error fetching project:", error)
+        setProject(defaultProjectsData[slug] || null)
+      } finally {
+        setLoading(false)
       }
-    } catch (error) {
-      console.error("Error fetching projects:", error)
-      setProjects(defaultProjects)
-    } finally {
-      setLoading(false)
     }
-  }
 
-  fetchProjects()
-}, [locale])
+    setLoading(true)
+    fetchProjectBySlug()
+  }, [locale, slug])
 
-  const titleGradient = isDark ? "#FFFFFF" : "#000000"
+  useEffect(() => {
+    const checkTheme = () => {
+      if (typeof document === "undefined") return
+      setIsDark(document.documentElement.classList.contains("dark"))
+    }
+
+    checkTheme()
+    const observer = new MutationObserver(checkTheme)
+    observer.observe(document.documentElement, { attributes: true, attributeFilter: ["class"] })
+
+    return () => observer.disconnect()
+  }, [])
+
+  const titleGradient = isDark
+    ? "linear-gradient(90.39deg, #FF6200 34.5%, #FFFFFF 66.76%)"
+    : "linear-gradient(90.39deg, #FF6200 34.5%, #000000 66.76%)"
 
   if (loading) {
     return (
@@ -749,7 +884,10 @@ export default function ProjectDetailPage() {
 
           {project.overview && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-4" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-4"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.overview}
               </h2>
               <p className="text-lg leading-relaxed" style={{ color: isDark ? "#A0A0A0" : "#666666" }}>
@@ -810,20 +948,24 @@ export default function ProjectDetailPage() {
 
           {project.stack && project.stack.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.technologyStack}
               </h2>
               <div className="flex flex-wrap gap-3">
                 {project.stack.map((tech: string, i: number) => (
                   <span
                     key={i}
-                    className="px-4 py-2 rounded-full text-sm font-medium"
+                    className="px-4 py-2 rounded-full text-sm font-medium inline-flex items-center gap-2"
                     style={{
                       backgroundColor: isDark ? "#2A2A2A" : "#F5F5F5",
                       color: isDark ? "#FFFFFF" : "#000000",
                       border: `1px solid ${isDark ? "#3A3A3A" : "#E0E0E0"}`,
                     }}
                   >
+                    {techIcons[tech] && <Image src={techIcons[tech] || "/placeholder.svg"} alt={`${tech} icon`} width={18} height={18} />}
                     {tech}
                   </span>
                 ))}
@@ -833,7 +975,10 @@ export default function ProjectDetailPage() {
 
           {project.features && project.features.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.keyFeatures}
               </h2>
               <ul className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -853,18 +998,25 @@ export default function ProjectDetailPage() {
 
           {project.gallery && project.gallery.length > 0 && (
             <div className="mb-12">
-              <h2 className="text-2xl font-bold mb-6" style={{ color: titleGradient }}>
+              <h2
+                className="text-2xl font-bold mb-6"
+                style={{ backgroundImage: titleGradient, backgroundClip: "text", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}
+              >
                 {t.projectGallery}
               </h2>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                {project.gallery.map((image: string, i: number) => (
+                {project.gallery.map((media: string, i: number) => (
                   <div key={i} className="relative aspect-[3/2] rounded-[4px] overflow-hidden">
-                    <Image
-                      src={image || "/placeholder.svg"}
-                      alt={`${String(getLocalizedText(project.title))} screenshot ${i + 1}`}
-                      fill
-                      className="object-cover hover:scale-105 transition-transform duration-300"
-                    />
+                    {media.toLowerCase().endsWith(".mp4") ? (
+                      <video src={media} controls className="w-full h-full object-cover" playsInline preload="metadata" />
+                    ) : (
+                      <Image
+                        src={media || "/placeholder.svg"}
+                        alt={`${String(getLocalizedText(project.title))} screenshot ${i + 1}`}
+                        fill
+                        className="object-cover hover:scale-105 transition-transform duration-300"
+                      />
+                    )}
                   </div>
                 ))}
               </div>
