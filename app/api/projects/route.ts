@@ -72,6 +72,19 @@ export async function GET(request: Request) {
         },
       },
       {
+        id: "6",
+        title: {
+          en: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+          uk: "AR примірка сережок (Unity / Face Tracking)",
+        },
+        slug: "ar-earring-virtual-try-on",
+        image: "/1600x400_Earring_Collection_1.webp",
+        shortDescription: {
+          en: "Markerless AR earring try-on with realistic movement and stable face tracking.",
+          uk: "Markerless AR-примірка сережок із реалістичним рухом та стабільним face tracking.",
+        },
+      },
+      {
         id: "4",
         title: {
           en: "Waltair Robotics (Mobile App v4)",
@@ -97,10 +110,23 @@ export async function GET(request: Request) {
           uk: "Підвищена стабільність релізів, вища якість продукту та плавніші процеси QA.",
         },
       },
+      {
+        id: "7",
+        title: {
+          en: "DevOps for Yotewo",
+          uk: "DevOps для Yotewo",
+        },
+        slug: "devops-for-yotewo",
+        image: "/placeholder.svg",
+        shortDescription: {
+          en: "Built end-to-end DevOps infrastructure across AWS and Azure with automated CI/CD, secure networking, cost controls, and scalable delivery.",
+          uk: "Побудовано end-to-end DevOps-інфраструктуру на AWS та Azure з автоматизованим CI/CD, secure networking, контролем витрат і готовністю до масштабування.",
+        },
+      },
     ]
 
     // Map posts to the format needed for Our Projects section
-    const projects =
+    const mappedPosts =
       posts && posts.length > 0
         ? posts.map((post) => ({
             id: post.id,
@@ -115,9 +141,13 @@ export async function GET(request: Request) {
               uk: post.excerpt || "Вивчайте нашу недавню роботу з клієнтами",
             },
           }))
-        : defaultProjects
+        : []
 
-    return NextResponse.json(projects)
+    const fallbackOnly = defaultProjects.filter((fallbackProject) => !mappedPosts.some((post) => post.slug === fallbackProject.slug))
+    const projects = mappedPosts.length > 0 ? [...mappedPosts, ...fallbackOnly] : defaultProjects
+    const uniqueProjects = projects.filter((project, index, array) => index === array.findIndex((item) => item.slug === project.slug))
+
+    return NextResponse.json(uniqueProjects)
   } catch (error) {
     console.error("[v0] Error fetching projects:", error)
     // Return default projects on error - these have proper { en, uk } structure
@@ -162,7 +192,33 @@ export async function GET(request: Request) {
         },
       },
       {
+        id: "6",
+        title: {
+          en: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+          uk: "AR примірка сережок (Unity / Face Tracking)",
+        },
+        slug: "ar-earring-virtual-try-on",
+        image: "/1600x400_Earring_Collection_1.webp",
+        shortDescription: {
+          en: "Markerless AR earring try-on with realistic movement and stable face tracking.",
+          uk: "Markerless AR-примірка сережок із реалістичним рухом та стабільним face tracking.",
+        },
+      },
+      {
         id: "4",
+        title: {
+          en: "Waltair Robotics (Mobile App v4)",
+          uk: "Waltair Robotics (Mobile App v4)",
+        },
+        slug: "waltair-robotics",
+        image: "/Waltair-Robotics-1.png",
+        shortDescription: {
+          en: "Mobile version was stabilized and improved. Fixed regressions in session timers, navigation flow, and video playback, as well as inconsistent UI behavior across devices and orientations. Resolved socket synchronization issues, improved overall code maintainability by reducing monolithic structure, and addressed instability caused by third-party libraries. Added proper localization support and enhanced data visualization capabilities.",
+          uk: "Виправлена мобільна версія, яка мала низку проблем, що впливали на зручність використання та підтримку, зокрема регресії в таймерах сесій, навігації та відтворенні відео, а також нестабільну поведінку інтерфейсу на різних пристроях і в різних орієнтаціях. Додатково виникали проблеми із синхронізацією socket-подій, монолітною та складною для підтримки структурою коду й нестабільністю сторонніх бібліотек. Крім того, бракувало підтримки локалізації та можливостей для візуалізації даних.",
+        },
+      },
+      {
+        id: "5",
         title: {
           en: "Testing Expertise for a Sports Social Platform",
           uk: "Тестування експертизи для спортивної соціальної платформи",
