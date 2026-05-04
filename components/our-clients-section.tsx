@@ -11,7 +11,7 @@ const clientLogos = [
   { name: "Appexoft", light: "/icons/tech/appexoft-light.svg", dark: "/icons/tech/appexoft-dark.svg" },
   { name: "Acropolium", light: "/icons/tech/acropolium-light.svg", dark: "/icons/tech/acropolium-dark.svg" },
   { name: "InAppo", light: "/icons/tech/inappo-light.svg", dark: "/icons/tech/inappo-dark.svg" },
-  { name: "Talents Today", light: "/icons/tech/red-jumpers-light.svg", dark: "/icons/tech/red-jumpers-dark.svg" },
+  { name: "Red Jumpers", light: "/icons/tech/red-jumpers-ligt.svg", dark: "/icons/tech/red-jumpers-dark.svg" },
   { name: "1GameChanger", light: "/icons/tech/1gamechanger-light.svg", dark: "/icons/tech/1gamechanger-dark.svg" },
   { name: "Equinox", light: "/icons/tech/Equinox-light.svg", dark: "/icons/tech/Equinox-dark.svg" },
   { name: "ABTO Software", light: "/icons/tech/abto-software-light.svg", dark: "/icons/tech/abtosoftware-dark.svg" },
