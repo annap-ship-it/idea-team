@@ -59,9 +59,6 @@ export function AboutUsSection() {
           </div>
         </div>
       </div>
-      style={{
-      fontFamily: "Onest",
-     }}
     </section>
   )
 }
