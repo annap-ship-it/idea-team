@@ -176,7 +176,7 @@ export default function BlogContent() {
           }
         }
 
-         const postsWithAuthors = nonProjectPosts.map((post) => ({
+        const postsWithAuthors = nonProjectPosts.map((post) => ({
           ...post,
           author: authorsMap[post.author_id] || null,
         }))
