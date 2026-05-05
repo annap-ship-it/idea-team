@@ -34,7 +34,21 @@ export function Navigation() {
   const navBg = isDark ? "rgba(255, 255, 255, 0.15)" : "rgba(255, 255, 255, 0.15)"
   const navBorder = isDark ? "rgba(255, 255, 255, 0.1)" : "rgba(0, 0, 0, 0.5)"
   const textColor = isDark ? "#FFFFFF" : "#000000"
-
+  const featuredProjectLinks = [
+    {
+      href: "/projects/ar-earring-virtual-try-on",
+      label: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+    },
+    {
+      href: "/projects/waltair-robotics",
+      label: "Waltair Robotics (Mobile App v4)",
+    },
+    {
+      href: "/projects/devops-for-yotewo",
+      label: "DevOps for Yotewo",
+    },
+  ]
+  
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
@@ -1035,6 +1049,41 @@ export function Navigation() {
                           {/* Using t.ecommercePlatform from useLocale hook instead of currentTranslations */}
                           {t.ecommercePlatform}
                         </Link>
+                        {featuredProjectLinks.map((project) => (
+                          <Link
+                            key={project.href}
+                            href={project.href}
+                            onClick={() => setProjectsOpen(false)}
+                            className="transition-all duration-300 ease-out"
+                            style={{
+                              fontFamily: "Onest",
+                              fontWeight: 400,
+                              fontSize: "16px",
+                              lineHeight: "100%",
+                              letterSpacing: "0.02em",
+                              color: isDark ? "#FFFFFF99" : "#21212199",
+                              padding: "6px 8px",
+                              borderRadius: "8px",
+                            }}
+                            onMouseDown={(e) => {
+                              e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                              e.currentTarget.style.border = "1px solid #FF620033"
+                            }}
+                            onMouseUp={(e) => {
+                              e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                              e.currentTarget.style.border = "none"
+                            }}
+                            onMouseEnter={(e) => {
+                              e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                            }}
+                            onMouseLeave={(e) => {
+                              e.currentTarget.style.background = "transparent"
+                              e.currentTarget.style.border = "none"
+                            }}
+                          >
+                            {project.label}
+                          </Link>
+                        ))}
                       </div>
 
                       <div
@@ -2147,6 +2196,57 @@ export function Navigation() {
                       {/* Using t.ecommercePlatform from useLocale hook instead of currentTranslations */}
                       {t.ecommercePlatform}
                     </Link>
+                       {featuredProjectLinks.map((project) => (
+                      <Link
+                        key={project.href}
+                        href={project.href}
+                        onClick={() => {
+                          setMobileMenuOpen(false)
+                          setMobileProjectsOpen(false)
+                        }}
+                        className="transition-all duration-300 ease-out"
+                        style={{
+                          fontFamily: "Onest",
+                          fontWeight: 400,
+                          fontSize: "16px",
+                          lineHeight: "100%",
+                          letterSpacing: "0.02em",
+                          color: isDark ? "#FFFFFF99" : "#21212199",
+                          padding: "6px 0",
+                          borderRadius: "8px",
+                          textDecoration: "none",
+                        }}
+                        onMouseDown={(e) => {
+                          e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                          e.currentTarget.style.border = "1px solid #FF620033"
+                          e.currentTarget.style.color = isDark ? "#FFC7A3" : "#000000"
+                        }}
+                        onMouseUp={(e) => {
+                          e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                          e.currentTarget.style.border = "none"
+                          e.currentTarget.style.color = isDark ? "#FFC7A3" : "#000000"
+                        }}
+                        onMouseEnter={(e) => {
+                          e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                          e.currentTarget.style.color = isDark ? "#FFC7A3" : "#000000"
+                        }}
+                        onMouseLeave={(e) => {
+                          e.currentTarget.style.background = "transparent"
+                          e.currentTarget.style.border = "none"
+                          e.currentTarget.style.color = isDark ? "#FFFFFF99" : "#21212199"
+                        }}
+                        onTouchStart={(e) => {
+                          e.currentTarget.style.background = isDark ? "#303030" : "#E6E6E6"
+                          e.currentTarget.style.color = isDark ? "#FFC7A3" : "#000000"
+                        }}
+                        onTouchEnd={(e) => {
+                          e.currentTarget.style.background = "transparent"
+                          e.currentTarget.style.color = isDark ? "#FFFFFF99" : "#21212199"
+                        }}
+                      >
+                        {project.label}
+                      </Link>
+                    ))}
                   </div>
 
                   <div className="flex gap-3 min-[480px]:gap-5">
