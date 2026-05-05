@@ -182,38 +182,38 @@ export function HeroBanner() {
               padding: "0 16px",
             }}
           >
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 50+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.estimations}
               </span>
             </div>
 
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 30+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.totalProjects}
               </span>
             </div>
 
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 20+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.successfulClients}
               </span>
             </div>
 
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 40+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.professionals}
               </span>
             </div>
