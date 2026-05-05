@@ -130,20 +130,24 @@ export default function BlogContent() {
         localePostsQuery = localePostsQuery.neq("category_id", projectsCategoryId)
       }
 
-      const { data: localePosts, error: localeError } = await localePostsQuery
-      let finalPostsData = localePosts
+      const { data: localePostsData, error: localeError } = await localePostsQuery
+      
+      let finalPostsData = localePostsData
 
-      if (((!localeError && localePosts && localePosts.length === 0) || localeError) && targetLocale === "uk") {
-        let englishPostsQuery = supabase
-          .from("posts")
-          .select(baseSelect)
-          .eq("status", "published")
-          .eq("locale", "en")
-          .order("published_at", { ascending: false, nullsFirst: false })
-          .limit(50)
-
-        if (projectsCategoryId) {
-          englishPostsQuery = englishPostsQuery.neq("category_id", projectsCategoryId)
+      if ((!localeError && localePostsData && localePostsData.length === 0) || localeError) {
+        // If requested Ukrainian but none found, fall back to English
+        if (targetLocale === "uk") {
+          const { data: englishPosts } = await supabase
+            .from("posts")
+            .select(
+              `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
+            )
+            .eq("status", "published")
+            .neq("category_id", projectsCategoryId)
+            .eq("locale", "en")
+            .order("published_at", { ascending: false, nullsFirst: false })
+            .limit(50)
+          finalPostsData = englishPosts
         }
 
         const { data: englishPosts } = await englishPostsQuery

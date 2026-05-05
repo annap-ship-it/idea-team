@@ -296,6 +296,7 @@ export default function ProjectsPage() {
   const [termsAccepted, setTermsAccepted] = useState(false)
   const [siteKey, setSiteKey] = useState<string>("")
   const scriptLoaded = useRef(false)
+  const projectsFetchVersion = useRef(0)
 
   useEffect(() => {
     const fetchSiteKey = async () => {
@@ -391,6 +392,76 @@ export default function ProjectsPage() {
     setLoading(false)
     fetchProjects()
   }, [locale])
+
+  // Get current locale translations
+  const translations_obj = {
+    en: {
+      title: "Projects",
+      subtitle: "Find out how we have turned our clients' inspiring ideas into high-end products",
+      consultationTitle: "Request Free Consultation",
+      processTitle: "What's the process?",
+      processStep1: "Our specialist will reach out after reviewing your message",
+      processStep2: "If needed we'll sign an NDA to ensure trust, after what you provide us with the project details",
+      processStep3: "You'll receive a detailed proposal including estimates, timelines, and expert profiles",
+      nameLabel: "Your Name",
+      emailLabel: "Your Email",
+      messageLabel: "Your Message",
+      attachLabel: "Attach File (optional)",
+      termsLabel: "I agree to the",
+      submitButton: "Send Request",
+      successMessage: "Thank you! We'll be in touch soon.",
+      errorMessage: "Error submitting form. Please try again.",
+      challengeLabel: "Challenge:",
+      solutionLabel: "Solution:",
+      resultLabel: "Result:",
+      stackLabel: "Stack:",
+      fileSizeError: "File must be less than 3MB",
+      termsRequiredAlert: "Please accept Terms and Conditions",
+      recaptchaRequiredAlert: "Please complete the reCAPTCHA",
+      recaptchaLoadFailAlert: "reCAPTCHA failed to load. Please refresh and try again",
+      receivedMessage: "We've received your message and will get back to you soon.",
+      fileAttachInfo: "No more than 3 files may be attached up to 3MB each. Formats: doc, docx, pdf, ppt, pptx.",
+      sendingButton: "Sending...",
+      termsAndConditions: "Terms and Conditions",
+      allFieldsRequiredAlert: "Please fill all necessary fields",
+      emailDisclaimer:
+        "By submitting your email, you accept terms and conditions. We may send you occasionally marketing emails.",
+    },
+    uk: {
+      title: "Проекти",
+      subtitle: "Дізнайтеся, як ми перетворили натхненні ідеї наших клієнтів на перший за своїм рівнем товари",
+      consultationTitle: "Запросити безплатну консультацію",
+      processTitle: "Який процес?",
+      processStep1: "Наш спеціаліст зв'яжеться з вами після перегляду вашого повідомлення",
+      processStep2: "Якщо потрібно, ми підпишемо угоду NDA для забезпечення довіри, після чого ви надасте нам деталі проекту",
+      processStep3: "Ви отримаєте детальну пропозицію, включаючи кошторис, часові графіки та профілі експертів",
+      nameLabel: "Ваше ім'я",
+      emailLabel: "Ваша електронна пошта",
+      messageLabel: "Ваше повідомлення",
+      attachLabel: "Приєднати файл (опціонально)",
+      termsLabel: "Я погоджуюся з",
+      submitButton: "Надіслати запит",
+      successMessage: "Дякуємо! Ми незабаром з вами зв'яжемося.",
+      errorMessage: "Помилка при надсиланні форми. Будь ласка, спробуйте ще раз.",
+      challengeLabel: "Завдання:",
+      solutionLabel: "Рішення:",
+      resultLabel: "Результат:",
+      stackLabel: "Стек:",
+      fileSizeError: "Файл повинен бути менше за 3МБ",
+      termsRequiredAlert: "Будь ласка, прийміть умови користування",
+      recaptchaRequiredAlert: "Будь ласка, заповніть reCAPTCHA",
+      recaptchaLoadFailAlert: "reCAPTCHA не вдалося завантажити. Будь ласка, оновіть і спробуйте ще раз",
+      receivedMessage: "Ми отримали ваше повідомлення і незабаром з вами зв'яжемося.",
+      fileAttachInfo: "Можна додати не більше 3 файлів до 3МБ кожний. Формати: doc, docx, pdf, ppt, pptx.",
+      sendingButton: "Надсилання...",
+      termsAndConditions: "Умови користування",
+      allFieldsRequiredAlert: "Будь ласка, заповніть всі необхідні поля",
+      emailDisclaimer:
+        "Надсилаючи вашу електронну адресу, ви приймаєте умови та положення. Ми можемо час від часу надсилати вам маркетингові електронні листи.",
+    },
+  }
+
+  const t = translations_obj[locale as "en" | "uk"] || translations_obj.en
 
   const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const selectedFiles = Array.from(e.target.files || [])
@@ -518,75 +589,6 @@ export default function ProjectsPage() {
       setIsSubmitting(false)
     }
   }
-
-  const translations = {
-    en: {
-      title: "Projects",
-      subtitle: "Find out how we have turned our clients' inspiring ideas into high-end products",
-      consultationTitle: "Request Free Consultation",
-      processTitle: "What's the process?",
-      processStep1: "Our specialist will reach out after reviewing your message",
-      processStep2: "If needed we'll sign an NDA to ensure trust, after what you provide us with the project details",
-      processStep3: "You'll receive a detailed proposal including estimates, timelines, and expert profiles",
-      nameLabel: "Your Name",
-      emailLabel: "Your Email",
-      messageLabel: "Your Message",
-      attachLabel: "Attach File (optional)",
-      termsLabel: "I agree to the",
-      submitButton: "Send Request",
-      successMessage: "Thank you! We'll be in touch soon.",
-      errorMessage: "Error submitting form. Please try again.",
-      challengeLabel: "Challenge:",
-      solutionLabel: "Solution:",
-      resultLabel: "Result:",
-      stackLabel: "Stack:",
-      fileSizeError: "File must be less than 3MB",
-      termsRequiredAlert: "Please accept Terms and Conditions",
-      recaptchaRequiredAlert: "Please complete the reCAPTCHA",
-      recaptchaLoadFailAlert: "reCAPTCHA failed to load. Please refresh and try again",
-      receivedMessage: "We've received your message and will get back to you soon.",
-      fileAttachInfo: "No more than 3 files may be attached up to 3MB each. Formats: doc, docx, pdf, ppt, pptx.",
-      sendingButton: "Sending...",
-      termsAndConditions: "Terms and Conditions",
-      allFieldsRequiredAlert: "Please fill all necessary fields",
-      emailDisclaimer:
-        "By submitting your email, you accept terms and conditions. We may send you occasionally marketing emails.",
-    },
-    uk: {
-      title: "Проекти",
-      subtitle: "Дізнайтеся, як ми перетворили натхненні ідеї наших клієнтів на високоякісні продукти",
-      consultationTitle: "Запитати безкоштовну консультацію",
-      processTitle: "Як це працює?",
-      processStep1: "Наш фахівець зв'яжеться з вами після розгляду вашого повідомлення",
-      processStep2: "Якщо потрібно ми підпишемо NDA щоб забезпечити довіру, після чого деталі проекту",
-      processStep3: "Ви отримаєте детальну пропозицію з оцінкою, таймлайном та експертним профайлом",
-      nameLabel: "Ваше ім'я",
-      emailLabel: "Ваша електронна пошта",
-      messageLabel: "Ваше повідомлення",
-      attachLabel: "Додати файл (опціонально)",
-      termsLabel: "Я згоден з",
-      submitButton: "Надіслати запит",
-      successMessage: "Дякуємо! Ми скоро з вами зв'яжемося.",
-      errorMessage: "Помилка при відправленні форми. Спробуйте ще раз.",
-      challengeLabel: "Завдання:",
-      solutionLabel: "Рішення:",
-      resultLabel: "Результат:",
-      stackLabel: "Стек:",
-      fileSizeError: "Файл повинен бути менше за 3 МБ",
-      termsRequiredAlert: "Будь ласка, прийміть Умови та положення",
-      recaptchaRequiredAlert: "Будь ласка, завершіть reCAPTCHA",
-      recaptchaLoadFailAlert: "Помилка завантаження reCAPTCHA. Будь ласка, оновіть сторінку і спробуйте ще раз.",
-      receivedMessage: "Ми отримали ваше повідомлення і скоро з вами зв'яжемося.",
-      fileAttachInfo: "Можна додати не більше 3 файлів розміром до 3 МБ кожен. Формати: doc, docx, pdf, ppt, pptx.",
-      sendingButton: "Надсилання...",
-      termsAndConditions: "Умовами та положеннями",
-      allFieldsRequiredAlert: "Будь ласка, заповніть всі обов\'язкові поля.",
-      emailDisclaimer:
-        "Надсилаючи свою електронну пошту, ви приймаєте умови та положення. Ми можемо периодично надсилати вам маркетингові листи.",
-    },
-  }
-
-  const t = translations[locale as keyof typeof translations] || translations.en
 
   const titleGradient = isDark
     ? "linear-gradient(90.39deg, #FF6200 34.5%, #FFFFFF 66.76%)"

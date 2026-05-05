@@ -240,6 +240,7 @@ export const translations = {
     viewAll: "Переглянути все",
 
       // Our Clients
+      // Наші клієнти
     ourClientsTitle: "Наші клієнти",
 
     // Hero Banner

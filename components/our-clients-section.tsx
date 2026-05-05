@@ -36,6 +36,7 @@ export function OurClientsSection() {
               {t.ourClientsEyebrow}
             </p>
             <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
+            <h2 className="text-3xl font-bold leading-tight text-foreground md:text-5xl">
               {t.ourClientsTitle}
             </h2>
             <p className="text-lg md:text-xl max-w-2xl mx-auto text-muted-foreground">
