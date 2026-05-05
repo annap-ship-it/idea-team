@@ -36,7 +36,6 @@ export function OurClientsSection() {
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.16em] text-primary md:text-base">
               {t.ourClientsEyebrow}
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
             <h2 className="text-3xl font-bold leading-tight text-foreground md:text-5xl">
               {t.ourClientsTitle}
             </h2>
