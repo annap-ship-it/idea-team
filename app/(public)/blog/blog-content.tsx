@@ -111,17 +111,16 @@ export default function BlogContent() {
   useEffect(() => {
     async function fetchPosts() {
       const supabase = createBrowserClient()
-      
-      // Fetch posts in the current locale
       const targetLocale = locale === "uk" ? "uk" : "en"
-      const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").single()
+      const { data: projectsCategory } = await supabase.from("categories").select("id").eq("slug", "projects").maybeSingle()
       const projectsCategoryId = projectsCategory?.id
+
+      const baseSelect =
+        "id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status"
 
       let localePostsQuery = supabase
         .from("posts")
-        .select(
-          `id, title, slug, excerpt, featured_image, category_id, categories(name, slug), created_at, published_at, author_id, locale, status`,
-        )
+        .select(baseSelect)
         .eq("status", "published")
         .eq("locale", targetLocale)
         .order("published_at", { ascending: false, nullsFirst: false })
@@ -150,6 +149,9 @@ export default function BlogContent() {
             .limit(50)
           finalPostsData = englishPosts
         }
+
+        const { data: englishPosts } = await englishPostsQuery
+        finalPostsData = englishPosts
       }
 
       if (finalPostsData && finalPostsData.length > 0) {

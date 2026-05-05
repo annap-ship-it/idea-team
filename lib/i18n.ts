@@ -239,6 +239,7 @@ export const translations = {
     allServices: "Наші сервіси",
     viewAll: "Переглянути все",
 
+      // Our Clients
       // Наші клієнти
     ourClientsTitle: "Наші клієнти",
 
@@ -381,8 +382,8 @@ export const translations = {
 
     // Projects Page
     ourProjectsTitle: "Наші проекти",
-    ourProjectsSubtitle: "Розглянути нашу останню роботу та тематичні дослідження",
-    projectsDescription: "Див як ми допомогли клієнтам досягти своїх цілей",
+    ourProjectsSubtitle: "Подивіться наші останні роботи та тематичні дослідження",
+    projectsDescription: "Дивіться як ми допомогли клієнтам досягти своїх цілей",
     multibrandEcommerce: "Багатобрендові посадочні сторінки для електронної комерції",
 
     // Careers Page

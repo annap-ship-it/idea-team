@@ -5,7 +5,6 @@ import { useLocale } from "@/lib/locale-context"
 import { useState, useEffect, useRef } from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { createBrowserClient } from "@/lib/supabase/client"
 import { getRecaptchaSiteKey } from "@/app/actions/recaptcha"
 import { ProjectsOverlappingSection } from "@/components/projects-overlapping-section"
 import {Loader2} from "lucide-react";
@@ -27,46 +26,6 @@ interface Project {
 type SubmitState = {
   status: "idle" | "success" | "error"
   message?: string
-}
-
-// Extract project data from content blocks
-function extractProjectData(content: any) {
-  const data = {
-    challenge: "",
-    solution: "",
-    result: "",
-    stack: [] as string[],
-  }
-
-  if (!content || !Array.isArray(content)) return data
-
-  content.forEach((block: any) => {
-    if (block.type === "paragraph" || block.type === "heading") {
-      const text = block.content || ""
-      if (text.toLowerCase().startsWith("challenge:")) {
-        data.challenge = text.replace(/^challenge:\s*/i, "")
-      } else if (text.toLowerCase().startsWith("solution:")) {
-        data.solution = text.replace(/^solution:\s*/i, "")
-      } else if (text.toLowerCase().startsWith("result:")) {
-        data.result = text.replace(/^result:\s*/i, "")
-      } else if (text.toLowerCase().startsWith("stack:")) {
-        data.stack = text
-          .replace(/^stack:\s*/i, "")
-          .split(",")
-          .map((s: string) => s.trim())
-      }
-    }
-  })
-
-  // Try to extract from metafields if available
-  if (content.metafields) {
-    if (content.metafields.challenge) data.challenge = content.metafields.challenge
-    if (content.metafields.solution) data.solution = content.metafields.solution
-    if (content.metafields.result) data.result = content.metafields.result
-    if (content.metafields.stack) data.stack = content.metafields.stack.split(",").map((s: string) => s.trim())
-  }
-
-  return data
 }
 
 // Default projects for display when no posts exist
@@ -137,8 +96,30 @@ const defaultProjects = [
     },
     stack: ["HTML", "CSS", "RequireJS", "Grunt", "jQuery", "Backbone"],
   },
-    {
-      id: "4",
+  {
+    id: "6",
+    title: {
+      en: "AR Earring Virtual Try-On (Unity / Face Tracking)",
+      uk: "AR примірка сережок (Unity / Face Tracking)",
+    },
+    slug: "ar-earring-virtual-try-on",
+    featured_image: "/1600x400_Earring_Collection_1.webp",
+    challenge: {
+      en: "Build markerless online earring try-on with natural behavior and stable face tracking.",
+      uk: "Реалізувати markerless онлайн-примірку сережок із природною поведінкою та стабільним face tracking.",
+    },
+    solution: {
+      en: "Built a Unity PoC with front camera face detection, dynamic anchor points, and realistic earring physics.",
+      uk: "Створили Unity PoC із визначенням обличчя через фронтальну камеру, динамічними anchor points та реалістичною фізикою сережок.",
+    },
+    result: {
+      en: "Delivered realistic AR try-on and a validated mobile PoC for product growth.",
+      uk: "Отримали реалістичну AR-примірку та валідований mobile PoC для розвитку продукту.",
+    },
+    stack: ["Unity", "AR Foundation", "ARKit Face Tracking", "C#"],
+  },
+  {
+    id: "4",
     title: {
       en: "Waltair Robotics (Mobile App v4)",
       uk: "Waltair Robotics (Mobile App v4)",
@@ -189,6 +170,28 @@ const defaultProjects = [
     },
     stack: ["Manual Testing", "Team Collaboration Tools"],
   },
+  {
+    id: "7",
+    title: {
+      en: "DevOps for Yotewo",
+      uk: "DevOps для Yotewo",
+    },
+    slug: "devops-for-yotewo",
+    featured_image: "/yotewo-blog.png",
+    challenge: {
+      en: "The project started without configured infrastructure or processes: no stable dev/prod environments, manual deployments with high error risk, no security and cost controls, and difficult AWS/Azure integration.",
+      uk: "Проєкт стартував без налаштованої інфраструктури та процесів: відсутність стабільного середовища (dev/prod), ручні деплої та ризики помилок, відсутність контролю витрат і безпеки, складна інтеграція між AWS та Azure.",
+    },
+    solution: {
+      en: "Built a complete DevOps ecosystem from scratch: configured VPC, EC2, RDS, S3, ECR, IAM, KMS; launched dev/prod environments; implemented secure networking and AWS↔Azure VPN; automated pipelines (GitHub Actions → ECR → EC2) with SSH-less deploys via SSM; added rollback and health checks; automated Docker image delivery; enforced IAM/OIDC access controls; set backup policies (EBS snapshots); established monitoring and budget alerts; optimized costs; and added Lambda auto start/stop.",
+      uk: "Ми побудували повноцінну DevOps-екосистему з нуля: налаштовано VPC, EC2, RDS, S3, ECR, IAM, KMS; розгорнуто dev і prod середовища; реалізовано secure networking і VPN (AWS↔Azure); автоматизовано пайплайни (GitHub Actions → ECR → EC2) і деплой без SSH через SSM; додано rollback і health-check; автоматичну збірку та доставку Docker-образів; контроль доступів (IAM, OIDC); backup-політики (EBS snapshots); моніторинг і budget alerts; cost tracking та оптимізацію; автостарт/стоп серверів через Lambda.",
+    },
+    result: {
+      en: "Fully automated and predictable delivery, stable infrastructure for dev and production, lower deployment risk, reduced infrastructure costs, and readiness for scaling.",
+      uk: "Повністю автоматизований і передбачуваний delivery, стабільна інфраструктура для dev і production, зниження ризиків помилок при деплої, контроль і зниження інфраструктурних витрат, готовність продукту до масштабування.",
+    },
+    stack: ["AWS", "Azure", "GitHub Actions", "Docker", "ECR", "SSM", "VPC", "VPN", "IAM", "KMS", "Nginx", "Certbot"],
+  },
 ]
 
 const techIcons: Record<string, string> = {
@@ -211,6 +214,31 @@ const techIcons: Record<string, string> = {
   NodeJS: "/icons/tech/nodejs.svg",
   Apollo: "/icons/tech/apollo.svg",
   Mongo: "/icons/tech/mongodb.svg",
+  "React Native": "/icons/tech/nodejs.svg",
+  Redux: "/icons/tech/apollo.svg",
+  Python: "/icons/tech/php.svg",
+  "Socket.io": "/icons/tech/graphql.svg",
+  "react-hook-form": "/icons/tech/css.svg",
+  Zod: "/icons/tech/bullet.svg",
+  i18n: "/icons/tech/telegram.svg",
+  Unity: "/icons/tech/unity.svg",
+  "AR Foundation": "/icons/tech/ar-foundation.svg",
+  "ARKit Face Tracking": "/icons/tech/arkit.svg",
+  "C#": "/icons/tech/csharp.svg",
+  "3D Rigging": "/icons/tech/backbone.svg",
+  TestFlight: "/icons/tech/linkedin.svg",
+  AWS: "/icons/tech/mongodb.svg",
+  Azure: "/icons/tech/vuejs.svg",
+  "GitHub Actions": "/icons/tech/jquery.svg",
+  Docker: "/icons/tech/nodejs.svg",
+  ECR: "/icons/tech/apollo.svg",
+  SSM: "/icons/tech/graphql.svg",
+  VPC: "/icons/tech/mssql.svg",
+  VPN: "/icons/tech/requirejs.svg",
+  IAM: "/icons/tech/php.svg",
+  KMS: "/icons/tech/mysql.svg",
+  Nginx: "/icons/tech/html.svg",
+  Certbot: "/icons/tech/css.svg",
 }
 
 function AnimatedCard({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
@@ -252,8 +280,8 @@ function AnimatedCard({ children, delay = 0 }: { children: React.ReactNode; dela
 export default function ProjectsPage() {
   const { locale } = useLocale()
 
-  const [projects, setProjects] = useState<any[]>([])
-  const [loading, setLoading] = useState(true)
+  const [projects, setProjects] = useState<any[]>(defaultProjects)
+  const [loading, setLoading] = useState(false)
   const [isDark, setIsDark] = useState(false)
 
   // Form state
@@ -321,50 +349,33 @@ export default function ProjectsPage() {
   }, [siteKey])
 
   useEffect(() => {
-      async function fetchProjects() {
+    async function fetchProjects() {
       const fetchVersion = ++projectsFetchVersion.current
       try {
-        const supabase = createBrowserClient()
         const targetLocale = String(locale || "").toLowerCase().startsWith("uk") ? "uk" : "en"
+        const response = await fetch(`/api/projects?locale=${targetLocale}`, { cache: "no-store" })
+        const projectsData = await response.json()
 
-        // Get projects category ID
-        const { data: category } = await supabase.from("categories").select("id").eq("slug", "projects").single()
-
-        if (category) {
-          const { data: posts } = await supabase
-            .from("posts")
-            .select("*")
-            .eq("category_id", category.id)
-            .eq("status", "published")
-            .eq("locale", targetLocale)
-            .order("created_at", { ascending: false })
-
-          const localeSafePosts =
-            posts?.filter((post) => String(post.locale || "").toLowerCase().startsWith(targetLocale)) || []
-
-          if (localeSafePosts.length > 0) {
-            const mappedProjects = localeSafePosts.map((post) => {
-              const projectData = extractProjectData(post.content)
-              return {
-                id: post.id,
-                title: post.title,
-                slug: post.slug,
-                featured_image: post.featured_image || "/project-management-team.png",
-                ...projectData,
-              }
-            })
-            if (fetchVersion === projectsFetchVersion.current) {
-              setProjects(mappedProjects)
-               }
-          } else {
-            if (fetchVersion === projectsFetchVersion.current) {
-              setProjects(defaultProjects)
-            }
-          }
-        } else {
+        if (!response.ok || !Array.isArray(projectsData)) {
           if (fetchVersion === projectsFetchVersion.current) {
             setProjects(defaultProjects)
           }
+          return
+        }
+
+        const mappedProjects = projectsData.map((project: any) => ({
+          id: project.id,
+          title: project.title,
+          slug: project.slug,
+          featured_image: project.image || project.featured_image || "/project-management-team.png",
+          challenge: project.challenge || "",
+          solution: project.solution || "",
+          result: project.result || "",
+          stack: project.stack || [],
+        }))
+
+        if (fetchVersion === projectsFetchVersion.current) {
+          setProjects(mappedProjects.length > 0 ? mappedProjects : defaultProjects)
         }
       } catch (error) {
         console.error("Error fetching projects:", error)
@@ -375,10 +386,10 @@ export default function ProjectsPage() {
         if (fetchVersion === projectsFetchVersion.current) {
           setLoading(false)
         }
-          }
+        }
     }
 
-   setLoading(true)
+    setLoading(false)
     fetchProjects()
   }, [locale])
 

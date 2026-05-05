@@ -182,6 +182,15 @@ export function HeroBanner() {
               padding: "0 16px",
             }}
           >
+            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center gap-6">
+              <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
+                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
+                  50+
+                </span>
+                <span className="flex items-center px-3 pt-1 block mt-0 stat-label" style={{ fontSize: "16px" }}>
+                  {t.estimations}
+                </span>
+              </div>
             <div className="flex flex-col stat-item text-center cursor-pointer">
               <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
                 50+
@@ -208,6 +217,15 @@ export function HeroBanner() {
                 {t.successfulClients}
               </span>
             </div>
+            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-6 sm:gap-12">
+              <div className="flex stat-item text-center flex-1 sm:flex-none px-5">
+                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
+                  20+
+                </span>
+                <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
+                  {t.successfulClients}
+               </span>
+              </div>
 
             <div className="flex flex-col stat-item text-center cursor-pointer">
               <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
@@ -245,6 +263,32 @@ export function HeroBanner() {
                 margin-right: auto !important;
                 margin-bottom: 24px !important;
               }
+
+              .stats-section {
+                margin-top: 56px !important;
+                gap: 16px !important;
+                padding-left: 8px !important;
+                padding-right: 8px !important;
+              }
+
+              .stats-section > div {
+                width: 100% !important;
+                justify-content: space-between !important;
+                gap: 8px !important;
+              }
+
+              .stat-item {
+                min-width: 0 !important;
+                flex: 1 1 0 !important;
+                justify-content: center !important;
+              }
+
+              .stat-label {
+                padding-left: 4px !important;
+                padding-right: 4px !important;
+                font-size: 14px !important;
+                text-align: left !important;
+              }
             }
             
             @media (min-width: 480px) and (max-width: 767px) {
@@ -271,6 +315,23 @@ export function HeroBanner() {
                 margin-left: auto !important;
                 margin-right: auto !important;
                 margin-bottom: 24px !important;
+              }
+
+              .stats-section {
+                margin-top: 64px !important;
+                gap: 20px !important;
+              }
+
+              .stats-section > div {
+                width: 100% !important;
+                justify-content: space-between !important;
+                gap: 16px !important;
+              }
+
+              .stat-item {
+                min-width: 0 !important;
+                flex: 1 1 0 !important;
+                justify-content: center !important;
               }
             }
 
