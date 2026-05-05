@@ -672,6 +672,11 @@ export default function ProjectsPage() {
                         </h2>
 
                         <div className="space-y-3 text-sm">
+                          {project.excerpt && (
+                            <p className="text-base leading-relaxed" style={{ color: isDark ? "#D0D0D0" : "#4A4A4A" }}>
+                              {project.excerpt}
+                            </p>
+                          )}
                           {typeof project.challenge === "string" ? (
                             <div className="flex gap-3">
                               <span className="font-semibold text-[#FF6200] min-w-[80px]">{t.challengeLabel}</span>
