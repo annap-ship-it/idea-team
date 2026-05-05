@@ -251,6 +251,7 @@ export function HeroBanner() {
                 gap: 16px !important;
                 padding-left: 8px !important;
                 padding-right: 8px !important;
+                padding-bottom: 24px !important;
               }
 
               .stats-section > div {
@@ -263,13 +264,14 @@ export function HeroBanner() {
                 min-width: 0 !important;
                 flex: 1 1 0 !important;
                 justify-content: center !important;
+                align-items: center !important;
               }
 
               .stat-label {
                 padding-left: 4px !important;
                 padding-right: 4px !important;
                 font-size: 14px !important;
-                text-align: left !important;
+                text-align: center !important;
               }
             }
             
@@ -302,6 +304,7 @@ export function HeroBanner() {
               .stats-section {
                 margin-top: 64px !important;
                 gap: 20px !important;
+                padding-bottom: 24px !important;
               }
 
               .stats-section > div {
@@ -314,7 +317,13 @@ export function HeroBanner() {
                 min-width: 0 !important;
                 flex: 1 1 0 !important;
                 justify-content: center !important;
+                align-items: center !important;
               }
+
+              .stat-label {
+                text-align: center !important;
+              }
+
             }
 
             @media (min-width: 768px) and (max-width: 1023px) {
