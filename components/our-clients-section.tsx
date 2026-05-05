@@ -21,6 +21,7 @@ const clientLogos = [
   { name: "Softengi", light: "/icons/tech/softengi-light.svg", dark: "/icons/tech/softengi-dark.svg" },
   { name: "Sonomics", light: "/icons/tech/son-light.svg", dark: "/icons/tech/son-dark.svg" },
   { name: "Powercode", light: "/icons/tech/powercode-light.svg", dark: "/icons/tech/powercode-dark.svg" },
+  { name: "Collab IT", light: "/icons/tech/logo-black.svg", dark: "/icons/tech/logo-white.svg" },
   ]
 
 export function OurClientsSection() {
