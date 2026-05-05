@@ -32,9 +32,6 @@ const content = {
     description2:
       "Наша команда інженерів middle+ допомагає компаніям запускатись швидше та масштабуватись з впевненістю. Ми оптимізували кожний крок від запиту до доставки, щоб скоротити затримки, підвищити якість та забезпечити повну відповідальність.",
   },
-  style={{
-     fontFamily: "Onest",
-    }}
 }
 
 export function AboutUsSection() {
@@ -62,6 +59,9 @@ export function AboutUsSection() {
           </div>
         </div>
       </div>
+      style={{
+      fontFamily: "Onest",
+     }}
     </section>
   )
 }
