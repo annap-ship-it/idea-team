@@ -21,7 +21,7 @@ const clientLogos = [
   { name: "Softengi", light: "/icons/tech/softengi-light.svg", dark: "/icons/tech/softengi-dark.svg" },
   { name: "Sonomics", light: "/icons/tech/son-light.svg", dark: "/icons/tech/son-dark.svg" },
   { name: "Powercode", light: "/icons/tech/powercode-light.svg", dark: "/icons/tech/powercode-dark.svg" },
-  { name: "Collab IT", light: "/icons/tech/logo-black.svg", dark: "/icons/tech/logo-white.svg" },
+  { name: "Collab IT company", light: "/icons/tech/logo-black.svg", dark: "/icons/tech/logo-white.svg" },
   ]
 
 export function OurClientsSection() {
@@ -36,7 +36,6 @@ export function OurClientsSection() {
             <p className="mb-4 text-sm font-medium uppercase tracking-[0.16em] text-primary md:text-base">
               {t.ourClientsEyebrow}
             </p>
-            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 text-foreground">
             <h2 className="text-3xl font-bold leading-tight text-foreground md:text-5xl">
               {t.ourClientsTitle}
             </h2>

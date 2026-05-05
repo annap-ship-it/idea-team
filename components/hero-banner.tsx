@@ -182,56 +182,38 @@ export function HeroBanner() {
               padding: "0 16px",
             }}
           >
-            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center gap-6">
-              <div className="flex stat-item text-center flex-1 sm:flex-none cursor-pointer">
-                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
-                  50+
-                </span>
-                <span className="flex items-center px-3 pt-1 block mt-0 stat-label" style={{ fontSize: "16px" }}>
-                  {t.estimations}
-                </span>
-              </div>
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 50+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.estimations}
               </span>
             </div>
 
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 30+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.totalProjects}
               </span>
             </div>
 
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 20+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.successfulClients}
               </span>
             </div>
-            <div className="flex items-center w-full sm:w-auto justify-start sm:justify-center cursor-pointer gap-6 sm:gap-12">
-              <div className="flex stat-item text-center flex-1 sm:flex-none px-5">
-                <span className="block font-bold stat-number" style={{ fontSize: "32px" }}>
-                  20+
-                </span>
-                <span className="flex items-center px-3 pt-1 mt-0 stat-label" style={{ fontSize: "16px" }}>
-                  {t.successfulClients}
-               </span>
-              </div>
 
-            <div className="flex flex-col stat-item text-center cursor-pointer">
-              <span className="block font-bold stat-number" style={{ fontSize: "28px", lineHeight: "1.2" }}>
+            <div className="flex flex-col md:flex-row md:items-center stat-item text-center md:text-left cursor-pointer">
+              <span className="block font-bold stat-number" style={{ fontSize: "32px", lineHeight: "1.2" }}>
                 40+
               </span>
-              <span className="block stat-label" style={{ fontSize: "14px", marginTop: "4px" }}>
+              <span className="block stat-label md:pl-3 md:pt-1" style={{ fontSize: "16px", marginTop: "4px" }}>
                 {t.professionals}
               </span>
             </div>
@@ -269,6 +251,7 @@ export function HeroBanner() {
                 gap: 16px !important;
                 padding-left: 8px !important;
                 padding-right: 8px !important;
+                padding-bottom: 24px !important;
               }
 
               .stats-section > div {
@@ -281,13 +264,14 @@ export function HeroBanner() {
                 min-width: 0 !important;
                 flex: 1 1 0 !important;
                 justify-content: center !important;
+                align-items: center !important;
               }
 
               .stat-label {
                 padding-left: 4px !important;
                 padding-right: 4px !important;
                 font-size: 14px !important;
-                text-align: left !important;
+                text-align: center !important;
               }
             }
             
@@ -320,6 +304,7 @@ export function HeroBanner() {
               .stats-section {
                 margin-top: 64px !important;
                 gap: 20px !important;
+                padding-bottom: 24px !important;
               }
 
               .stats-section > div {
@@ -332,7 +317,13 @@ export function HeroBanner() {
                 min-width: 0 !important;
                 flex: 1 1 0 !important;
                 justify-content: center !important;
+                align-items: center !important;
               }
+
+              .stat-label {
+                text-align: center !important;
+              }
+
             }
 
             @media (min-width: 768px) and (max-width: 1023px) {
